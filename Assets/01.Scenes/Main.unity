@@ -421,7 +421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa17d122634046b4a8e23048891fafc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_RaycastPrefab: {fileID: 0}
+  m_RaycastPrefab: {fileID: 7625603359391256069, guid: 1d207e07b6e6b6e438cb4d38b62ec8f9,
+    type: 3}
 --- !u!114 &388525034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -434,7 +435,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 728ad7fae8e460a4ba41265c7308d757, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AnchorPrefab: {fileID: 0}
+  m_AnchorPrefab: {fileID: 7625603359391256069, guid: 7b7ef171bdd7a4c4e9bd1a782fcbe0b2,
+    type: 3}
 --- !u!114 &388525035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,7 +449,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 788587e994f1943f3856c1c332db429b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_AnchorPrefab: {fileID: 0}
+  m_AnchorPrefab: {fileID: 7625603359391256069, guid: 15410a6834b82cc4a9e81731e170e928,
+    type: 3}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -737,6 +740,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Egg
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 8bc5a6dc1e1ca0d43b2d7503ccc274e5,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8632055958874330854, guid: 8bc5a6dc1e1ca0d43b2d7503ccc274e5,
         type: 3}
