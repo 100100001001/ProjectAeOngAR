@@ -10,7 +10,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     public GameObject placementIndicator;
 
     private ARRaycastManager arOrigin; // 원점
-    private Pose placementPose;       // 3D 포인트의 위치와 회전 확인
+    private Pose placementPose;        // 3D 포인트의 위치와 회전 확인
     private bool placementPoseValid = false;
 
     void Start()
@@ -25,7 +25,7 @@ public class ARTapToPlaceObject : MonoBehaviour
     }
 
     private void UpdatePlacementPose() {
-        var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
+        var screenCenter = Camera.main.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
         var hits = new List<ARRaycastHit>();
 
         arOrigin.Raycast(screenCenter, hits, TrackableType.Planes);
