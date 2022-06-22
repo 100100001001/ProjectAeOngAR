@@ -29,7 +29,7 @@ public class InputName : MonoBehaviour
         
         playerName = names[Random.Range(0, names.Count)];
         tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
-        Debug.Log(playerName);
+        //Debug.Log(playerName);
     }
 
     public void InputButtonClick()

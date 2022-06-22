@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 
 public class Touch : MonoBehaviour
 {
-    public GameObject touchText;
+    public GameObject touchText;   // 터치할 시 나오는 Text
 
-    public GameObject eggParticle;
+    public ParticleSystem eggParticle; // 터치할 시 나오는 Particle
 
     void Update()
     {
@@ -16,24 +16,24 @@ public class Touch : MonoBehaviour
         {
             //StartCoroutine(TouchTest());
 
-            // var touch = Input.GetTouch(0);
+            //var touch = Input.GetTouch(0);
 
-            // switch (touch.phase)
-            // {
-            //     case TouchPhase.Began:
-            //         touchText.GetComponent<Text>().text = "Began";
-            //         break;
-            //     case TouchPhase.Moved:
-            //         touchText.GetComponent<Text>().text = "Moved";
-            //         break;
-            //     case TouchPhase.Ended:
-            //         touchText.GetComponent<Text>().text = "Ended";
-            //         break;
-            // }
+            //switch (touch.phase)
+            //{
+            //    case TouchPhase.Began:
+            //        touchText.GetComponent<Text>().text = "Began";
+            //        break;
+            //    case TouchPhase.Moved:
+            //        touchText.GetComponent<Text>().text = "Moved";
+            //        break;
+            //    case TouchPhase.Ended:
+            //        touchText.GetComponent<Text>().text = "Ended";
+            //        break;
+            //}
 
             for (int i = 0; i < Input.touchCount; ++i)
             {
-                if (Input.GetTouch(i).phase == TouchPhase.Began || Input.GetTouch(i).phase == TouchPhase.Moved)
+                if (Input.GetTouch(i).phase == TouchPhase.Began)
                 {
                     // 현재 터치 좌표에서 광선 생성
                     Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
@@ -44,7 +44,8 @@ public class Touch : MonoBehaviour
                     {
                         if (hit.transform.tag == "Player")
                         {
-                            StartCoroutine(TouchTest());
+                            StartCoroutine(TouchTestText());
+                            eggParticle.Play();
                         }
 
                     }
@@ -59,13 +60,11 @@ public class Touch : MonoBehaviour
         transform.GetChild(2).GetComponent<MeshRenderer>().materials.GetValue(1);
     }
 
-    IEnumerator TouchTest()
+    IEnumerator TouchTestText()
     {
         touchText.SetActive(true);
         touchText.GetComponent<Text>().text = "YEAH!";
-        eggParticle.SetActive(true);
         yield return new WaitForSeconds(0.3f);
         touchText.SetActive(false);
-        eggParticle.SetActive(false);
     }
 }
