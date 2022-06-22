@@ -1,4 +1,4 @@
-using System;
+ï»¿using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +8,10 @@ using UnityEngine.XR.ARSubsystems;
 
 public class ARManager : MonoBehaviour
 {
-    // ¹Ù´Ú¿¡ ÇÁ¸®ÆÕ ³õ±â
+    public static ARManager instance; // ì¸ìŠ¤í„´ìŠ¤í™”
+
+
+
     public ARRaycastManager arRaycater;
     List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
@@ -22,7 +25,7 @@ public class ARManager : MonoBehaviour
         PlaceIndicator();
     }
 
-    #region ¹Ù´Ú Ç¥½Ã±â
+    #region ë°”ë‹¥ í‘œì‹œê¸°
 
     public Transform Indicator;
     //public GameObject spawnPrefab;
