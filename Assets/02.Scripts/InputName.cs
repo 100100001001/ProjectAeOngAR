@@ -8,17 +8,20 @@ public class InputName : MonoBehaviour
 {
     public TMP_InputField playerNameInput; // 플레이어(캐릭터) 이름을 받음
     public TextMeshProUGUI tmpName;        // 플레이어의 위에 띄워 질 이름
+    private string tmpText;                // TMP_InputField 로 받은 text
     private string playerName;             // TMP_InputField 로 받은 text를 TextMeshProUGUI 에 적용하기 위해 string타입의 변수 생성
 
 
-    public TextAsset itemDB;               // 이름을 지정하지 않았을 때 랜덤으로 지정된 기본 이름
-
-    private List<string> names = new List<string>();
+    // 기본 이름 설정
+    public TextAsset nameDB;                         // 이름을 지정하지 않았을 때 랜덤으로 지정된 기본 이름들 
+    private List<string> names = new List<string>(); // nameDB에서 받아온 기본 이름 리스트
 
     void Start()
     {
-        // enter(\n)를 기준으로 잘라준다 -> 배열 생성 
-        string[] lines = itemDB.text.Split('\n');
+        //// 기본 이름 설정
+
+        // enter(\n)를 기준으로 잘라서 배열 생성 
+        string[] lines = nameDB.text.Split('\n');
         // Debug.Log(lines[0]);
         foreach (var line in lines)
         {
@@ -26,15 +29,25 @@ public class InputName : MonoBehaviour
             string[] rows = line.Split('\t');
             names.Add(rows[0]);
         }
-        
+
+        // 이름 리스트에서 랜덤으로 숫자를 뽑아서 playerName에 할당
         playerName = names[Random.Range(0, names.Count)];
         tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
         //Debug.Log(playerName);
     }
 
+    // 입력 버튼을 눌렀을 때
     public void InputButtonClick()
     {
-        playerName = playerNameInput.GetComponent<TMP_InputField>().text;
-        tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
+        tmpText = playerNameInput.GetComponent<TMP_InputField>().text;
+
+        // tmpText가 비어있지 있지 않을 때만 이름 변경
+        if (tmpText.Length > 0)
+        {
+            Debug.Log(tmpText);
+            playerName = tmpText;
+            tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
+        }
+
     }
 }

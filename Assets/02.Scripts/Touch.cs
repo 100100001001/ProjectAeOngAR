@@ -44,8 +44,9 @@ public class Touch : MonoBehaviour
                     {
                         if (hit.transform.tag == "Player")
                         {
-                            StartCoroutine(TouchTestText());
                             eggParticle.Play();
+                            Status.instance.count++;
+                            StartCoroutine(TouchTestText());
                         }
 
                     }
@@ -63,7 +64,7 @@ public class Touch : MonoBehaviour
     IEnumerator TouchTestText()
     {
         touchText.SetActive(true);
-        touchText.GetComponent<Text>().text = "YEAH!";
+        touchText.GetComponent<Text>().text = Status.instance.count.ToString();
         yield return new WaitForSeconds(0.3f);
         touchText.SetActive(false);
     }
