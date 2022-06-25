@@ -6,8 +6,9 @@ using TMPro;
 
 public class InputName : MonoBehaviour
 {
-    public TMP_InputField playerNameInput; // 플레이어(캐릭터) 이름을 받음
-    public TextMeshProUGUI tmpName;        // 플레이어의 위에 띄워 질 이름
+    public TMP_InputField playerNameInput; // 사용자가 직접 수정한 플레이어(캐릭터) 이름
+    public TextMeshProUGUI tmpName;        // 플레이어(캐릭터)에게 적용될 이름
+    public TextMeshProUGUI tmpNameCharWin; // 플레이어(캐릭터) 창에서 보여질 이름
     private string tmpText;                // TMP_InputField 로 받은 text
     private string playerName;             // TMP_InputField 로 받은 text를 TextMeshProUGUI 에 적용하기 위해 string타입의 변수 생성
 
@@ -33,6 +34,7 @@ public class InputName : MonoBehaviour
         // 이름 리스트에서 랜덤으로 숫자를 뽑아서 playerName에 할당
         playerName = names[Random.Range(0, names.Count)];
         tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
+        tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
         //Debug.Log(playerName);
     }
 
@@ -47,6 +49,7 @@ public class InputName : MonoBehaviour
             Debug.Log(tmpText);
             playerName = tmpText;
             tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
+            tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
         }
 
     }

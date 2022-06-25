@@ -28,13 +28,17 @@ public class Status : MonoBehaviour
     public int value;
     public int count;
 
-    void Start()
+    public GameObject[] players;
+
+    private void Start()
+    {
+    }
+
+    private void Update()
     {
         
     }
 
-    void Update()
-    {
-        
-    }
+   
+
 }
