@@ -8,7 +8,8 @@ public class Touch : MonoBehaviour
 {
     public GameObject touchText;       // 터치할 때 나오는 Text 오브젝트
 
-    public ParticleSystem eggParticle; // 터치할 때 나오는 Particle
+    public ParticleSystem eggParticle; // 터치할 때 나오는 Particle_Egg
+    public ParticleSystem babyParticle; // 터치할 때 나오는 Particle_Baby
 
     string textAfterTouch;             // 터치 후에 나올 텍스트 string
 
@@ -49,7 +50,9 @@ public class Touch : MonoBehaviour
                     {
                         if (hit.transform.tag == "Player")
                         {
-                            eggParticle.Play();
+                            if (Status.instance.evo == Status.Evolution.EGG) eggParticle.Play();
+                            else if (Status.instance.evo == Status.Evolution.BABY) babyParticle.Play();
+
                             Status.instance.count++;
                             touchCnt++;
                             StartCoroutine(TouchTestText());
@@ -75,20 +78,25 @@ public class Touch : MonoBehaviour
         stop[0] = "이제 괜찮아";
         stop[1] = "...";
         stop[2] = "그만~";
-        
+
         string[] angry = new string[3];
         stop[0] = "왜 괴롭혀!!!!";
         stop[1] = "너무해!!!!";
         stop[2] = "싫다고!!!!";
 
 
-        if (touchCnt < 20) textAfterTouch = Status.instance.count.ToString();
-        else if (touchCnt < 30) textAfterTouch = stop[Random.Range(0, 3)];
-        else textAfterTouch = angry[Random.Range(0, 3)];
+        //if (touchCnt < 20) textAfterTouch = Status.instance.count.ToString();
+        if (touchCnt < 20) textAfterTouch = "좋아요!";
+        else if (touchCnt < 30)
+        {
+            textAfterTouch = stop[Random.Range(0, 3)];
+            Status.instance.evo = Status.Evolution.BABY;
+        }
+        else if (touchCnt >= 30) textAfterTouch = angry[Random.Range(0, 3)];
 
         touchText.SetActive(true);
-        touchText.GetComponent<Text>().text = textAfterTouch;
-        yield return new WaitForSeconds(0.3f);
+        touchText.GetComponent<Text>().text = touchCnt + " / " + textAfterTouch;
+        yield return new WaitForSeconds(0.5f);
         touchText.SetActive(false);
     }
 }

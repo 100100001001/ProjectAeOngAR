@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 [System.Serializable]
 // 반려동물의 상태를 기록하는 스크립트
@@ -23,12 +24,14 @@ public class Status : MonoBehaviour
     }
     private static Status m_instance; // 싱글턴이 할당될 static 변수
 
-    public enum stateType { ACTIVE, EMOTION }
-    public stateType type;
+    public enum StateType { ACTIVE, EMOTION }
+    public StateType type;
     public int value;
     public int count;
 
-    public GameObject[] players;
+    public enum Evolution { EGG, BABY, CHILD, YOUTH }
+    public Evolution evo = Evolution.EGG;
+
 
     private void Start()
     {
@@ -36,9 +39,8 @@ public class Status : MonoBehaviour
 
     private void Update()
     {
-        
     }
 
-   
+
 
 }
