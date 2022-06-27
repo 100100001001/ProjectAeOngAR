@@ -36,6 +36,7 @@ public class InputName : MonoBehaviour
         tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
         tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
         //Debug.Log(playerName);
+        //Debug.Log(names[1608]);
     }
 
     // 입력 버튼을 눌렀을 때

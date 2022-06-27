@@ -15,6 +15,9 @@ public class Touch : MonoBehaviour
 
     public int touchCnt;               // 터치 카운트
 
+    void Start()
+    {
+    }
 
     void Update()
     {
@@ -86,17 +89,25 @@ public class Touch : MonoBehaviour
 
 
         //if (touchCnt < 20) textAfterTouch = Status.instance.count.ToString();
-        if (touchCnt < 20) textAfterTouch = "좋아요!";
+        if (touchCnt < 20)
+        {
+            StatusBar.instance.HappyIncrease();
+            textAfterTouch = "좋아요!";
+        }
         else if (touchCnt < 30)
         {
             textAfterTouch = stop[Random.Range(0, 3)];
             Status.instance.evo = Status.Evolution.BABY;
         }
-        else if (touchCnt >= 30) textAfterTouch = angry[Random.Range(0, 3)];
+        else if (touchCnt >= 30)
+        {
+            StatusBar.instance.HappyDecrease();
+            textAfterTouch = angry[Random.Range(0, 3)];
+        }
 
         touchText.SetActive(true);
         touchText.GetComponent<Text>().text = touchCnt + " / " + textAfterTouch;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         touchText.SetActive(false);
     }
 }

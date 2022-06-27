@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 // 반려동물의 상태를 기록하는 스크립트
@@ -32,9 +33,17 @@ public class Status : MonoBehaviour
     public enum Evolution { EGG, BABY, CHILD, YOUTH }
     public Evolution evo = Evolution.EGG;
 
+    // 성별
+    public TextMeshProUGUI sText;
+    private string sString;
 
     private void Start()
     {
+
+        if (Random.Range(0, 2) == 0) sString = "여";
+        else sString = "남";
+
+        sText.text = sString;
     }
 
     private void Update()
