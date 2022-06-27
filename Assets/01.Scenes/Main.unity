@@ -499,7 +499,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &57383483
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2039,15 +2039,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 2737483790194491779, guid: 250df6780bff10942aa7369611e0f90b,
+    type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -2342,8 +2343,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSprites:
-  - {fileID: 7068030316330904585, guid: f627bc4cff0fba94997ed4574fd3e0df, type: 3}
-  - {fileID: -8373107383028109649, guid: f627bc4cff0fba94997ed4574fd3e0df, type: 3}
+  - {fileID: 3883298416164446047, guid: 250df6780bff10942aa7369611e0f90b, type: 3}
+  - {fileID: -8160381414814860451, guid: 250df6780bff10942aa7369611e0f90b, type: 3}
 --- !u!114 &762070859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2364,7 +2365,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -8373107383028109649, guid: f627bc4cff0fba94997ed4574fd3e0df,
+  m_Sprite: {fileID: -8160381414814860451, guid: 250df6780bff10942aa7369611e0f90b,
     type: 3}
   m_Type: 0
   m_PreserveAspect: 0
@@ -3414,8 +3415,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: -7581548445574318419, guid: 250df6780bff10942aa7369611e0f90b,
+    type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -4473,7 +4475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1823069981
 RectTransform:
   m_ObjectHideFlags: 0
