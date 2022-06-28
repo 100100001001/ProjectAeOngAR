@@ -25,13 +25,17 @@ public class Status : MonoBehaviour
     }
     private static Status m_instance; // 싱글턴이 할당될 static 변수
 
-    public enum StateType { ACTIVE, EMOTION }
+
+
+    public enum StateType { ACTIVE, EMOTION } // 캐릭터의 상태
     public StateType type;
     public int value;
     public int count;
 
-    public enum Evolution { EGG, BABY, CHILD, YOUTH }
-    public Evolution evo = Evolution.EGG;
+
+
+    public enum Evolution { EGG, BABY, CHILD, YOUTH } // 캐릭터 진화
+    public Evolution evo;                             // 캐릭터 상태를 담을 변수
 
     // 성별
     public TextMeshProUGUI sText;
@@ -39,11 +43,18 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
+        // 캐릭터의 처음 상태를 EGG로 지정
+        evo = Evolution.EGG;
 
+
+        // 성별 랜덤 지정
         if (Random.Range(0, 2) == 0) sString = "여";
         else sString = "남";
 
         sText.text = sString;
+
+
+
     }
 
     private void Update()
