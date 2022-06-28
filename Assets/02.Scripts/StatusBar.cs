@@ -3,6 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+// 사용자 정의 자료형
+[System.Serializable] // 직렬화
+public class StatusValue
+{
+
+    public enum StatusType { HUNGER, CLEAN, SMART, ACTIVE, ENERGY, HAPPY }
+
+    public StatusType type;
+    public Slider bar;
+    public float maxValue = 100;
+    public float curValue;
+
+
+    //// 생성자 -> 초기값
+    //public StatusValue(float _maxValue, float _curValue)
+    //{
+    //    maxValue = _maxValue;
+    //    curValue = _curValue;
+    //}
+}
+
+
 public class StatusBar : MonoBehaviour
 {
     // 싱글턴 접근용 프로퍼티
@@ -23,16 +45,19 @@ public class StatusBar : MonoBehaviour
     private static StatusBar m_instance; // 싱글턴이 할당될 static 변수
 
 
-    public Slider happyBar;
+    //public Slider happyBar;
 
-    private float maxHappy = 100;
-    private float curHappy = 0;
+    //private float maxHappy = 100;
+    //private float curHappy = 0;
+
+    public StatusValue statusValue;
 
 
 
     void Start()
     {
-        happyBar.value = (float)curHappy / (float)maxHappy; // 초기화
+        //happyBar.value = (float)curHappy / (float)maxHappy; // 초기화
+        statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
     }
 
     void Update()
@@ -40,19 +65,28 @@ public class StatusBar : MonoBehaviour
         HandleStatusBar();
     }
 
-    private void HandleStatusBar()
+    public void HandleStatusBar()
     {
-        happyBar.value = (float)curHappy / (float)maxHappy; // 초기화
+        //happyBar.value = (float)curHappy / (float)maxHappy; // 초기화
+        statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
     }
 
 
-
-    public void HappyIncrease()
+    public void ValueIncrease()
     {
-        curHappy += 2;
+        //// 매개변수 StatusValue.StatusType stateName
+        //switch (stateName)
+        //{
+        //    case StatusValue.StatusType.HUNGER:
+        //        return;
+        //}
+        //curHappy += 2;
+        statusValue.curValue += 2;
     }
-    public void HappyDecrease()
+
+    public void ValueDecrease()
     {
-        curHappy -= 2;
+        //curHappy -= 2;
+        statusValue.curValue -= 2;
     }
 }

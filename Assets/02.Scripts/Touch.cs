@@ -15,6 +15,7 @@ public class Touch : MonoBehaviour
 
     public int touchCnt;               // 터치 카운트
 
+
     void Start()
     {
     }
@@ -91,7 +92,7 @@ public class Touch : MonoBehaviour
         //if (touchCnt < 20) textAfterTouch = Status.instance.count.ToString();
         if (touchCnt < 20)
         {
-            StatusBar.instance.HappyIncrease();
+            StatusBar.instance.ValueIncrease();
             textAfterTouch = "좋아요!";
         }
         else if (touchCnt < 30)
@@ -101,7 +102,7 @@ public class Touch : MonoBehaviour
         }
         else if (touchCnt >= 30)
         {
-            StatusBar.instance.HappyDecrease();
+            StatusBar.instance.ValueDecrease();
             textAfterTouch = angry[Random.Range(0, 3)];
         }
 
