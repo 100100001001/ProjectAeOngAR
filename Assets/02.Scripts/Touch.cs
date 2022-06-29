@@ -63,7 +63,6 @@ public class Touch : MonoBehaviour
                             else if (Status.instance.evo == Status.Evolution.CHILD) childParticle.Play();
                             else if (Status.instance.evo == Status.Evolution.YOUTH) youthParticle.Play();
 
-                            Status.instance.count++;
                             touchCnt++;
                             StartCoroutine(TouchTestText());
 
@@ -98,8 +97,10 @@ public class Touch : MonoBehaviour
         //if (touchCnt < 20) textAfterTouch = Status.instance.count.ToString();
         if (touchCnt < 20)
         {
-            StatusBar.instance.HappyValue(true);
+            StatusBar.instance.HappyValue(true, 2);
             textAfterTouch = "좋아요!";
+            Status.instance.cntClean1++;
+
         }
         else if (touchCnt < 30)
         {
@@ -108,15 +109,17 @@ public class Touch : MonoBehaviour
         }
         else if (touchCnt < 40)
         {
-            StatusBar.instance.HappyValue(false);
+            StatusBar.instance.HappyValue(false, 2);
             textAfterTouch = angry[Random.Range(0, 3)];
             Status.instance.evo = Status.Evolution.CHILD;
         }
         else if (touchCnt >= 40)
         {
-            StatusBar.instance.HappyValue(true);
+            StatusBar.instance.HappyValue(true, 2);
+            Status.instance.cntClean1++;
             textAfterTouch = angry[Random.Range(0, 3)];
             Status.instance.evo = Status.Evolution.YOUTH;
+
 
         }
 

@@ -27,25 +27,37 @@ public class Status : MonoBehaviour
 
 
 
-    public enum StateType { ACTIVE, EMOTION } // 캐릭터의 상태
-    public StateType type;
-    public int value;
-    public int count;
+    //public enum StateType { HUNGER, CLEAN, SMART, ACTIVE, ENERGY, HAPPY } // 캐릭터의 상태를 카운트
+    //public StateType type;
+    //public int value;
+    //public int count;
+
+
+    // 캐릭터의 상태 변화를 셀 변수
+    public float cntHunger1;
+    public float cntClean1;
+    public float cntSmart1;
+    public float cntActive1;
+    public float cntEnergy1;
+    public float cntHappy1;
 
 
 
     public enum Evolution { EGG, BABY, CHILD, YOUTH } // 캐릭터 진화
     public Evolution evo;                             // 캐릭터 상태를 담을 변수
 
+
+
     // 성별
     public TextMeshProUGUI sText;
     private string sString;
+
+
 
     private void Start()
     {
         // 캐릭터의 처음 상태를 EGG로 지정
         evo = Evolution.EGG;
-
 
         // 성별 랜덤 지정
         if (Random.Range(0, 2) == 0) sString = "여";

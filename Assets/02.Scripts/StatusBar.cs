@@ -115,35 +115,35 @@ public class StatusBar : MonoBehaviour
 
     #region 상태바 조절 메소드
 
-    public void HungerValue(bool val)
+    public void HungerValue(bool val, int n)
     {
-        if (val) curHunger += 2;
-        else curHunger -= 2;
+        if (val) curHunger += n;
+        else curHunger -= n;
     }
-    public void CleanValue(bool val)
+    public void CleanValue(bool val, int n)
     {
-        if (val) curClean += 2;
-        else curClean -= 2;
+        if (val) curClean += n;
+        else curClean -= n;
     }
-    public void SmartValue(bool val)
+    public void SmartValue(bool val, int n)
     {
-        if (val) curSmart += 2;
-        else curSmart -= 2;
+        if (val) curSmart += n;
+        else curSmart -= n;
     }
-    public void ActiveValue(bool val)
+    public void ActiveValue(bool val, int n)
     {
-        if (val) curActive += 2;
-        else curActive -= 2;
+        if (val) curActive += n;
+        else curActive -= n;
     }
-    public void EnergyValue(bool val)
+    public void EnergyValue(bool val, int n)
     {
-        if (val) curEnergy += 2;
-        else curEnergy -= 2;
+        if (val) curEnergy += n;
+        else curEnergy -= n;
     }
-    public void HappyValue(bool val)
+    public void HappyValue(bool val, int n)
     {
-        if (val) curHappy += 2;
-        else curHappy -= 2;
+        if (val) curHappy += n;
+        else curHappy -= n;
     }
 
     #endregion
@@ -151,28 +151,4 @@ public class StatusBar : MonoBehaviour
 
 
 
-
-
-
-
-
-
-
-    //public void ValueIncrease()
-    //{
-    //    //// 매개변수 StatusValue.StatusType stateName
-    //    //switch (stateName)
-    //    //{
-    //    //    case StatusValue.StatusType.HUNGER:
-    //    //        return;
-    //    //}
-    //    //curHappy += 2;
-    //    statusValue.curValue += 2;
-    //}
-
-    //public void ValueDecrease()
-    //{
-    //    //curHappy -= 2;
-    //    statusValue.curValue -= 2;
-    //}
 }
