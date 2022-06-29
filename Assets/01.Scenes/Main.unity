@@ -1333,6 +1333,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145327963}
   m_CullTransparentMesh: 1
+--- !u!1 &148643577
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 148643579}
+  - component: {fileID: 148643578}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &148643578
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148643577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 885a1ff9f735e1b4a997a5ba62dfb878, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainSlime: {fileID: 0}
+  idleBut: {fileID: 0}
+  walkBut: {fileID: 0}
+  jumpBut: {fileID: 0}
+  attackBut: {fileID: 0}
+  damageBut0: {fileID: 0}
+  damageBut1: {fileID: 0}
+  damageBut2: {fileID: 0}
+  cam: {fileID: 0}
+--- !u!4 &148643579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148643577}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &149554089
 GameObject:
   m_ObjectHideFlags: 0
@@ -1363,8 +1415,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dust:
-  - {fileID: 8260000312464569097, guid: 3eb988eda1ff84b44a54777aade0ce68, type: 3}
-  - {fileID: 5741909239629918163, guid: d4d14180f7c9068408c4923c787db292, type: 3}
+  - {fileID: 4198365972641146553, guid: 3eb988eda1ff84b44a54777aade0ce68, type: 3}
+  - {fileID: 2601932152648979056, guid: d4d14180f7c9068408c4923c787db292, type: 3}
 --- !u!4 &149554091
 Transform:
   m_ObjectHideFlags: 0
@@ -3573,7 +3625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 0.3803922, b: 0.41163594, a: 1}
+  m_Color: {r: 0.48490566, g: 1, b: 0.82916194, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -9250,9 +9302,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce0d1ced3e522374f87df01eece6d595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
-  value: 0
-  count: 0
+  cntHunger1: 0
+  cntClean1: 0
+  cntSmart1: 0
+  cntActive1: 0
+  cntEnergy1: 0
+  cntHappy1: 0
   evo: 0
   sText: {fileID: 1899433291}
 --- !u!4 &2077497078
