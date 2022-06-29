@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// 사용자 정의 자료형
-[System.Serializable] // 직렬화
-public class StatusValue
-{
+//// 사용자 정의 자료형
+//[System.Serializable] // 직렬화
+//public class StatusValue
+//{
 
-    public enum StatusType { HUNGER, CLEAN, SMART, ACTIVE, ENERGY, HAPPY }
+//    public enum StatusType { HUNGER, CLEAN, SMART, ACTIVE, ENERGY, HAPPY }
 
-    public StatusType type;
-    public Slider bar;
-    public float maxValue = 100;
-    public float curValue;
+//    public StatusType type;
+//    public Slider bar;
+//    public float maxValue = 100;
+//    public float curValue;
 
 
-    //// 생성자 -> 초기값
-    //public StatusValue(float _maxValue, float _curValue)
-    //{
-    //    maxValue = _maxValue;
-    //    curValue = _curValue;
-    //}
-}
+//    //// 생성자 -> 초기값
+//    //public StatusValue(float _maxValue, float _curValue)
+//    //{
+//    //    maxValue = _maxValue;
+//    //    curValue = _curValue;
+//    //}
+//}
 
 
 public class StatusBar : MonoBehaviour
@@ -45,19 +45,53 @@ public class StatusBar : MonoBehaviour
     private static StatusBar m_instance; // 싱글턴이 할당될 static 변수
 
 
-    //public Slider happyBar;
+    #region 상태바
 
-    //private float maxHappy = 100;
-    //private float curHappy = 0;
+    public Slider hungerBar;
 
-    public StatusValue statusValue;
+    private float maxHunger = 100;
+    private float curHunger = 50;
+
+
+    public Slider cleanBar;
+
+    private float maxClean = 100;
+    private float curClean = 50;
+
+
+    public Slider smartBar;
+
+    private float maxSmart = 100;
+    private float curSmart = 0;
+
+
+    public Slider activeBar;
+
+    private float maxActive = 100;
+    private float curActive = 0;
+
+
+    public Slider energyBar;
+
+    private float maxEnergy = 100;
+    private float curEnergy = 100;
+
+
+    public Slider happyBar;
+
+    private float maxHappy = 100;
+    private float curHappy = 0;
+
+    #endregion
+
+    //public StatusValue statusValue;
 
 
 
     void Start()
     {
-        //happyBar.value = (float)curHappy / (float)maxHappy; // 초기화
-        statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
+        HandleStatusBar(); // 초기화
+        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
     }
 
     void Update()
@@ -65,28 +99,80 @@ public class StatusBar : MonoBehaviour
         HandleStatusBar();
     }
 
+    // 상태 초기화
     public void HandleStatusBar()
     {
-        //happyBar.value = (float)curHappy / (float)maxHappy; // 초기화
-        statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
+        hungerBar.value = (float)curHunger / (float)maxHunger;
+        cleanBar.value = (float)curClean / (float)maxClean;
+        smartBar.value = (float)curSmart / (float)maxSmart;
+        activeBar.value = (float)curActive / (float)maxActive;
+        energyBar.value = (float)curEnergy / (float)maxEnergy;
+        happyBar.value = (float)curHappy / (float)maxHappy;
+        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
     }
 
 
-    public void ValueIncrease()
+
+    #region 상태바 조절 메소드
+
+    public void HungerValue(bool val)
     {
-        //// 매개변수 StatusValue.StatusType stateName
-        //switch (stateName)
-        //{
-        //    case StatusValue.StatusType.HUNGER:
-        //        return;
-        //}
-        //curHappy += 2;
-        statusValue.curValue += 2;
+        if (val) curHunger += 2;
+        else curHunger -= 2;
+    }
+    public void CleanValue(bool val)
+    {
+        if (val) curClean += 2;
+        else curClean -= 2;
+    }
+    public void SmartValue(bool val)
+    {
+        if (val) curSmart += 2;
+        else curSmart -= 2;
+    }
+    public void ActiveValue(bool val)
+    {
+        if (val) curActive += 2;
+        else curActive -= 2;
+    }
+    public void EnergyValue(bool val)
+    {
+        if (val) curEnergy += 2;
+        else curEnergy -= 2;
+    }
+    public void HappyValue(bool val)
+    {
+        if (val) curHappy += 2;
+        else curHappy -= 2;
     }
 
-    public void ValueDecrease()
-    {
-        //curHappy -= 2;
-        statusValue.curValue -= 2;
-    }
+    #endregion
+
+
+
+
+
+
+
+
+
+
+
+    //public void ValueIncrease()
+    //{
+    //    //// 매개변수 StatusValue.StatusType stateName
+    //    //switch (stateName)
+    //    //{
+    //    //    case StatusValue.StatusType.HUNGER:
+    //    //        return;
+    //    //}
+    //    //curHappy += 2;
+    //    statusValue.curValue += 2;
+    //}
+
+    //public void ValueDecrease()
+    //{
+    //    //curHappy -= 2;
+    //    statusValue.curValue -= 2;
+    //}
 }

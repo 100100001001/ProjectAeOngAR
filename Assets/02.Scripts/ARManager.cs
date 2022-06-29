@@ -40,18 +40,18 @@ public class ARManager : MonoBehaviour
                 PlaceIndicator();
                 return;
             case Status.Evolution.CHILD:
+                indicatorTest[1].SetActive(false);
+                indicator = indicatorTest[2].transform;
+                PlaceIndicator();
                 return;
             case Status.Evolution.YOUTH:
+                indicatorTest[2].SetActive(false);
+                indicator = indicatorTest[3].transform;
+                PlaceIndicator();
                 return;
             default:
                 return;
         }
-
-        //if (Status.instance.evo == Status.Evolution.EGG)
-        //{
-        //    indicatorTest[0].SetActive(false);
-        //    indicator = indicatorTest[1].transform;
-        //}
 
     }
 

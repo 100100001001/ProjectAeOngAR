@@ -30,12 +30,12 @@ public class ChangePlayer : MonoBehaviour
             case Status.Evolution.BABY:
                 mySprite.sprite = playerSprites[1];
                 return;
-                //case Status.Evolution.CHILD:
-                //    mySprite = playerSprites[2];
-                //    return;
-                //case Status.Evolution.YOUTH:
-                //    mySprite = playerSprites[3];
-                //    return;
+            case Status.Evolution.CHILD:
+                mySprite.sprite = playerSprites[2];
+                return;
+            case Status.Evolution.YOUTH:
+                mySprite.sprite = playerSprites[3];
+                return;
 
         }
     }

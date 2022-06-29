@@ -10,6 +10,8 @@ public class Touch : MonoBehaviour
 
     public ParticleSystem eggParticle; // 터치할 때 나오는 Particle_Egg
     public ParticleSystem babyParticle; // 터치할 때 나오는 Particle_Baby
+    public ParticleSystem childParticle; // 터치할 때 나오는 Particle_Child
+    public ParticleSystem youthParticle; // 터치할 때 나오는 Particle_Youth
 
     string textAfterTouch;             // 터치 후에 나올 텍스트 string
 
@@ -22,6 +24,8 @@ public class Touch : MonoBehaviour
 
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.Space)) StatusBar.instance.HappyValue(true);
+
         if (Input.touchCount > 0)
         {
             //StartCoroutine(TouchTest());
@@ -56,6 +60,8 @@ public class Touch : MonoBehaviour
                         {
                             if (Status.instance.evo == Status.Evolution.EGG) eggParticle.Play();
                             else if (Status.instance.evo == Status.Evolution.BABY) babyParticle.Play();
+                            else if (Status.instance.evo == Status.Evolution.CHILD) childParticle.Play();
+                            else if (Status.instance.evo == Status.Evolution.YOUTH) youthParticle.Play();
 
                             Status.instance.count++;
                             touchCnt++;
@@ -92,7 +98,7 @@ public class Touch : MonoBehaviour
         //if (touchCnt < 20) textAfterTouch = Status.instance.count.ToString();
         if (touchCnt < 20)
         {
-            StatusBar.instance.ValueIncrease();
+            StatusBar.instance.HappyValue(true);
             textAfterTouch = "좋아요!";
         }
         else if (touchCnt < 30)
@@ -100,10 +106,18 @@ public class Touch : MonoBehaviour
             textAfterTouch = stop[Random.Range(0, 3)];
             Status.instance.evo = Status.Evolution.BABY;
         }
-        else if (touchCnt >= 30)
+        else if (touchCnt < 40)
         {
-            StatusBar.instance.ValueDecrease();
+            StatusBar.instance.HappyValue(false);
             textAfterTouch = angry[Random.Range(0, 3)];
+            Status.instance.evo = Status.Evolution.CHILD;
+        }
+        else if (touchCnt >= 40)
+        {
+            StatusBar.instance.HappyValue(true);
+            textAfterTouch = angry[Random.Range(0, 3)];
+            Status.instance.evo = Status.Evolution.YOUTH;
+
         }
 
         touchText.SetActive(true);
