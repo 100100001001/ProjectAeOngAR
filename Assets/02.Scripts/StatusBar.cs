@@ -49,38 +49,38 @@ public class StatusBar : MonoBehaviour
 
     public Slider hungerBar;
 
-    private float maxHunger = 100;
-    private float curHunger = 50;
+    public float maxHunger = 100;
+    public float curHunger = 50;
 
 
     public Slider cleanBar;
 
-    private float maxClean = 100;
-    private float curClean = 50;
+    public float maxClean = 100;
+    public float curClean = 50;
 
 
     public Slider smartBar;
 
-    private float maxSmart = 100;
-    private float curSmart = 0;
+    public float maxSmart = 100;
+    public float curSmart = 0;
 
 
     public Slider activeBar;
 
-    private float maxActive = 100;
-    private float curActive = 0;
+    public float maxActive = 100;
+    public float curActive = 0;
 
 
     public Slider energyBar;
 
-    private float maxEnergy = 100;
-    private float curEnergy = 100;
+    public float maxEnergy = 100;
+    public float curEnergy = 100;
 
 
     public Slider happyBar;
 
-    private float maxHappy = 100;
-    private float curHappy = 0;
+    public float maxHappy = 100;
+    public float curHappy = 0;
 
     #endregion
 

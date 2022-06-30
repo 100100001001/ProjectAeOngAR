@@ -17,7 +17,7 @@ public class TimeFlowTest : MonoBehaviour
         time += Time.deltaTime;
 
         if (time > 10) {
-            StatusDecrease(1);
+            StatusDecrease(5);
             time = 0;
         }
 

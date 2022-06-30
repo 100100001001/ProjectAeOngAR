@@ -24,20 +24,20 @@ public class ARManager : MonoBehaviour
 
 
 
-    // 시간이 지남에 따라 생성되는 먼지
-    public GameObject[] dust;
-    private Transform dustTransform;
+    //// 시간이 지남에 따라 생성되는 먼지
+    //public GameObject[] dust;
+    //private Transform dustTransform;
 
-    private float dustXMin = -10f;
-    private float dustXMax = 10f;
+    //private float dustXMin = -0.001f;
+    //private float dustXMax = 0.001f;
 
-    private float dustYMin = -10f;
-    private float dustYMax = 10f;
+    //private float dustYMin = -0.002f;
+    //private float dustYMax = 0.002f;
 
-    private float dustScaleMin = 2;
-    private float dustScaleMax = 5;
+    //private float dustScaleMin = 0.005f;
+    //private float dustScaleMax = 0.01f;
 
-    private int dustLen = 2;
+    //private int dustLen = 2;
 
     
     public GameObject ttest;
@@ -47,6 +47,11 @@ public class ARManager : MonoBehaviour
     void Start()
     {
         indicator = indicatorTest[0].transform;
+        //dustTransform = dust[0].transform;
+
+        indicatorTest[1].SetActive(false);
+        indicatorTest[2].SetActive(false);
+        indicatorTest[3].SetActive(false);
     }
 
     void Update()
@@ -54,21 +59,25 @@ public class ARManager : MonoBehaviour
         switch (Status.instance.evo)
         {
             case Status.Evolution.EGG:
+                indicatorTest[0].SetActive(true);
                 indicator = indicatorTest[0].transform;
                 PlaceIndicator();
                 return;
             case Status.Evolution.BABY:
                 indicatorTest[0].SetActive(false);
+                indicatorTest[1].SetActive(true);
                 indicator = indicatorTest[1].transform;
                 PlaceIndicator();
                 return;
             case Status.Evolution.CHILD:
                 indicatorTest[1].SetActive(false);
+                indicatorTest[2].SetActive(true);
                 indicator = indicatorTest[2].transform;
                 PlaceIndicator();
                 return;
             case Status.Evolution.YOUTH:
                 indicatorTest[2].SetActive(false);
+                indicatorTest[3].SetActive(true);
                 indicator = indicatorTest[3].transform;
                 PlaceIndicator();
                 return;
@@ -89,18 +98,24 @@ public class ARManager : MonoBehaviour
             indicator.rotation = indicatorHits[0].pose.rotation;
 
 
+            //dustTransform.position = indicatorHits[0].pose.position;
+            //dustTransform.rotation = indicatorHits[0].pose.rotation;
 
-            dustTransform = dust[UnityEngine.Random.Range(0, dust.Length)].transform;
 
+            //for (int i = 0; i < UnityEngine.Random.Range(0, dust.Length); i++)
+            //{
+            //    dustTransform = dust[UnityEngine.Random.Range(0, dust.Length)].transform;
 
-            float dustXPos = UnityEngine.Random.Range(dustXMin, dustXMax);
-            float dustYPos = UnityEngine.Random.Range(dustYMin, dustYMax);
-            float dustScale = UnityEngine.Random.Range(dustScaleMin, dustScaleMax);
+            //    float dustXPos = UnityEngine.Random.Range(dustXMin, dustXMax);
+            //    float dustYPos = UnityEngine.Random.Range(dustYMin, dustYMax);
+            //    float dustScale = UnityEngine.Random.Range(dustScaleMin, dustScaleMax);
 
-            dustTransform.transform.localScale = new Vector3(dustScale, dustScale, dustScale);
+            //    dustTransform.transform.localScale = new Vector3(dustScale, dustScale, dustScale);
 
-            dustTransform.position = new Vector3(indicatorHits[0].pose.position.x, indicatorHits[0].pose.position.y, indicatorHits[0].pose.position.z);
-            dustTransform.rotation = indicatorHits[0].pose.rotation;
+            //    dustTransform.position = new Vector3(indicatorHits[0].pose.position.x * dustXPos, indicatorHits[0].pose.position.y * dustYPos, indicatorHits[0].pose.position.z);
+            //    dustTransform.rotation = indicatorHits[0].pose.rotation;
+
+            //}
 
 
             // test!!!!!!!!!!!!!
