@@ -18,10 +18,6 @@ public class Touch : MonoBehaviour
     public int touchCnt;               // 터치 카운트
 
 
-    void Start()
-    {
-    }
-
     void Update()
     {
         //if (Input.GetKeyDown(KeyCode.Space)) StatusBar.instance.HappyValue(true);
@@ -109,7 +105,6 @@ public class Touch : MonoBehaviour
         }
         else if (touchCnt < 40)
         {
-            StatusBar.instance.HappyValue(false, 2);
             textAfterTouch = angry[Random.Range(0, 3)];
             Status.instance.evo = Status.Evolution.CHILD;
         }

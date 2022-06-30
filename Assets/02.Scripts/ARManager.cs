@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
+using TMPro;
 
 
 public class ARManager : MonoBehaviour
@@ -20,6 +21,28 @@ public class ARManager : MonoBehaviour
     public GameObject[] indicatorTest;
     private Transform indicator;
     List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>();
+
+
+
+    // 시간이 지남에 따라 생성되는 먼지
+    public GameObject[] dust;
+    private Transform dustTransform;
+
+    private float dustXMin = -10f;
+    private float dustXMax = 10f;
+
+    private float dustYMin = -10f;
+    private float dustYMax = 10f;
+
+    private float dustScaleMin = 2;
+    private float dustScaleMax = 5;
+
+    private int dustLen = 2;
+
+    
+    public GameObject ttest;
+    public TextMeshProUGUI t;
+
 
     void Start()
     {
@@ -64,14 +87,31 @@ public class ARManager : MonoBehaviour
         {
             indicator.position = indicatorHits[0].pose.position;
             indicator.rotation = indicatorHits[0].pose.rotation;
+
+
+
+            dustTransform = dust[UnityEngine.Random.Range(0, dust.Length)].transform;
+
+
+            float dustXPos = UnityEngine.Random.Range(dustXMin, dustXMax);
+            float dustYPos = UnityEngine.Random.Range(dustYMin, dustYMax);
+            float dustScale = UnityEngine.Random.Range(dustScaleMin, dustScaleMax);
+
+            dustTransform.transform.localScale = new Vector3(dustScale, dustScale, dustScale);
+
+            dustTransform.position = new Vector3(indicatorHits[0].pose.position.x, indicatorHits[0].pose.position.y, indicatorHits[0].pose.position.z);
+            dustTransform.rotation = indicatorHits[0].pose.rotation;
+
+
+            // test!!!!!!!!!!!!!
         }
+
     }
-
-    //public void PlaceIndicatorPrefab()
-    //{
-    //    Pose hitPose = IndicatorHits[0].pose;
-    //    Instantiate(spawnPrefab, hitPose.position, hitPose.rotation);
-    //}
-
-
 }
+
+//public void PlaceIndicatorPrefab()
+//{
+//    Pose hitPose = IndicatorHits[0].pose;
+//    Instantiate(spawnPrefab, hitPose.position, hitPose.rotation);
+//}
+

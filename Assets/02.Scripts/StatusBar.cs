@@ -1,10 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-//// »ç¿ëÀÚ Á¤ÀÇ ÀÚ·áÇü
-//[System.Serializable] // Á÷·ÄÈ­
+//// ì‚¬ìš©ì ì •ì˜ ìë£Œí˜•
+//[System.Serializable] // ì§ë ¬í™”
 //public class StatusValue
 //{
 
@@ -16,7 +16,7 @@ using UnityEngine.UI;
 //    public float curValue;
 
 
-//    //// »ı¼ºÀÚ -> ÃÊ±â°ª
+//    //// ìƒì„±ì -> ì´ˆê¸°ê°’
 //    //public StatusValue(float _maxValue, float _curValue)
 //    //{
 //    //    maxValue = _maxValue;
@@ -27,25 +27,25 @@ using UnityEngine.UI;
 
 public class StatusBar : MonoBehaviour
 {
-    // ½Ì±ÛÅÏ Á¢±Ù¿ë ÇÁ·ÎÆÛÆ¼
+    // ì‹±ê¸€í„´ ì ‘ê·¼ìš© í”„ë¡œí¼í‹°
     public static StatusBar instance
     {
         get
         {
-            // ¸¸¾à ½Ì±ÛÅÏ º¯¼ö¿¡ ¾ÆÁ÷ ¿ÀºêÁ§Æ®°¡ ÇÒ´çµÇÁö ¾Ê¾Ò´Ù¸é
+            // ë§Œì•½ ì‹±ê¸€í„´ ë³€ìˆ˜ì— ì•„ì§ ì˜¤ë¸Œì íŠ¸ê°€ í• ë‹¹ë˜ì§€ ì•Šì•˜ë‹¤ë©´
             if (m_instance == null)
             {
-                // ¾À¿¡¼­ GameManager ¿ÀºêÁ§Æ®¸¦ Ã£¾Æ¼­ ÇÒ´ç
+                // ì”¬ì—ì„œ GameManager ì˜¤ë¸Œì íŠ¸ë¥¼ ì°¾ì•„ì„œ í• ë‹¹
                 m_instance = FindObjectOfType<StatusBar>();
             }
-            // ½Ì±ÛÅÏ ¿ÀºêÁ§Æ® ¹İÈ¯
+            // ì‹±ê¸€í„´ ì˜¤ë¸Œì íŠ¸ ë°˜í™˜
             return m_instance;
         }
     }
-    private static StatusBar m_instance; // ½Ì±ÛÅÏÀÌ ÇÒ´çµÉ static º¯¼ö
+    private static StatusBar m_instance; // ì‹±ê¸€í„´ì´ í• ë‹¹ë  static ë³€ìˆ˜
 
 
-    #region »óÅÂ¹Ù
+    #region ìƒíƒœë°”
 
     public Slider hungerBar;
 
@@ -90,8 +90,8 @@ public class StatusBar : MonoBehaviour
 
     void Start()
     {
-        HandleStatusBar(); // ÃÊ±âÈ­
-        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // ÃÊ±âÈ­
+        HandleStatusBar(); // ì´ˆê¸°í™”
+        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // ì´ˆê¸°í™”
     }
 
     void Update()
@@ -99,7 +99,7 @@ public class StatusBar : MonoBehaviour
         HandleStatusBar();
     }
 
-    // »óÅÂ ÃÊ±âÈ­
+    // ìƒíƒœ ì´ˆê¸°í™”
     public void HandleStatusBar()
     {
         hungerBar.value = (float)curHunger / (float)maxHunger;
@@ -108,12 +108,12 @@ public class StatusBar : MonoBehaviour
         activeBar.value = (float)curActive / (float)maxActive;
         energyBar.value = (float)curEnergy / (float)maxEnergy;
         happyBar.value = (float)curHappy / (float)maxHappy;
-        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // ÃÊ±âÈ­
+        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // ì´ˆê¸°í™”
     }
 
 
 
-    #region »óÅÂ¹Ù Á¶Àı ¸Ş¼Òµå
+    #region ìƒíƒœ(ë°”) ì¡°ì ˆ ë©”ì†Œë“œ
 
     public void HungerValue(bool val, int n)
     {

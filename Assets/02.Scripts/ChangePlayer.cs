@@ -1,16 +1,16 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// Player Panel(Ä³¸¯ÅÍÃ¢)ÀÇ Ä³¸¯ÅÍ¸¦ º¯°æÇÏ´Â ½ºÅ©¸³Æ®
+// Player Panel(ìºë¦­í„°ì°½)ì˜ ìºë¦­í„°ë¥¼ ë³€ê²½í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
 public class ChangePlayer : MonoBehaviour
 {
-    public Sprite[] playerSprites; // Ä³¸¯ÅÍÀÇ ÀÌ¹ÌÁöµéÀ» ¹è¿­·Î ¹ŞÀ½
-    private Image mySprite;        // º¯°æÇÒ ÀÌ¹ÌÁö
+    public Sprite[] playerSprites; // ìºë¦­í„°ì˜ ì´ë¯¸ì§€ë“¤ì„ ë°°ì—´ë¡œ ë°›ìŒ
+    private Image mySprite;        // ë³€ê²½í•  ì´ë¯¸ì§€
 
-    public GameObject childSprout; // Child »óÅÂ¿¡¼­ÀÇ »õ½Ï
-    public GameObject youthLeaf;   // Youth »óÅÂ¿¡¼­ÀÇ ÀÙ
+    public GameObject childSprout; // Child ìƒíƒœì—ì„œì˜ ìƒˆì‹¹
+    public GameObject youthLeaf;   // Youth ìƒíƒœì—ì„œì˜ ì
 
     void Start()
     {
@@ -23,7 +23,7 @@ public class ChangePlayer : MonoBehaviour
         Evo(Status.instance.evo);
     }
 
-    // ÁøÈ­ ´Ü°è¿¡ µû¶ó¼­ ÀÌ¹ÌÁö°¡ ¹Ù²ñ
+    // ì§„í™” ë‹¨ê³„ì— ë”°ë¼ì„œ ì´ë¯¸ì§€ê°€ ë°”ë€œ
     public void Evo(Status.Evolution stage)
     {
         switch (stage)
@@ -35,10 +35,12 @@ public class ChangePlayer : MonoBehaviour
                 mySprite.sprite = playerSprites[1];
                 return;
             case Status.Evolution.CHILD:
+                mySprite.sprite = playerSprites[1];
                 childSprout.SetActive(true);
                 youthLeaf.SetActive(false);
                 return;
             case Status.Evolution.YOUTH:
+                mySprite.sprite = playerSprites[1];
                 childSprout.SetActive(false);
                 youthLeaf.SetActive(true);
                 return;
