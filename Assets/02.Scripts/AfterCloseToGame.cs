@@ -49,11 +49,11 @@ public class AfterCloseToGame : MonoBehaviour
             //InstantiateDust(3);
             StatusBar.instance.CleanValue(false, 30);
 
-            StatusBar.instance.HungerValue(false, 30);
-            StatusBar.instance.SmartValue(false, 30);
-            StatusBar.instance.ActiveValue(false, 30);
-            StatusBar.instance.EnergyValue(false, 30);
-            StatusBar.instance.HappyValue(false, 30);
+            // StatusBar.instance.HungerValue(false, 30);
+            // StatusBar.instance.SmartValue(false, 30);
+            // StatusBar.instance.ActiveValue(false, 30);
+            // StatusBar.instance.EnergyValue(false, 30);
+            // StatusBar.instance.HappyValue(false, 30);
         }
 
 
@@ -107,6 +107,10 @@ public class AfterCloseToGame : MonoBehaviour
         Debug.Log("종료 시간 : " + System.DateTime.Now.ToString());
     }
 
+
+
+
+    //------------------------수정해야 함!!!------------------------//
     private void InstantiateDust(int step)
     {
         for (int j = 0; j < step; j++)

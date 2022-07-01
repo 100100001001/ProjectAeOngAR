@@ -97,6 +97,15 @@ public class StatusBar : MonoBehaviour
     void Update()
     {
         HandleStatusBar();
+
+        // Debug.Log("hungerBar "+hungerBar.value);
+        // Debug.Log("cleanBar "+cleanBar.value);
+        // Debug.Log("smartBar "+smartBar.value);
+        // Debug.Log("activeBar "+activeBar.value);
+        // Debug.Log("energyBar "+energyBar.value);
+        Debug.Log("happyBar "+happyBar.value);
+        Debug.Log("curHappy "+curHappy);
+        Debug.Log("maxHappy "+maxHappy);
     }
 
     // 상태 초기화

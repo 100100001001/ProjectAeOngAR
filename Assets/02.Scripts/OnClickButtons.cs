@@ -1,69 +1,100 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+// 하단 버튼을 눌렀을 때 상태 변화
 public class OnClickButtons : MonoBehaviour
 {
-    public GameObject bubbleThinking;
-    private RectTransform bubbleThinkingRT;
-    private string thinkingText;
+    public GameObject bubble;            // 말풍선 오브젝트를 담아두는 변수
+    private RectTransform bubbleRT;      // 말풍선 위치가 랜덤으로 뜨기 위해 RectTransform을 받아오는 변수
+    private Image bubbleImg;             // 말풍선 오브젝트의 Image를 불러오기 위한 변수
 
-    public GameObject bubbleRec;
-    private RectTransform bubbleRecRT;
+    public Sprite[] bubbleSprites;       // 말풍선 sprite들을 담아두는 변수
+
+    private TextMeshProUGUI bubbleTMPro; // TextMeshPro를 담아두기 위한 변수
+    private string bubbleText;           // TextMeshPro의 텍스트를 변경하기 위한 변수
+
 
 
 
     private void Start()
     {
-        bubbleThinkingRT = bubbleThinking.GetComponent<RectTransform>();
-        bubbleRecRT = bubbleRec.GetComponent<RectTransform>();
+        bubbleRT = bubble.GetComponent<RectTransform>();
+        bubbleImg = bubble.GetComponent<Image>();
+        
 
-
-
-        bubbleThinkingRT.anchoredPosition = new Vector3(Random.Range(-200, 200), Random.Range(-380, 280), 0);
-        bubbleThinking.SetActive(true);
-        StatusBar.instance.HappyValue(false, 10);
-        TakeShower();
+        
     }
-
-
-
 
     public void TakeShower()
     {
-        if (StatusBar.instance.curClean >= 100)
+        if (StatusBar.instance.curClean >= 100)      // Clean이 가득 찬 상태인데 샤워 버튼을 눌렀을 때
         {
-            bubbleThinking.transform.position = new Vector3(Random.Range(-200, 200), Random.Range(-380, 280), 0);
-            bubbleThinking.SetActive(true);
-            StatusBar.instance.HappyValue(false, 10);
+            StartCoroutine(ThinkingBubble("Clean"));
+            StatusBar.instance.HappyValue(false, 10); // 기분이 안 좋아짐
+            return;
         }
 
-        Status.instance.RemoveDust();
+        StartCoroutine(RecBubble("Clean"));
 
-        StatusBar.instance.HappyValue(true, 10);
         StatusBar.instance.CleanValue(true, 50);
+        StatusBar.instance.HappyValue(true, 10);
+
+        Status.instance.RemoveDust();                 // 화면에 띄워진 먼지 제거
+
     }
 
 
-
-    IEnumerator BubbleText()
+    // 생각하는 말풍선
+    IEnumerator ThinkingBubble(string st)
     {
-        //string[] stop = new string[3];
-        //stop[0] = "���� ������";
-        //stop[1] = "...";
-        //stop[2] = "�׸�~";
+        // 샤워했을 때
+        if (st == "Clean") {
+            string[] thinkingTextShower = new string[3];
+            thinkingTextShower[0] = "왜..\n또 씻지?";
+            thinkingTextShower[1] = "지도.. 씻고\n또 씻어라";
+            thinkingTextShower[2] = "아 저\n깨끗하다고요";
 
-        //string[] angry = new string[3];
-        //stop[0] = "�� ������!!!!";
-        //stop[1] = "�ʹ���!!!!";
-        //stop[2] = "�ȴٰ�!!!!";
+            bubbleText = thinkingTextShower[Random.Range(0, 3)];
+        }
 
 
-        //touchText.GetComponent<Text>().text = touchCnt + " / " + textAfterTouch;
-        yield return new WaitForSeconds(1f);
-        //touchText.SetActive(false);
+        bubble.SetActive(true);
+
+        bubbleImg.sprite = bubbleSprites[0];
+        bubbleRT.anchoredPosition = new Vector3(Random.Range(-200, 200), Random.Range(-380, 280), 0);
+
+        bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
+
+        yield return new WaitForSeconds(2f);
+        bubble.SetActive(false);
     }
 
+
+    // 말하는 말풍선
+    IEnumerator RecBubble(string st)
+    {
+        // 샤워했을 때
+        if (st == "Clean") {
+            string[] thinkingTextShower = new string[3];
+            thinkingTextShower[0] = "히히\n깨끗해";
+            thinkingTextShower[1] = "기분 조아\n히히";
+            thinkingTextShower[2] = "나는\n뽀송해~!";
+
+            bubbleText = thinkingTextShower[Random.Range(0, 3)];
+        }
+
+
+        bubble.SetActive(true);
+
+        bubbleImg.sprite = bubbleSprites[1];
+        bubbleRT.anchoredPosition = new Vector3(Random.Range(-200, 200), Random.Range(-380, 280), 0);
+
+        bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
+
+        yield return new WaitForSeconds(3f);
+        bubble.SetActive(false);
+    }
 }
