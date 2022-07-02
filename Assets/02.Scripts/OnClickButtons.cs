@@ -10,6 +10,7 @@ public class OnClickButtons : MonoBehaviour
     /// <summary>
     ///  말풍선
     /// </summary>
+    [Header("--- 말풍선 ---")]
     public GameObject bubble;            // 말풍선 오브젝트를 담아두는 변수
     private RectTransform bubbleRT;      // 말풍선 위치가 랜덤으로 뜨기 위해 RectTransform을 받아오는 변수
     private Image bubbleImg;             // 말풍선 오브젝트의 Image를 불러오기 위한 변수
@@ -19,10 +20,21 @@ public class OnClickButtons : MonoBehaviour
     private TextMeshProUGUI bubbleTMPro; // TextMeshPro를 담아두기 위한 변수
     private string bubbleText;           // TextMeshPro의 텍스트를 변경하기 위한 변수
 
-
+    [Header("--- For the SmartButton / 공부 ---")]
     public GameObject readABook;         // 책 보는 이미지를 띄우기 위해, 이미지가 있는 오브젝트를 받을 변수
+
+    [Header("--- For the CleanButton / 먼지 생성 ---")]
     public GameObject dusts;
     public GameObject timeFlowTest;
+
+    [Header("--- For the SleepButton / 자는 얼굴 ---")]
+    public GameObject players;
+    public Texture2D sleepingFace;
+    public GameObject BlackImage;
+    private Texture originFace;
+    int sleepN = 1;
+
+
 
     private void Start()
     {
@@ -52,7 +64,7 @@ public class OnClickButtons : MonoBehaviour
         StatusBar.instance.CleanValue(true, 50);
         StatusBar.instance.HappyValue(true, 10);
 
-        Status.instance.RemoveDust();                 // 화면에 띄워진 먼지 제거
+        //Status.instance.RemoveDust();                 // 화면에 띄워진 먼지 제거
 
     }
 
@@ -78,6 +90,43 @@ public class OnClickButtons : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// 자는 버튼을 눌렀을 때
+    /// </summary>
+    public void Sleeping()
+    {
+        if (Status.instance.evo == Status.Evolution.EGG)
+        {
+            BlackImage.SetActive(true);
+            return;
+        }
+        else if (Status.instance.evo == Status.Evolution.BABY) sleepN = 1;
+        else if (Status.instance.evo == Status.Evolution.CHILD) sleepN = 2;
+        else if (Status.instance.evo == Status.Evolution.YOUTH) sleepN = 3;
+
+        originFace = players.transform.GetChild(sleepN).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
+        players.transform.GetChild(sleepN).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
+
+        BlackImage.SetActive(true); // 어두운 패널 활성화
+    }
+
+    /// <summary>
+    /// 어두워진 패널을 눌렀을 때. 잠 끝
+    /// </summary>
+    public void EndSleep()
+    {
+        if (Status.instance.evo == Status.Evolution.EGG)
+        {
+            BlackImage.SetActive(false); // 어두운 패널 비활성화
+            return;
+        }
+        else if (Status.instance.evo == Status.Evolution.BABY) sleepN = 1;
+        else if (Status.instance.evo == Status.Evolution.CHILD) sleepN = 2;
+        else if (Status.instance.evo == Status.Evolution.YOUTH) sleepN = 3;
+
+        players.gameObject.transform.GetChild(sleepN).transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
+        BlackImage.SetActive(false); // 어두운 패널 비활성화
+    }
 
     /// <summary>
     /// 반려동물(캐릭터)가 생각하는 말풍선
@@ -118,7 +167,6 @@ public class OnClickButtons : MonoBehaviour
         yield return new WaitForSeconds(3f);
         bubble.SetActive(false);
     }
-
 
     /// <summary>
     /// 반려동물(캐릭터)의 말풍선

@@ -42,10 +42,10 @@ public class Status : MonoBehaviour
     public float cntHappy1;
 
 
-    public GameObject[] dustEgg;
-    public GameObject[] dustBaby;
-    public GameObject[] dustChild;
-    public GameObject[] dustYouth;
+    //public GameObject[] dustEgg;
+    //public GameObject[] dustBaby;
+    //public GameObject[] dustChild;
+    //public GameObject[] dustYouth;
 
 
 
@@ -60,6 +60,8 @@ public class Status : MonoBehaviour
 
 
 
+
+
     private void Start()
     {
         // 캐릭터의 처음 상태를 EGG로 지정
@@ -71,52 +73,54 @@ public class Status : MonoBehaviour
 
         sText.text = sString;
 
+
+
     }
 
     private void Update()
     {
-        if (StatusBar.instance.curClean < 50)
-            AddDust();
+        //if (StatusBar.instance.curClean < 50)
+        //    AddDust();
     }
 
-    // 먼지를 활성화하는 메소드
-    public void AddDust()
-    {
-        switch (evo)
-        {
-            case Evolution.EGG:
-                for (int i = 0; i < dustEgg.Length; i++) dustEgg[i].SetActive(true);
-                break;
-            case Evolution.BABY:
-                for (int i = 0; i < dustBaby.Length; i++) dustBaby[i].SetActive(true);
-                break;
-            case Evolution.CHILD:
-                for (int i = 0; i < dustChild.Length; i++) dustChild[i].SetActive(true);
-                break;
-            case Evolution.YOUTH:
-                for (int i = 0; i < dustYouth.Length; i++) dustYouth[i].SetActive(true);
-                break;
-        }
-    }
+    //// 먼지를 활성화하는 메소드
+    //public void AddDust()
+    //{
+    //    switch (evo)
+    //    {
+    //        case Evolution.EGG:
+    //            for (int i = 0; i < dustEgg.Length; i++) dustEgg[i].SetActive(true);
+    //            break;
+    //        case Evolution.BABY:
+    //            for (int i = 0; i < dustBaby.Length; i++) dustBaby[i].SetActive(true);
+    //            break;
+    //        case Evolution.CHILD:
+    //            for (int i = 0; i < dustChild.Length; i++) dustChild[i].SetActive(true);
+    //            break;
+    //        case Evolution.YOUTH:
+    //            for (int i = 0; i < dustYouth.Length; i++) dustYouth[i].SetActive(true);
+    //            break;
+    //    }
+    //}
 
-    // 먼지를 비활성화하는 메소드
-    public void RemoveDust()
-    {
+    //// 먼지를 비활성화하는 메소드
+    //public void RemoveDust()
+    //{
 
-        switch (evo)
-        {
-            case Evolution.EGG:
-                for (int i = 0; i < dustEgg.Length; i++) dustEgg[i].SetActive(false);
-                break;
-            case Evolution.BABY:
-                for (int i = 0; i < dustBaby.Length; i++) dustBaby[i].SetActive(false);
-                break;
-            case Evolution.CHILD:
-                for (int i = 0; i < dustChild.Length; i++) dustChild[i].SetActive(false);
-                break;
-            case Evolution.YOUTH:
-                for (int i = 0; i < dustYouth.Length; i++) dustYouth[i].SetActive(false);
-                break;
-        }
-    }
+    //    switch (evo)
+    //    {
+    //        case Evolution.EGG:
+    //            for (int i = 0; i < dustEgg.Length; i++) dustEgg[i].SetActive(false);
+    //            break;
+    //        case Evolution.BABY:
+    //            for (int i = 0; i < dustBaby.Length; i++) dustBaby[i].SetActive(false);
+    //            break;
+    //        case Evolution.CHILD:
+    //            for (int i = 0; i < dustChild.Length; i++) dustChild[i].SetActive(false);
+    //            break;
+    //        case Evolution.YOUTH:
+    //            for (int i = 0; i < dustYouth.Length; i++) dustYouth[i].SetActive(false);
+    //            break;
+    //    }
+    //}
 }

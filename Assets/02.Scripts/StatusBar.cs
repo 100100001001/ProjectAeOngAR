@@ -74,7 +74,7 @@ public class StatusBar : MonoBehaviour
     public Slider energyBar;
 
     public float maxEnergy = 100;
-    public float curEnergy = 100;
+    public float curEnergy = 50;
 
 
     public Slider happyBar;
@@ -103,9 +103,9 @@ public class StatusBar : MonoBehaviour
         // Debug.Log("smartBar "+smartBar.value);
         // Debug.Log("activeBar "+activeBar.value);
         // Debug.Log("energyBar "+energyBar.value);
-        Debug.Log("happyBar "+happyBar.value);
-        Debug.Log("curHappy "+curHappy);
-        Debug.Log("maxHappy "+maxHappy);
+        //Debug.Log("happyBar "+happyBar.value);
+        //Debug.Log("curHappy "+curHappy);
+        //Debug.Log("maxHappy "+maxHappy);
     }
 
     // 상태 초기화

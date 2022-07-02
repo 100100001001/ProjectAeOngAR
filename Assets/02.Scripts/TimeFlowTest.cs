@@ -49,7 +49,7 @@ public class TimeFlowTest : MonoBehaviour
         StatusBar.instance.CleanValue(false, n);
         StatusBar.instance.SmartValue(false, n);
         StatusBar.instance.ActiveValue(false, n);
-        StatusBar.instance.EnergyValue(false, n);
+        //StatusBar.instance.EnergyValue(false, n);
         StatusBar.instance.HappyValue(false, n);
 
     }
