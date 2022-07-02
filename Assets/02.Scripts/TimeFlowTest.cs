@@ -1,15 +1,15 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-// ½Ã°£ÀÇ Èå¸§¿¡ µû¶ó »óÅÂ¸¦ º¯È­ÇÏ±â À§ÇÑ ½ºÅ©¸³Æ®
+// ì‹œê°„ì˜ íë¦„ì— ë”°ë¼ ìƒíƒœë¥¼ ë³€í™”í•˜ê¸° ìœ„í•œ ìŠ¤í¬ë¦½íŠ¸
 public class TimeFlowTest : MonoBehaviour
 {
-    // ¸ÕÁö »ı¼º
-    public GameObject[] dust;        // ¸ÕÁö ¿ÀºêÁ§Æ®µéÀ» ´ãÀ» º¯¼ö
+    // ë¨¼ì§€ ìƒì„±
+    public GameObject[] dust;        // ë¨¼ì§€ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ë‹´ì„ ë³€ìˆ˜
 
-    private float dustXMin = -230f;  // ¸ÕÁö ¿ÀºêÁ§Æ®°¡ ·£´ı À§Ä¡, ·£´ıÇÑ Å©±â·Î ¶ã ¼ö ÀÖµµ·Ï ¹üÀ§°ª ÁöÁ¤
+    private float dustXMin = -230f;  // ë¨¼ì§€ ì˜¤ë¸Œì íŠ¸ê°€ ëœë¤ ìœ„ì¹˜, ëœë¤í•œ í¬ê¸°ë¡œ ëœ° ìˆ˜ ìˆë„ë¡ ë²”ìœ„ê°’ ì§€ì •
     private float dustXMax = 230f;
 
     private float dustYMin = -400f;
@@ -18,20 +18,20 @@ public class TimeFlowTest : MonoBehaviour
     private float dustScaleMin = 5;
     private float dustScaleMax = 10;
 
-    public int timeCnt = 0;          // ½Ã°£ÀÇ Èå¸§¿¡ µû¶ó ¸ÕÁö¸¦ ÇÏ³ª¾¿ Áõ°¡½ÃÅ°±â À§ÇØ ½Ã°£ Èå¸§À» Ä«¿îÆ® ÇÏ´Â º¯¼ö
+    public int timeCnt = 0;          // ì‹œê°„ì˜ íë¦„ì— ë”°ë¼ ë¨¼ì§€ë¥¼ í•˜ë‚˜ì”© ì¦ê°€ì‹œí‚¤ê¸° ìœ„í•´ ì‹œê°„ íë¦„ì„ ì¹´ìš´íŠ¸ í•˜ëŠ” ë³€ìˆ˜
     
     
-    public float time;               // ½Ã°£ÀÇ Èå¸§À» Ã¼Å©ÇÏ´Â º¯¼ö
+    public float time;               // ì‹œê°„ì˜ íë¦„ì„ ì²´í¬í•˜ëŠ” ë³€ìˆ˜
 
 
     void Update()
     {
-        time += Time.deltaTime;     // ¸¶Áö¸· ÇÁ·¹ÀÓ¿¡¼­ ÇöÀç ÇÁ·¹ÀÓ±îÁöÀÇ ÃÊ¸¦ ´õÇÏ¿© ½Ã°£ÀÇ Èå¸§ Ã¼Å©
+        time += Time.deltaTime;     // ë§ˆì§€ë§‰ í”„ë ˆì„ì—ì„œ í˜„ì¬ í”„ë ˆì„ê¹Œì§€ì˜ ì´ˆë¥¼ ë”í•˜ì—¬ ì‹œê°„ì˜ íë¦„ ì²´í¬
 
-        if (time > 2)               // »óÅÂ º¯È­ ÁÖ±â
+        if (time > 2)               // ìƒíƒœ ë³€í™” ì£¼ê¸°
         {
             timeCnt++;
-            if (timeCnt >= 9) timeCnt = 9; // Áõ°¡ÇÒ ¸ÕÁö°¡ 9°³ ÀÖ±â ¶§¹®¿¡, IndexError°¡ ³ª¿À´Â °ÍÀ» ¸·±â À§ÇØ timeCnt¸¦ 9¿¡ °íÁ¤½ÃÅ²´Ù
+            if (timeCnt >= 9) timeCnt = 9; // ì¦ê°€í•  ë¨¼ì§€ê°€ 9ê°œ ìˆê¸° ë•Œë¬¸ì—, IndexErrorê°€ ë‚˜ì˜¤ëŠ” ê²ƒì„ ë§‰ê¸° ìœ„í•´ timeCntë¥¼ 9ì— ê³ ì •ì‹œí‚¨ë‹¤
 
             StatusDecrease(5);
             time = 0;
@@ -42,7 +42,7 @@ public class TimeFlowTest : MonoBehaviour
     }
 
 
-    // ½Ã°£ÀÇ Èå¸§¿¡ µû¸¥ »óÅÂ º¯È­ (Value °¨¼Ò)
+    // ì‹œê°„ì˜ íë¦„ì— ë”°ë¥¸ ìƒíƒœ ë³€í™” (Value ê°ì†Œ)
     void StatusDecrease(int n)
     {
         StatusBar.instance.HungerValue(false, n);
@@ -54,12 +54,12 @@ public class TimeFlowTest : MonoBehaviour
 
     }
 
-    // ¸ÕÁö »ı¼ºÇÏ´Â ¸Ş¼Òµå
+    // ë¨¼ì§€ ìƒì„±í•˜ëŠ” ë©”ì†Œë“œ
     void InstantiateDust(int step)
     {
         for (int i = 0; i < step; i++)
         {
-            float dustScale = Random.Range(dustScaleMin, dustScaleMax); // ·£´ıÇÑ ½ºÄÉÀÏ °ªÀ» ¾ò±â À§ÇÑ º¯¼ö
+            float dustScale = Random.Range(dustScaleMin, dustScaleMax); // ëœë¤í•œ ìŠ¤ì¼€ì¼ ê°’ì„ ì–»ê¸° ìœ„í•œ ë³€ìˆ˜
 
             dust[i].GetComponent<RectTransform>().localScale = new Vector2(dustScale, dustScale);
             dust[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(dustXMin, dustXMax), Random.Range(dustYMin, dustYMax));

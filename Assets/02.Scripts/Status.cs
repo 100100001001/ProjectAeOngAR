@@ -33,13 +33,14 @@ public class Status : MonoBehaviour
     //public int count;
 
 
-    // 캐릭터의 상태 변화를 셀 변수
-    public float cntHunger1;
-    public float cntClean1;
-    public float cntSmart1;
-    public float cntActive1;
-    public float cntEnergy1;
-    public float cntHappy1;
+    // 캐릭터의 상태 변화를 셀 변수 (호감도가 오를 때에만 횟수 증가)
+    public float cntClean1;   // 샤워 한 횟수
+    public float cntSmart1;   // 공부 한 횟수
+    public float cntActive1;  // 활동 한 횟수
+    public float cntSleep1;   // 잠 잔 횟수
+    public float cntEatItem1; // 아이템을 먹은 횟수
+    public float cntHappy1;   // 행복한 횟수
+    public float cntTouch1;   // 터치 횟수
 
 
     //public GameObject[] dustEgg;
@@ -59,6 +60,10 @@ public class Status : MonoBehaviour
     private string sString;
 
 
+    // evo 테스트!!!!!!!!!
+    public TextMeshProUGUI evoTestText;
+
+    float time;
 
 
 
@@ -79,9 +84,34 @@ public class Status : MonoBehaviour
 
     private void Update()
     {
+        // 수정해야돼!!!!!!!!!!!!!!!!!!
+        time += Time.deltaTime;
+        if (time > 2) evo = Evolution.BABY;
+        else if (time > 4) evo = Evolution.CHILD;
+        else if (time > 6) evo = Evolution.YOUTH;
+
+
+
+        //if (cntClean1 == 5 && cntSmart1 == 5 && cntSleap1 == 5 && cntTouch1 == 5 && cntHappy1 == 5) Status.instance.evo = Status.Evolution.BABY;
+        //if (cntSleep1 >= 1 && cntTouch1 >= 1) evo = Evolution.BABY;
+        //else if (cntSleep1 >= 1 && cntTouch1 >= 3) evo = Evolution.CHILD;
+        //else if (cntSleep1 >= 1 && cntTouch1 >= 5) evo = Evolution.YOUTH;
+
+        evoTestText.text = ""+evo;
+
+
+
+
+
         //if (StatusBar.instance.curClean < 50)
         //    AddDust();
     }
+
+
+
+
+
+
 
     //// 먼지를 활성화하는 메소드
     //public void AddDust()

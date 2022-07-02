@@ -46,7 +46,10 @@ public class ARManager : MonoBehaviour
 
     void Start()
     {
+        indicatorTest[0].SetActive(true);
         indicator = indicatorTest[0].transform;
+        PlaceIndicator();
+
         //dustTransform = dust[0].transform;
 
         indicatorTest[1].SetActive(false);

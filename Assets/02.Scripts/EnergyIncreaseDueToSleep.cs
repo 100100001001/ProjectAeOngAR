@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SleepValueIncease : MonoBehaviour
+public class EnergyIncreaseDueToSleep : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    int n = 1;
+    float time;
 
-    // Update is called once per frame
     void Update()
     {
-        
+        time += Time.deltaTime;
+
+        if (time > 2)
+        {
+            StatusBar.instance.EnergyValue(true, n);
+            time = 0;
+        }
     }
 }

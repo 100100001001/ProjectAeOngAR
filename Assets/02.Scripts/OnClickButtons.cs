@@ -95,17 +95,21 @@ public class OnClickButtons : MonoBehaviour
     /// </summary>
     public void Sleeping()
     {
-        if (Status.instance.evo == Status.Evolution.EGG)
+        if (Status.instance.evo == Status.Evolution.BABY)
         {
-            BlackImage.SetActive(true);
-            return;
+            originFace = players.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
+            players.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
         }
-        else if (Status.instance.evo == Status.Evolution.BABY) sleepN = 1;
-        else if (Status.instance.evo == Status.Evolution.CHILD) sleepN = 2;
-        else if (Status.instance.evo == Status.Evolution.YOUTH) sleepN = 3;
-
-        originFace = players.transform.GetChild(sleepN).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
-        players.transform.GetChild(sleepN).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
+        else if (Status.instance.evo == Status.Evolution.CHILD)
+        {
+            originFace = players.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
+            players.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
+        }
+        else if (Status.instance.evo == Status.Evolution.YOUTH)
+        {
+            originFace = players.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
+            players.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
+        }
 
         BlackImage.SetActive(true); // 어두운 패널 활성화
     }
@@ -115,17 +119,23 @@ public class OnClickButtons : MonoBehaviour
     /// </summary>
     public void EndSleep()
     {
-        if (Status.instance.evo == Status.Evolution.EGG)
+        if (Status.instance.evo == Status.Evolution.BABY)
         {
-            BlackImage.SetActive(false); // 어두운 패널 비활성화
-            return;
+            players.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
         }
-        else if (Status.instance.evo == Status.Evolution.BABY) sleepN = 1;
-        else if (Status.instance.evo == Status.Evolution.CHILD) sleepN = 2;
-        else if (Status.instance.evo == Status.Evolution.YOUTH) sleepN = 3;
+        else if (Status.instance.evo == Status.Evolution.CHILD)
+        {
+            players.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
+        }
+        else if (Status.instance.evo == Status.Evolution.YOUTH)
+        {
+            players.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
+        }
 
-        players.gameObject.transform.GetChild(sleepN).transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
         BlackImage.SetActive(false); // 어두운 패널 비활성화
+
+        Status.instance.cntSleep1++;
+
     }
 
     /// <summary>
