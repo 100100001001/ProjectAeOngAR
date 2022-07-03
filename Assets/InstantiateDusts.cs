@@ -7,7 +7,8 @@ public class InstantiateDusts : MonoBehaviour
 {
     public GameObject[] dust;        // 먼지 오브젝트들을 담을 변수
 
-    private float dustXMin = -220f;  // 먼지 오브젝트가 랜덤 위치, 랜덤한 크기로 뜰 수 있도록 범위값 지정
+    // 먼지 오브젝트가 랜덤 위치, 랜덤한 크기로 뜰 수 있도록 범위값 지정
+    private float dustXMin = -220f; 
     private float dustXMax = 220f;
 
     private float dustYMin = -450f;
@@ -36,6 +37,7 @@ public class InstantiateDusts : MonoBehaviour
         }
     }
 
+    // 먼지를 생성하는 메서드
     void InstantiateDust(int step)
     {
         for (int i = 0; i < step; i++)
