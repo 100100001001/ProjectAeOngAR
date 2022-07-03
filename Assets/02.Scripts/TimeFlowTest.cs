@@ -28,14 +28,11 @@ public class TimeFlowTest : MonoBehaviour
     {
         time += Time.deltaTime;     // 마지막 프레임에서 현재 프레임까지의 초를 더하여 시간의 흐름 체크
 
-        if (time > 2)               // 상태 변화 주기
+        if (time > 5)               // 상태 변화 주기
         {
-            timeCnt++;
-            if (timeCnt >= 9) timeCnt = 9; // 증가할 먼지가 9개 있기 때문에, IndexError가 나오는 것을 막기 위해 timeCnt를 9에 고정시킨다
 
             StatusDecrease(5);
             time = 0;
-            InstantiateDust(timeCnt);
             
 
         }
@@ -49,24 +46,24 @@ public class TimeFlowTest : MonoBehaviour
         StatusBar.instance.CleanValue(false, n);
         StatusBar.instance.SmartValue(false, n);
         StatusBar.instance.ActiveValue(false, n);
-        //StatusBar.instance.EnergyValue(false, n);
+        StatusBar.instance.EnergyValue(false, n);
         StatusBar.instance.HappyValue(false, n);
 
     }
 
-    // 먼지 생성하는 메소드
-    void InstantiateDust(int step)
-    {
-        for (int i = 0; i < step; i++)
-        {
-            float dustScale = Random.Range(dustScaleMin, dustScaleMax); // 랜덤한 스케일 값을 얻기 위한 변수
+    //// 먼지 생성하는 메소드
+    //void InstantiateDust(int step)
+    //{
+    //    for (int i = 0; i < step; i++)
+    //    {
+    //        float dustScale = Random.Range(dustScaleMin, dustScaleMax); // 랜덤한 스케일 값을 얻기 위한 변수
 
-            dust[i].GetComponent<RectTransform>().localScale = new Vector2(dustScale, dustScale);
-            dust[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(dustXMin, dustXMax), Random.Range(dustYMin, dustYMax));
+    //        dust[i].GetComponent<RectTransform>().localScale = new Vector2(dustScale, dustScale);
+    //        dust[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(dustXMin, dustXMax), Random.Range(dustYMin, dustYMax));
 
-            dust[i].SetActive(true);
+    //        dust[i].SetActive(true);
 
-            StatusBar.instance.CleanValue(false, 10);
-        }
-    }
+    //        StatusBar.instance.CleanValue(false, 10);
+    //    }
+    //}
 }

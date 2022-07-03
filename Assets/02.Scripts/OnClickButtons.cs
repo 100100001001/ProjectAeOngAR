@@ -32,8 +32,9 @@ public class OnClickButtons : MonoBehaviour
     public Texture2D sleepingFace;
     public GameObject BlackImage;
     private Texture originFace;
-    int sleepN = 1;
 
+    [Header("--- For the ShowerButton ---")]
+    public GameObject shower;
 
 
     private void Start()
@@ -50,6 +51,7 @@ public class OnClickButtons : MonoBehaviour
     {
         if (StatusBar.instance.curClean >= 100)      // Clean이 가득 찬 상태인데 샤워 버튼을 눌렀을 때
         {
+            Status.instance.dustCnt = 0;
             StartCoroutine(ThinkingBubble("Clean"));
             StatusBar.instance.HappyValue(false, 10); // 기분이 안 좋아짐
             return;
@@ -60,9 +62,16 @@ public class OnClickButtons : MonoBehaviour
 
 
         StartCoroutine(RecBubble("Clean"));
+        StartCoroutine(TakeAShowerAnimation());
 
         StatusBar.instance.CleanValue(true, 50);
         StatusBar.instance.HappyValue(true, 10);
+
+        Status.instance.cntClean1++;
+
+        Status.instance.dustCnt /= 2;
+
+
 
         //Status.instance.RemoveDust();                 // 화면에 띄워진 먼지 제거
 
@@ -87,6 +96,9 @@ public class OnClickButtons : MonoBehaviour
 
         StatusBar.instance.SmartValue(true, 20);
         StatusBar.instance.HappyValue(true, 10);
+
+        Status.instance.cntSmart1++;
+
 
     }
 
@@ -231,4 +243,14 @@ public class OnClickButtons : MonoBehaviour
     }
 
 
+    /// <summary>
+    /// 샤워하는 이미지 오브젝트를 활성화
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TakeAShowerAnimation()
+    {
+        shower.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        shower.SetActive(false);
+    }
 }

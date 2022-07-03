@@ -60,6 +60,7 @@ public class Touch : MonoBehaviour
                             else if (Status.instance.evo == Status.Evolution.YOUTH) youthParticle.Play();
 
 
+                            Status.instance.cntTouch1++;
 
                             touchCnt++;
                             StartCoroutine(TouchTestText());

@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
 
 [System.Serializable]
 // 반려동물의 상태를 기록하는 스크립트
@@ -34,20 +31,13 @@ public class Status : MonoBehaviour
 
 
     // 캐릭터의 상태 변화를 셀 변수 (호감도가 오를 때에만 횟수 증가)
-    public float cntClean1;   // 샤워 한 횟수
-    public float cntSmart1;   // 공부 한 횟수
-    public float cntActive1;  // 활동 한 횟수
-    public float cntSleep1;   // 잠 잔 횟수
-    public float cntEatItem1; // 아이템을 먹은 횟수
-    public float cntHappy1;   // 행복한 횟수
-    public float cntTouch1;   // 터치 횟수
-
-
-    //public GameObject[] dustEgg;
-    //public GameObject[] dustBaby;
-    //public GameObject[] dustChild;
-    //public GameObject[] dustYouth;
-
+    public int cntClean1;   // 샤워 한 횟수
+    public int cntSmart1;   // 공부 한 횟수
+    public int cntActive1;  // 활동 한 횟수
+    public int cntSleep1;   // 잠 잔 횟수
+    public int cntEatItem1; // 아이템을 먹은 횟수
+    public int cntHappy1;   // 행복한 횟수
+    public int cntTouch1;   // 터치 횟수
 
 
     public enum Evolution { EGG, BABY, CHILD, YOUTH } // 캐릭터 진화
@@ -64,6 +54,8 @@ public class Status : MonoBehaviour
     public TextMeshProUGUI evoTestText;
 
     float time;
+
+    public int dustCnt = 0;
 
 
 
@@ -84,23 +76,9 @@ public class Status : MonoBehaviour
 
     private void Update()
     {
-        // 수정해야돼!!!!!!!!!!!!!!!!!!
-        time += Time.deltaTime;
-        if (time > 2) evo = Evolution.BABY;
-        else if (time > 4) evo = Evolution.CHILD;
-        else if (time > 6) evo = Evolution.YOUTH;
+        Evo(evo);
 
-
-
-        //if (cntClean1 == 5 && cntSmart1 == 5 && cntSleap1 == 5 && cntTouch1 == 5 && cntHappy1 == 5) Status.instance.evo = Status.Evolution.BABY;
-        //if (cntSleep1 >= 1 && cntTouch1 >= 1) evo = Evolution.BABY;
-        //else if (cntSleep1 >= 1 && cntTouch1 >= 3) evo = Evolution.CHILD;
-        //else if (cntSleep1 >= 1 && cntTouch1 >= 5) evo = Evolution.YOUTH;
-
-        evoTestText.text = ""+evo;
-
-
-
+        evoTestText.text = "" + evo;
 
 
         //if (StatusBar.instance.curClean < 50)
@@ -109,6 +87,48 @@ public class Status : MonoBehaviour
 
 
 
+    public void Evo(Evolution step)
+    {
+        switch (step)
+        {
+            case Evolution.EGG:
+
+                if (cntTouch1 >= 5)
+                    if (cntSmart1 >= 2 || cntClean1 >= 2)
+                        evo = Evolution.BABY;
+
+                else if (cntTouch1 >= 20)
+                        evo = Evolution.BABY;
+
+                break;
+
+
+            case Evolution.BABY:
+                    if (cntTouch1 >= 10)
+                        if (cntSmart1 >= 4 || cntClean1 >= 4)
+                        evo = Evolution.CHILD;
+
+                    else if (cntTouch1 >= 50)
+                        evo = Evolution.CHILD;
+
+                break;
+
+
+            case Evolution.CHILD:
+                if (cntTouch1 >= 15)
+                    if (cntSmart1 >= 6 || cntClean1 >= 6)
+                        evo = Evolution.YOUTH;
+
+                else if (cntTouch1 >= 100)
+                    evo = Evolution.YOUTH;
+
+                break;
+
+
+            case Evolution.YOUTH:
+                break;
+        }
+    }
 
 
 

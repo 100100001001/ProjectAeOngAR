@@ -47,7 +47,7 @@ public class AfterCloseToGame : MonoBehaviour
         if (conpareTime.TotalSeconds > 1)
         {
             //InstantiateDust(3);
-            StatusBar.instance.CleanValue(false, 30);
+            //StatusBar.instance.CleanValue(false, 30);
 
             // StatusBar.instance.HungerValue(false, 30);
             // StatusBar.instance.SmartValue(false, 30);
