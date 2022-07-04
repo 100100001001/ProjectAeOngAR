@@ -130,6 +130,7 @@ public class StatusBar : MonoBehaviour
         else curHunger -= n;
 
         if (curHunger >= 100) curHunger = 100;
+        if (curHunger <= 0) curHunger = 0;
     }
     public void CleanValue(bool val, int n)
     {
@@ -137,6 +138,7 @@ public class StatusBar : MonoBehaviour
         else curClean -= n;
 
         if (curClean >= 100) curClean = 100;
+        if (curClean <= 0) curClean = 0;
     }
     public void SmartValue(bool val, int n)
     {
@@ -144,6 +146,7 @@ public class StatusBar : MonoBehaviour
         else curSmart -= n;
 
         if (curSmart >= 100) curSmart = 100;
+        if (curSmart <= 0) curSmart = 0;
     }
     public void ActiveValue(bool val, int n)
     {
@@ -151,6 +154,7 @@ public class StatusBar : MonoBehaviour
         else curActive -= n;
 
         if (curActive >= 100) curActive = 100;
+        if (curActive <= 0) curActive = 0;
     }
     public void EnergyValue(bool val, int n)
     {
@@ -158,6 +162,7 @@ public class StatusBar : MonoBehaviour
         else curEnergy -= n;
 
         if (curEnergy >= 100) curEnergy = 100;
+        if (curEnergy <= 0) curEnergy = 0;
     }
     public void HappyValue(bool val, int n)
     {
@@ -165,6 +170,7 @@ public class StatusBar : MonoBehaviour
         else curHappy -= n;
 
         if (curHappy >= 100) curHappy = 100;
+        if (curHappy <= 0) curHappy = 0;
     }
 
     #endregion
