@@ -327,7 +327,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &223974227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -863,7 +863,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1455898096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -878,7 +878,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arObjectToSpawn: {fileID: 7519694551611892616, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
     type: 3}
-  placementIndicator: {fileID: 1616647808}
+  placementIndicator: {fileID: 3668188800302807996, guid: e252e07b9289fe5469377b69ec5eb150,
+    type: 3}
   shoot: {fileID: 701272731}
 --- !u!4 &1455898097
 Transform:
@@ -994,12 +995,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &1616647808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6705402075998324148, guid: d941199d4a58fcb45adc75ea8e37c42c,
-    type: 3}
-  m_PrefabInstance: {fileID: 235983900}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2077497076
 GameObject:
   m_ObjectHideFlags: 0

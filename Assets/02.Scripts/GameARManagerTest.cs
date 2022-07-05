@@ -29,13 +29,13 @@ public class GameARManagerTest : MonoBehaviour
     private float jellyXMin = -0.5f;
     private float jellyXMax = 1.5f;
 
-    private float jellyYMin = 1.5f;
-    private float jellyYMax = 2f;
+    private float jellyYMin = 1f;
+    private float jellyYMax = 2.5f;
 
     private float jellyScaleMin = 0.05f;
     private float jellyScaleMax = 0.3f;
 
-    private Vector3 poolPosition = new Vector3(-25, 0, 0);
+    private Vector3 poolPosition = new Vector3(0, 0, -25);
     private Vector3 ro = new Vector3(0, 180, 0);
 
 
@@ -79,6 +79,21 @@ public class GameARManagerTest : MonoBehaviour
         {
             //spawnedJelly = Instantiate(jelly, PlacementPose.position, PlacementPose.rotation);
 
+            for (int i = 0; i < 5; i++)
+            {
+                float jellyXPos = Random.Range(jellyXMin, jellyXMax);
+                float jellyYPos = Random.Range(jellyYMin, jellyYMax);
+                float jellyScale = Random.Range(jellyScaleMin, jellyScaleMax);
+
+                jelly.transform.localScale = new Vector3(jellyScale, jellyScale, jellyScale);
+                Vector3 jellyPos = new Vector3(PlacementPose.position.x * jellyXPos, PlacementPose.position.y * jellyYPos, PlacementPose.position.z);
+
+
+
+                //spawnedJelly[i].transform.SetPositionAndRotation(PlacementPose.position, PlacementPose.rotation);
+                spawnedJelly[i].transform.SetPositionAndRotation(jellyPos, Quaternion.Euler(ro));
+            }
+
             time = 0;
         }
 
@@ -86,7 +101,7 @@ public class GameARManagerTest : MonoBehaviour
 
 
         PlaceIndicator();
-        StartCoroutine(SetJelly());
+        //StartCoroutine(SetJelly());
 
 
 
@@ -110,9 +125,10 @@ public class GameARManagerTest : MonoBehaviour
 
     IEnumerator SetJelly()
     {
+        yield return new WaitForSeconds(5f);
+
         for (int i = 0; i < 10; i++)
         {
-            
             float jellyXPos = Random.Range(jellyXMin, jellyXMax);
             float jellyYPos = Random.Range(jellyYMin, jellyYMax);
             float jellyScale = Random.Range(jellyScaleMin, jellyScaleMax);
@@ -127,7 +143,6 @@ public class GameARManagerTest : MonoBehaviour
         }
 
 
-        yield return new WaitForSeconds(0);
 
 
         // float jellyXPos = Random.Range(jellyXMin, jellyXMax);

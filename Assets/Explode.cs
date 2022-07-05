@@ -10,8 +10,8 @@ public class Explode : MonoBehaviour
     {
         if(collision.transform.tag == "Jelly")
         {
-            collision.transform.gameObject.transform.position = Vector3.zero;
-            //Destroy(collision.transform.gameObject); // destroy jelly
+            //collision.transform.gameObject.transform.position = Vector3.zero;
+            Destroy(collision.transform.gameObject); // destroy jelly
             Instantiate(explosion, collision.transform.position, collision.transform.rotation); 
         }
     }
