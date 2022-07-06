@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnergyIncreaseDueToSleep : MonoBehaviour
 {
-    int n = 1;
+    int n = 5;
     float time;
 
     void Update()

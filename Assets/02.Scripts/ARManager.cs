@@ -46,43 +46,44 @@ public class ARManager : MonoBehaviour
 
     void Start()
     {
-        indicatorTest[0].SetActive(true);
-        indicator = indicatorTest[0].transform;
+        indicatorTest[4].SetActive(true);
+        indicator = indicatorTest[4].transform;
         PlaceIndicator();
 
         //dustTransform = dust[0].transform;
 
-        indicatorTest[1].SetActive(false);
-        indicatorTest[2].SetActive(false);
-        indicatorTest[3].SetActive(false);
+        //indicatorTest[1].SetActive(false);
+        //indicatorTest[2].SetActive(false);
+        //indicatorTest[3].SetActive(false);
     }
 
     void Update()
     {
+        if (Input.touchCount > 1)// && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            indicatorTest[4].SetActive(true);
+            indicator = indicatorTest[4].transform;
+            PlaceIndicator();
+
+
+        }
+
         switch (Status.instance.evo)
         {
             case Status.Evolution.EGG:
                 indicatorTest[0].SetActive(true);
-                indicator = indicatorTest[0].transform;
-                PlaceIndicator();
                 return;
             case Status.Evolution.BABY:
                 indicatorTest[0].SetActive(false);
                 indicatorTest[1].SetActive(true);
-                indicator = indicatorTest[1].transform;
-                PlaceIndicator();
                 return;
             case Status.Evolution.CHILD:
                 indicatorTest[1].SetActive(false);
                 indicatorTest[2].SetActive(true);
-                indicator = indicatorTest[2].transform;
-                PlaceIndicator();
                 return;
             case Status.Evolution.YOUTH:
                 indicatorTest[2].SetActive(false);
                 indicatorTest[3].SetActive(true);
-                indicator = indicatorTest[3].transform;
-                PlaceIndicator();
                 return;
             default:
                 return;

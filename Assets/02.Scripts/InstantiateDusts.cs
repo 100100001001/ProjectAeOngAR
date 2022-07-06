@@ -8,14 +8,14 @@ public class InstantiateDusts : MonoBehaviour
     public GameObject[] dust;        // 먼지 오브젝트들을 담을 변수
 
     // 먼지 오브젝트가 랜덤 위치, 랜덤한 크기로 뜰 수 있도록 범위값 지정
-    private float dustXMin = -220f; 
-    private float dustXMax = 220f;
+    private float dustXMin = -300f;
+    private float dustXMax = 80f;
 
-    private float dustYMin = -450f;
-    private float dustYMax = 300f;
+    private float dustYMin = -120f;
+    private float dustYMax = 250f;
 
-    private float dustScaleMin = 5;
-    private float dustScaleMax = 10;
+    private float dustScaleMin = 3;
+    private float dustScaleMax = 6;
 
     float time;
 
@@ -27,12 +27,17 @@ public class InstantiateDusts : MonoBehaviour
 
             if (time > 5)
             {
-                if (Status.instance.dustCnt >= 9) Status.instance.dustCnt = 9; // 증가할 먼지가 9개 있기 때문에, IndexError가 나오는 것을 막기 위해 timeCnt를 9에 고정시킨다
-
+                time = 0;
                 Status.instance.dustCnt++;
+
+                if (Status.instance.dustCnt >= 9)
+                {
+                    Status.instance.dustCnt = 9; // 증가할 먼지가 9개 있기 때문에, IndexError가 나오는 것을 막기 위해 timeCnt를 9에 고정시킨다
+                    return;
+                }
+
                 InstantiateDust(Status.instance.dustCnt);
 
-                time = 0;
             }
         }
     }

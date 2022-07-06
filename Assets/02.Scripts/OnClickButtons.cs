@@ -66,6 +66,7 @@ public class OnClickButtons : MonoBehaviour
 
         StatusBar.instance.CleanValue(true, 50);
         StatusBar.instance.HappyValue(true, 10);
+        StatusBar.instance.EnergyValue(false, 5);
 
         Status.instance.cntClean1++;
 
@@ -96,6 +97,8 @@ public class OnClickButtons : MonoBehaviour
 
         StatusBar.instance.SmartValue(true, 20);
         StatusBar.instance.HappyValue(true, 10);
+        StatusBar.instance.EnergyValue(false, 10);
+
 
         Status.instance.cntSmart1++;
 
@@ -151,6 +154,29 @@ public class OnClickButtons : MonoBehaviour
     }
 
     /// <summary>
+    /// 책 읽는 이미지 오브젝트를 활성화
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator ReadToBookAnimation()
+    {
+        readABook.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        readABook.SetActive(false);
+    }
+
+    /// <summary>
+    /// 샤워하는 이미지 오브젝트를 활성화
+    /// </summary>
+    /// <returns></returns>
+    IEnumerator TakeAShowerAnimation()
+    {
+        shower.SetActive(true);
+        yield return new WaitForSeconds(3f);
+        shower.SetActive(false);
+    }
+
+
+    /// <summary>
     /// 반려동물(캐릭터)가 생각하는 말풍선
     /// </summary>
     /// <param name="st">상태에 따라 달라지는 말풍선 텍스트를 구분하기 위한 매개변수</param>
@@ -160,29 +186,29 @@ public class OnClickButtons : MonoBehaviour
         // 샤워했을 때
         if (st == "Clean")
         {
-            string[] thinkingTextShower = new string[3];
-            thinkingTextShower[0] = "왜..\n또 씻지?";
-            thinkingTextShower[1] = "지도.. 씻고\n또 씻어라";
-            thinkingTextShower[2] = "아 저\n깨끗하다고요";
+            string[] thinkingText = new string[3];
+            thinkingText[0] = "왜..\n또 씻지?";
+            thinkingText[1] = "지도.. 씻고\n또 씻어라";
+            thinkingText[2] = "아 저\n깨끗하다고요";
 
-            bubbleText = thinkingTextShower[Random.Range(0, 3)];
+            bubbleText = thinkingText[Random.Range(0, 3)];
         }
 
         // 공부했을 때
         if (st == "Smart")
         {
-            string[] thinkingTextShower = new string[2];
-            thinkingTextShower[0] = "공부 다 했는데.";
-            thinkingTextShower[1] = "지는.. \n공부 안하면서..";
+            string[] thinkingText = new string[2];
+            thinkingText[0] = "공부 다 했는데.";
+            thinkingText[1] = "지는.. \n공부 안하면서..";
 
-            bubbleText = thinkingTextShower[Random.Range(0, 2)];
+            bubbleText = thinkingText[Random.Range(0, 2)];
         }
 
 
         bubble.SetActive(true);
 
         bubbleImg.sprite = bubbleSprites[0];
-        bubbleRT.anchoredPosition = new Vector3(Random.Range(-200, 200), Random.Range(-380, 280), 0);
+        bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
 
         bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
 
@@ -200,30 +226,30 @@ public class OnClickButtons : MonoBehaviour
         // 샤워했을 때
         if (st == "Clean")
         {
-            string[] thinkingTextShower = new string[3];
-            thinkingTextShower[0] = "히히\n깨끗해";
-            thinkingTextShower[1] = "기분 조아\n히히";
-            thinkingTextShower[2] = "나는\n뽀송해~!";
+            string[] thinkingText = new string[3];
+            thinkingText[0] = "히히\n깨끗해";
+            thinkingText[1] = "기분 조아\n히히";
+            thinkingText[2] = "나는\n뽀송해~!";
 
-            bubbleText = thinkingTextShower[Random.Range(0, 3)];
+            bubbleText = thinkingText[Random.Range(0, 3)];
         }
 
         // 공부했을 때
         if (st == "Smart")
         {
-            string[] thinkingTextShower = new string[3];
-            thinkingTextShower[0] = "똑똑해지는 기분\n너무 좋아!";
-            thinkingTextShower[1] = "난 똑똑해!\n난 멋져!";
-            thinkingTextShower[2] = "내가 다 읽어야지~ 히히";
+            string[] thinkingText = new string[3];
+            thinkingText[0] = "똑똑해지는 기분\n너무 좋아!";
+            thinkingText[1] = "난 똑똑해!\n난 멋져!";
+            thinkingText[2] = "내가 다 읽어야지~ 히히";
 
-            bubbleText = thinkingTextShower[Random.Range(0, 3)];
+            bubbleText = thinkingText[Random.Range(0, 3)];
         }
 
 
         bubble.SetActive(true);
 
         bubbleImg.sprite = bubbleSprites[1];
-        bubbleRT.anchoredPosition = new Vector3(Random.Range(-200, 200), Random.Range(-380, 280), 0);
+        bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
 
         bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
 
@@ -231,26 +257,4 @@ public class OnClickButtons : MonoBehaviour
         bubble.SetActive(false);
     }
 
-    /// <summary>
-    /// 책 읽는 이미지 오브젝트를 활성화
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator ReadToBookAnimation()
-    {
-        readABook.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        readABook.SetActive(false);
-    }
-
-
-    /// <summary>
-    /// 샤워하는 이미지 오브젝트를 활성화
-    /// </summary>
-    /// <returns></returns>
-    IEnumerator TakeAShowerAnimation()
-    {
-        shower.SetActive(true);
-        yield return new WaitForSeconds(3f);
-        shower.SetActive(false);
-    }
 }
