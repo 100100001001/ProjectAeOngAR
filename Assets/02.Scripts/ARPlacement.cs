@@ -36,6 +36,8 @@ public class ARPlacement : MonoBehaviour
     {
         if(spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            
+
             ARPlaceObject();
             shoot.SetActive(true);
 
