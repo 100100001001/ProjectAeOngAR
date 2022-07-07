@@ -45,7 +45,12 @@ public class ARManager : MonoBehaviour
 
 
 
-    private MeshRenderer prefabsMR;
+    private MeshRenderer eggMR;
+    private Renderer babyMR;
+    private Renderer childMR;
+    private Renderer youthMR;
+    private MeshRenderer eggbreakUpMR;
+    private MeshRenderer eggbreakBotMR;
 
     Color color;
 
@@ -59,11 +64,22 @@ public class ARManager : MonoBehaviour
         PlaceIndicator();
 
 
-        prefabsMR = indicatorTest[0].GetComponent<MeshRenderer>();
+        eggMR = indicatorTest[0].GetComponent<MeshRenderer>();
+        babyMR = indicatorTest[1].transform.GetChild(1).GetComponent<Renderer>();
+        childMR = indicatorTest[2].transform.GetChild(1).GetComponent<Renderer>();
+        youthMR = indicatorTest[3].transform.GetChild(1).GetComponent<Renderer>();
+        eggbreakUpMR = indicatorTest[5].GetComponent<MeshRenderer>();
+        eggbreakBotMR = indicatorTest[6].GetComponent<MeshRenderer>();
 
 
 
-        ChangeColorrr();
+        indicatorTest[1].SetActive(false);
+        indicatorTest[2].SetActive(false);
+        indicatorTest[3].SetActive(false);
+
+
+
+        ChangeColor();
 
         //dustTransform = dust[0].transform;
 
@@ -145,22 +161,26 @@ public class ARManager : MonoBehaviour
     }
 
 
-    void ChangeColorrr()
+    void ChangeColor()
     {
 
         int n = UnityEngine.Random.Range(0, 8);
 
-        if (n == 0) color = new Color32(255, 200, 240, 255);
-        else if (n == 1) color = new Color32(255, 205, 200, 255);
-        else if (n == 2) color = new Color32(255, 250, 200, 255);
-        else if (n == 3) color = new Color32(200, 255, 205, 255);
-        else if (n == 4) color = new Color32(200, 255, 234, 255);
-        else if (n == 5) color = new Color32(200, 251, 255, 255);
-        else if (n == 6) color = new Color32(200, 213, 255, 255);
-        else if (n == 7) color = new Color32(220, 200, 255, 255);
+        if (n == 0) color = new Color32(233, 200, 218, 255);      // 연두색 (원래 색상)
+        else if (n == 1) color = new Color32(255, 255, 218, 255); // 노란색
+        else if (n == 2) color = new Color32(255, 235, 218, 255); // 주황색
+        else if (n == 3) color = new Color32(255, 218, 225, 255); // 빨간색
+        else if (n == 4) color = new Color32(255, 218, 255, 255); // 분홍색
+        else if (n == 5) color = new Color32(239, 218, 255, 255); // 보라색
+        else if (n == 6) color = new Color32(218, 221, 255, 255); // 남색
+        else if (n == 7) color = new Color32(218, 251, 255, 255); // 하늘색
 
-
-        prefabsMR.material.SetColor("_Color", color);
+        eggMR.material.SetColor("_Color", color);
+        babyMR.material.SetColor("_Color", color);
+        childMR.material.SetColor("_Color", color);
+        youthMR.material.SetColor("_Color", color);
+        eggbreakUpMR.material.SetColor("_Color", color);
+        eggbreakBotMR.material.SetColor("_Color", color);
     }
 }
 

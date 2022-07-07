@@ -31,6 +31,13 @@ public class Touch : MonoBehaviour
     public GameObject players;
     private Animator[] animator;  // 사용할 애니메이터 컴포넌트
 
+    public GameObject egg;
+    public GameObject baby;
+    public GameObject child;
+    public GameObject youth;
+
+
+
 
     public int touchCnt;  // 터치 카운트
 
@@ -71,15 +78,47 @@ public class Touch : MonoBehaviour
             for (int i = 0; i < Input.touchCount; ++i)
             {
 
-                //if (Input.GetTouch(i).phase == TouchPhase.Began)
-                //{
+                if (Input.GetTouch(i).phase == TouchPhase.Began)
+                {
+                    // 현재 터치 좌표에서 광선 생성
+                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                    RaycastHit hit;
 
-                if (Input.GetTouch(i).phase == TouchPhase.Moved)
+                    // 터치했을 때 나타나는 효과
+                    if (Physics.Raycast(ray, out hit))
+                    {
+                        if (hit.transform.tag == "Player")
+                        {
+                            if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
+                            else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
+                            else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
+                            else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
+
+                            Status.instance.cntTouch1++;
+
+                            touchCnt++;
+                            TouchResponse();
+
+                            // 시간 지나면 touchCnt 초기화 -------------------
+                        }
+
+                    }
+                }
+
+                else if (Input.GetTouch(i).phase == TouchPhase.Moved)
                 {
                     if (Status.instance.evo1 == Status.Evolution1.EGG)
                     {
                         animator[0].SetBool("isRoll", true);
+
+
+                        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+                        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+                        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+                        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
                     }
+
+                        
 
                 }
 
@@ -92,36 +131,11 @@ public class Touch : MonoBehaviour
 
                 }
 
-                // 현재 터치 좌표에서 광선 생성
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-                RaycastHit hit;
-
-                // 터치했을 때 나타나는 효과
-                if (Physics.Raycast(ray, out hit))
-                {
-                    if (hit.transform.tag == "Player")
-                    {
-
-                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
-                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
-                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
-                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
-
-                        Status.instance.cntTouch1++;
-
-                        touchCnt++;
-                        TouchResponse();
-
-                        // 시간 지나면 touchCnt 초기화 -------------------
-                    }
-
-
-                }
-
             }
 
         }
     }
+
 
     void ChangeColor()
     {

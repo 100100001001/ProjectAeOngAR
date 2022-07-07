@@ -50,8 +50,8 @@ public class Status : MonoBehaviour
 
 
     // 성별
-    public TextMeshProUGUI sText;
-    private string sString;
+    //public TextMeshProUGUI sText;
+    //private string sString;
 
 
     // evo 테스트!!!!!!!!!
@@ -142,7 +142,8 @@ public class Status : MonoBehaviour
 
     IEnumerator BreakEgg()
     {
-        ARManager.instance.indicatorTest[0] = breakEgg;
+        ARManager.instance.indicatorTest[0].SetActive(false);
+        breakEgg.SetActive(true);
         yield return new WaitForSeconds(3f);
     }
 
