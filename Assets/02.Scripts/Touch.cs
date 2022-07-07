@@ -20,8 +20,8 @@ public class Touch : MonoBehaviour
 
 
     [Header("--- 파티클 ---")]
-    public ParticleSystem eggParticle; // 터치할 때 나오는 Particle_Egg
-    public ParticleSystem babyParticle; // 터치할 때 나오는 Particle_Baby
+    public ParticleSystem eggParticle;   // 터치할 때 나오는 Particle_Egg
+    public ParticleSystem babyParticle;  // 터치할 때 나오는 Particle_Baby
     public ParticleSystem childParticle; // 터치할 때 나오는 Particle_Child
     public ParticleSystem youthParticle; // 터치할 때 나오는 Particle_Youth
 
@@ -32,13 +32,15 @@ public class Touch : MonoBehaviour
     private Animator[] animator;  // 사용할 애니메이터 컴포넌트
 
 
-    public int touchCnt;               // 터치 카운트
+    public int touchCnt;  // 터치 카운트
 
 
     void Start()
     {
         bubbleRT = bubble.GetComponent<RectTransform>();
         bubbleImg = bubble.GetComponent<Image>();
+
+        bubbleTMPro = bubble.GetComponentInChildren<TextMeshProUGUI>();
 
         animator = players.GetComponentsInChildren<Animator>();
     }
@@ -68,45 +70,52 @@ public class Touch : MonoBehaviour
 
             for (int i = 0; i < Input.touchCount; ++i)
             {
+
+                //if (Input.GetTouch(i).phase == TouchPhase.Began)
+                //{
+
                 if (Input.GetTouch(i).phase == TouchPhase.Moved)
                 {
-                    if (Status.instance.evo == Status.Evolution.EGG)
+                    if (Status.instance.evo1 == Status.Evolution1.EGG)
                     {
                         animator[0].SetBool("isRoll", true);
-                        animator[0].SetBool("isRoll", false);
                     }
-                    //else if (Status.instance.evo == Status.Evolution.BABY) babyParticle.Play();
-                    //else if (Status.instance.evo == Status.Evolution.CHILD) childParticle.Play();
-                    //else if (Status.instance.evo == Status.Evolution.YOUTH) youthParticle.Play();
+
                 }
 
-
-                else if (Input.GetTouch(i).phase == TouchPhase.Began)
+                else if (Input.GetTouch(i).phase == TouchPhase.Ended)
                 {
-                    // 현재 터치 좌표에서 광선 생성
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-                    RaycastHit hit;
-
-                    // 터치했을 때 나타나는 효과
-                    if (Physics.Raycast(ray, out hit))
+                    if (Status.instance.evo1 == Status.Evolution1.EGG)
                     {
-                        if (hit.transform.tag == "Player")
-                        {
-
-                            if (Status.instance.evo == Status.Evolution.EGG) eggParticle.Play();
-                            else if (Status.instance.evo == Status.Evolution.BABY) babyParticle.Play();
-                            else if (Status.instance.evo == Status.Evolution.CHILD) childParticle.Play();
-                            else if (Status.instance.evo == Status.Evolution.YOUTH) youthParticle.Play();
-
-                            Status.instance.cntTouch1++;
-
-                            touchCnt++;
-                            TouchResponse();
-
-                            // 시간 지나면 touchCnt 초기화 -------------------
-                        }
-
+                        animator[0].SetBool("isRoll", false);
                     }
+
+                }
+
+                // 현재 터치 좌표에서 광선 생성
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+                RaycastHit hit;
+
+                // 터치했을 때 나타나는 효과
+                if (Physics.Raycast(ray, out hit))
+                {
+                    if (hit.transform.tag == "Player")
+                    {
+
+                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
+                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
+                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
+                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
+
+                        Status.instance.cntTouch1++;
+
+                        touchCnt++;
+                        TouchResponse();
+
+                        // 시간 지나면 touchCnt 초기화 -------------------
+                    }
+
+
                 }
 
             }
@@ -153,7 +162,7 @@ public class Touch : MonoBehaviour
     /// <returns></returns>
     IEnumerator ThinkingBubble()
     {
-        
+
         string[] thinkingText = new string[3];
         thinkingText[0] = "그만 하라고 했는데?";
         thinkingText[1] = "왜 괴롭히지?";
@@ -167,7 +176,7 @@ public class Touch : MonoBehaviour
         bubbleImg.sprite = bubbleSprites[0];
         bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
 
-        bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
+        bubbleTMPro.text = bubbleText;
 
         yield return new WaitForSeconds(3f);
         bubble.SetActive(false);
@@ -212,7 +221,7 @@ public class Touch : MonoBehaviour
         bubbleImg.sprite = bubbleSprites[1];
         bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
 
-        bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
+        bubbleTMPro.text = bubbleText;
 
         yield return new WaitForSeconds(3f);
         bubble.SetActive(false);

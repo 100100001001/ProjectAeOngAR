@@ -15,31 +15,31 @@ public class ChangePlayer : MonoBehaviour
     void Start()
     {
         mySprite = GetComponent<Image>();
-        Evo(Status.instance.evo);
+        Evo(Status.instance.evo1);
     }
 
     void Update()
     {
-        Evo(Status.instance.evo);
+        Evo(Status.instance.evo1);
     }
 
     // 진화 단계에 따라서 이미지가 바뀜
-    public void Evo(Status.Evolution stage)
+    public void Evo(Status.Evolution1 stage)
     {
         switch (stage)
         {
-            case Status.Evolution.EGG:
+            case Status.Evolution1.EGG:
                 mySprite.sprite = playerSprites[0];
                 return;
-            case Status.Evolution.BABY:
+            case Status.Evolution1.BABY:
                 mySprite.sprite = playerSprites[1];
                 return;
-            case Status.Evolution.CHILD:
+            case Status.Evolution1.CHILD:
                 mySprite.sprite = playerSprites[1];
                 childSprout.SetActive(true);
                 youthLeaf.SetActive(false);
                 return;
-            case Status.Evolution.YOUTH:
+            case Status.Evolution1.YOUTH:
                 mySprite.sprite = playerSprites[1];
                 childSprout.SetActive(false);
                 youthLeaf.SetActive(true);

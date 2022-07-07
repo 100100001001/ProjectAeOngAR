@@ -44,11 +44,26 @@ public class ARManager : MonoBehaviour
     public TextMeshProUGUI t;
 
 
+
+    private MeshRenderer prefabsMR;
+
+    Color color;
+
+
+
+
     void Start()
     {
         indicatorTest[4].SetActive(true);
         indicator = indicatorTest[4].transform;
         PlaceIndicator();
+
+
+        prefabsMR = indicatorTest[0].GetComponent<MeshRenderer>();
+
+
+
+        ChangeColorrr();
 
         //dustTransform = dust[0].transform;
 
@@ -66,22 +81,24 @@ public class ARManager : MonoBehaviour
             PlaceIndicator();
 
 
+
+
         }
 
-        switch (Status.instance.evo)
+        switch (Status.instance.evo1)
         {
-            case Status.Evolution.EGG:
+            case Status.Evolution1.EGG:
                 indicatorTest[0].SetActive(true);
                 return;
-            case Status.Evolution.BABY:
+            case Status.Evolution1.BABY:
                 indicatorTest[0].SetActive(false);
                 indicatorTest[1].SetActive(true);
                 return;
-            case Status.Evolution.CHILD:
+            case Status.Evolution1.CHILD:
                 indicatorTest[1].SetActive(false);
                 indicatorTest[2].SetActive(true);
                 return;
-            case Status.Evolution.YOUTH:
+            case Status.Evolution1.YOUTH:
                 indicatorTest[2].SetActive(false);
                 indicatorTest[3].SetActive(true);
                 return;
@@ -125,6 +142,25 @@ public class ARManager : MonoBehaviour
             // test!!!!!!!!!!!!!
         }
 
+    }
+
+
+    void ChangeColorrr()
+    {
+
+        int n = UnityEngine.Random.Range(0, 8);
+
+        if (n == 0) color = new Color32(255, 200, 240, 255);
+        else if (n == 1) color = new Color32(255, 205, 200, 255);
+        else if (n == 2) color = new Color32(255, 250, 200, 255);
+        else if (n == 3) color = new Color32(200, 255, 205, 255);
+        else if (n == 4) color = new Color32(200, 255, 234, 255);
+        else if (n == 5) color = new Color32(200, 251, 255, 255);
+        else if (n == 6) color = new Color32(200, 213, 255, 255);
+        else if (n == 7) color = new Color32(220, 200, 255, 255);
+
+
+        prefabsMR.material.SetColor("_Color", color);
     }
 }
 

@@ -1,17 +1,17 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// È­»ìÇ¥¸¦ ´­·¶À» ¶§ ÇÃ·¹ÀÌ¾î(Ä³¸¯ÅÍ)Ã¢À» ¹Ù²Ù´Â ½ºÅ©¸³Æ®
+// í™”ì‚´í‘œë¥¼ ëˆŒë €ì„ ë•Œ í”Œë ˆì´ì–´(ìºë¦­í„°)ì°½ì„ ë°”ê¾¸ëŠ” ìŠ¤í¬ë¦½íŠ¸
 public class ChangePanel : MonoBehaviour
 {
-    public GameObject[] Arrows;       // È­»ìÇ¥¸¦ ²°´ÙÄ×´ÙÇÏ±â À§ÇØ È­»ìÇ¥µéÀ» ¹Ş´Â º¯¼ö
-    public GameObject[] playerPanels; // ÇÃ·¹ÀÌ¾î(Ä³¸¯ÅÍ)Ã¢µéÀ» ¹Ş´Â º¯¼ö
-    private int count = 0;            // ÇÃ·¹ÀÌ¾î(Ä³¸¯ÅÍ)Ã¢ ¹è¿­ÀÇ ÀÎµ¦½º·Î Á¢±ÙÇÏ±â À§ÇØ ¸¸µç º¯¼ö
+    public GameObject[] Arrows;       // í™”ì‚´í‘œë¥¼ ê»ë‹¤ì¼°ë‹¤í•˜ê¸° ìœ„í•´ í™”ì‚´í‘œë“¤ì„ ë°›ëŠ” ë³€ìˆ˜
+    public GameObject[] playerPanels; // í”Œë ˆì´ì–´(ìºë¦­í„°)ì°½ë“¤ì„ ë°›ëŠ” ë³€ìˆ˜
+    private int count = 0;            // í”Œë ˆì´ì–´(ìºë¦­í„°)ì°½ ë°°ì—´ì˜ ì¸ë±ìŠ¤ë¡œ ì ‘ê·¼í•˜ê¸° ìœ„í•´ ë§Œë“  ë³€ìˆ˜
 
     private void Update()
     {
-        // ÇÃ·¹ÀÌ¾î(Ä³¸¯ÅÍ)Ã¢ÀÇ È°¼ºÈ­ ¿©ºÎ¿¡ µû¶ó È­»ìÇ¥µµ È°¼ºÈ­/ºñÈ°¼ºÈ­ ÇØÁÜ
+        // í”Œë ˆì´ì–´(ìºë¦­í„°)ì°½ì˜ í™œì„±í™” ì—¬ë¶€ì— ë”°ë¼ í™”ì‚´í‘œë„ í™œì„±í™”/ë¹„í™œì„±í™” í•´ì¤Œ
         if (playerPanels[0].activeSelf == true) Arrows[0].SetActive(false);
         else if (playerPanels[2].activeSelf == true) Arrows[1].SetActive(false);
         else
@@ -21,7 +21,7 @@ public class ChangePanel : MonoBehaviour
         }
     }
 
-    // ¿À¸¥ÂÊ È­»ìÇ¥¸¦ ´­·¶À» ¶§
+    // ì˜¤ë¥¸ìª½ í™”ì‚´í‘œë¥¼ ëˆŒë €ì„ ë•Œ
     public void Right()
     {
         if (count + 1 >= playerPanels.Length) return;
@@ -31,7 +31,7 @@ public class ChangePanel : MonoBehaviour
         playerPanels[count].SetActive(true);
     }
 
-    // ¿ŞÂÊ È­»ìÇ¥¸¦ ´­·¶À» ¶§
+    // ì™¼ìª½ í™”ì‚´í‘œë¥¼ ëˆŒë €ì„ ë•Œ
     public void Left()
     {
         if (count - 1 < 0) return;

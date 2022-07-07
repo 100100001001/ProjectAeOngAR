@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -40,9 +42,11 @@ public class Status : MonoBehaviour
     public int cntTouch1;   // 터치 횟수
 
 
-    public enum Evolution { EGG, BABY, CHILD, YOUTH } // 캐릭터 진화
-    public Evolution evo;                             // 캐릭터 상태를 담을 변수
+    public enum Evolution1 { EGG, BABY, CHILD, YOUTH } // 캐릭터 진화
+    public Evolution1 evo1;                             // 캐릭터 상태를 담을 변수
 
+
+    public GameObject breakEgg;
 
 
     // 성별
@@ -62,23 +66,22 @@ public class Status : MonoBehaviour
     private void Start()
     {
         // 캐릭터의 처음 상태를 EGG로 지정
-        evo = Evolution.EGG;
+        evo1 = Evolution1.EGG;
 
-        // 성별 랜덤 지정
-        if (Random.Range(0, 2) == 0) sString = "여";
-        else sString = "남";
+        //// 성별 랜덤 지정
+        //if (Random.Range(0, 2) == 0) sString = "여";
+        //else sString = "남";
 
-        sText.text = sString;
-
+        //sText.text = sString;
 
 
     }
 
     private void Update()
     {
-        Evo(evo);
+        Evo(evo1);
 
-        evoTestText.text = "" + evo;
+        evoTestText.text = "" + evo1;
 
 
         //if (StatusBar.instance.curClean < 50)
@@ -87,67 +90,81 @@ public class Status : MonoBehaviour
 
 
 
-    public void Evo(Evolution step)
+    public void Evo(Evolution1 step)
     {
         switch (step)
         {
-            case Evolution.EGG:
+            case Evolution1.EGG:
 
                 if (cntTouch1 >= 5)
                     if (cntSmart1 >= 2 || cntClean1 >= 2)
-                        evo = Evolution.BABY;
+                    {
+                        StartCoroutine(BreakEgg());
+                        evo1 = Evolution1.BABY;
+                    }
 
-                else if (cntTouch1 >= 20)
-                        evo = Evolution.BABY;
+                    else if (cntTouch1 >= 20)
+                    {
+                        StartCoroutine(BreakEgg());
+                        evo1 = Evolution1.BABY;
+                    }
 
                 break;
 
 
-            case Evolution.BABY:
-                    if (cntTouch1 >= 10)
-                        if (cntSmart1 >= 4 || cntClean1 >= 4)
-                        evo = Evolution.CHILD;
+            case Evolution1.BABY:
+                if (cntTouch1 >= 10)
+                    if (cntSmart1 >= 4 || cntClean1 >= 4)
+                        evo1 = Evolution1.CHILD;
 
                     else if (cntTouch1 >= 50)
-                        evo = Evolution.CHILD;
+                        evo1 = Evolution1.CHILD;
 
                 break;
 
 
-            case Evolution.CHILD:
+            case Evolution1.CHILD:
                 if (cntTouch1 >= 15)
                     if (cntSmart1 >= 6 || cntClean1 >= 6)
-                        evo = Evolution.YOUTH;
+                        evo1 = Evolution1.YOUTH;
 
-                else if (cntTouch1 >= 100)
-                    evo = Evolution.YOUTH;
+                    else if (cntTouch1 >= 100)
+                        evo1 = Evolution1.YOUTH;
 
                 break;
 
 
-            case Evolution.YOUTH:
+            case Evolution1.YOUTH:
                 break;
         }
     }
 
+
+    IEnumerator BreakEgg()
+    {
+        ARManager.instance.indicatorTest[0] = breakEgg;
+        yield return new WaitForSeconds(3f);
+    }
+
+    
 
 
 
     //// 먼지를 활성화하는 메소드
     //public void AddDust()
     //{
-    //    switch (evo)
+    //    switch (evo1)
     //    {
-    //        case Evolution.EGG:
+    //        case Evolution1.EGG:
     //            for (int i = 0; i < dustEgg.Length; i++) dustEgg[i].SetActive(true);
     //            break;
-    //        case Evolution.BABY:
+    //        case Evolution1.BABY:
     //            for (int i = 0; i < dustBaby.Length; i++) dustBaby[i].SetActive(true);
     //            break;
-    //        case Evolution.CHILD:
+    //        case Evolution1.CHILD:
     //            for (int i = 0; i < dustChild.Length; i++) dustChild[i].SetActive(true);
     //            break;
-    //        case Evolution.YOUTH:
+    //        case Evolution1.YOUTH:
     //            for (int i = 0; i < dustYouth.Length; i++) dustYouth[i].SetActive(true);
     //            break;
     //    }
@@ -157,18 +174,18 @@ public class Status : MonoBehaviour
     //public void RemoveDust()
     //{
 
-    //    switch (evo)
+    //    switch (evo1)
     //    {
-    //        case Evolution.EGG:
+    //        case Evolution1.EGG:
     //            for (int i = 0; i < dustEgg.Length; i++) dustEgg[i].SetActive(false);
     //            break;
-    //        case Evolution.BABY:
+    //        case Evolution1.BABY:
     //            for (int i = 0; i < dustBaby.Length; i++) dustBaby[i].SetActive(false);
     //            break;
-    //        case Evolution.CHILD:
+    //        case Evolution1.CHILD:
     //            for (int i = 0; i < dustChild.Length; i++) dustChild[i].SetActive(false);
     //            break;
-    //        case Evolution.YOUTH:
+    //        case Evolution1.YOUTH:
     //            for (int i = 0; i < dustYouth.Length; i++) dustYouth[i].SetActive(false);
     //            break;
     //    }

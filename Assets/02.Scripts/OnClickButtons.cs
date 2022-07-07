@@ -42,6 +42,8 @@ public class OnClickButtons : MonoBehaviour
         bubbleRT = bubble.GetComponent<RectTransform>();
         bubbleImg = bubble.GetComponent<Image>();
 
+        bubbleTMPro = bubble.GetComponentInChildren<TextMeshProUGUI>();
+
     }
 
     /// <summary>
@@ -110,17 +112,17 @@ public class OnClickButtons : MonoBehaviour
     /// </summary>
     public void Sleeping()
     {
-        if (Status.instance.evo == Status.Evolution.BABY)
+        if (Status.instance.evo1 == Status.Evolution1.BABY)
         {
             originFace = players.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
             players.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
         }
-        else if (Status.instance.evo == Status.Evolution.CHILD)
+        else if (Status.instance.evo1 == Status.Evolution1.CHILD)
         {
             originFace = players.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
             players.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
         }
-        else if (Status.instance.evo == Status.Evolution.YOUTH)
+        else if (Status.instance.evo1 == Status.Evolution1.YOUTH)
         {
             originFace = players.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].GetTexture("_MainTex");  // 본래의 Face 텍스쳐 저장
             players.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", sleepingFace); // 자는 Face 텍스쳐로 변경
@@ -134,15 +136,15 @@ public class OnClickButtons : MonoBehaviour
     /// </summary>
     public void EndSleep()
     {
-        if (Status.instance.evo == Status.Evolution.BABY)
+        if (Status.instance.evo1 == Status.Evolution1.BABY)
         {
             players.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
         }
-        else if (Status.instance.evo == Status.Evolution.CHILD)
+        else if (Status.instance.evo1 == Status.Evolution1.CHILD)
         {
             players.transform.GetChild(2).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
         }
-        else if (Status.instance.evo == Status.Evolution.YOUTH)
+        else if (Status.instance.evo1 == Status.Evolution1.YOUTH)
         {
             players.transform.GetChild(3).gameObject.transform.GetChild(1).gameObject.GetComponent<Renderer>().materials[1].SetTexture("_MainTex", originFace); // 본래의 Face 텍스쳐로 변경
         }
@@ -210,7 +212,7 @@ public class OnClickButtons : MonoBehaviour
         bubbleImg.sprite = bubbleSprites[0];
         bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
 
-        bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
+        bubbleTMPro.text = bubbleText;
 
         yield return new WaitForSeconds(3f);
         bubble.SetActive(false);
@@ -251,7 +253,7 @@ public class OnClickButtons : MonoBehaviour
         bubbleImg.sprite = bubbleSprites[1];
         bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
 
-        bubble.GetComponentInChildren<TextMeshProUGUI>().text = bubbleText;
+        bubbleTMPro.text = bubbleText;
 
         yield return new WaitForSeconds(3f);
         bubble.SetActive(false);

@@ -1,13 +1,13 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// ¸ÕÁöµéÀ» »ı¼ºÇÏ´Â ½ºÅ©¸³Æ®
+// ë¨¼ì§€ë“¤ì„ ìƒì„±í•˜ëŠ” ìŠ¤í¬ë¦½íŠ¸
 public class InstantiateDusts : MonoBehaviour
 {
-    public GameObject[] dust;        // ¸ÕÁö ¿ÀºêÁ§Æ®µéÀ» ´ãÀ» º¯¼ö
+    public GameObject[] dust;        // ë¨¼ì§€ ì˜¤ë¸Œì íŠ¸ë“¤ì„ ë‹´ì„ ë³€ìˆ˜
 
-    // ¸ÕÁö ¿ÀºêÁ§Æ®°¡ ·£´ı À§Ä¡, ·£´ıÇÑ Å©±â·Î ¶ã ¼ö ÀÖµµ·Ï ¹üÀ§°ª ÁöÁ¤
+    // ë¨¼ì§€ ì˜¤ë¸Œì íŠ¸ê°€ ëœë¤ ìœ„ì¹˜, ëœë¤í•œ í¬ê¸°ë¡œ ëœ° ìˆ˜ ìˆë„ë¡ ë²”ìœ„ê°’ ì§€ì •
     private float dustXMin = -300f;
     private float dustXMax = 80f;
 
@@ -32,7 +32,7 @@ public class InstantiateDusts : MonoBehaviour
 
                 if (Status.instance.dustCnt >= 9)
                 {
-                    Status.instance.dustCnt = 9; // Áõ°¡ÇÒ ¸ÕÁö°¡ 9°³ ÀÖ±â ¶§¹®¿¡, IndexError°¡ ³ª¿À´Â °ÍÀ» ¸·±â À§ÇØ timeCnt¸¦ 9¿¡ °íÁ¤½ÃÅ²´Ù
+                    Status.instance.dustCnt = 9; // ì¦ê°€í•  ë¨¼ì§€ê°€ 9ê°œ ìˆê¸° ë•Œë¬¸ì—, IndexErrorê°€ ë‚˜ì˜¤ëŠ” ê²ƒì„ ë§‰ê¸° ìœ„í•´ timeCntë¥¼ 9ì— ê³ ì •ì‹œí‚¨ë‹¤
                     return;
                 }
 
@@ -42,12 +42,12 @@ public class InstantiateDusts : MonoBehaviour
         }
     }
 
-    // ¸ÕÁö¸¦ »ı¼ºÇÏ´Â ¸Ş¼­µå
+    // ë¨¼ì§€ë¥¼ ìƒì„±í•˜ëŠ” ë©”ì„œë“œ
     void InstantiateDust(int step)
     {
         for (int i = 0; i < step; i++)
         {
-            float dustScale = Random.Range(dustScaleMin, dustScaleMax); // ·£´ıÇÑ ½ºÄÉÀÏ °ªÀ» ¾ò±â À§ÇÑ º¯¼ö
+            float dustScale = Random.Range(dustScaleMin, dustScaleMax); // ëœë¤í•œ ìŠ¤ì¼€ì¼ ê°’ì„ ì–»ê¸° ìœ„í•œ ë³€ìˆ˜
 
             dust[i].GetComponent<RectTransform>().localScale = new Vector2(dustScale, dustScale);
             dust[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(dustXMin, dustXMax), Random.Range(dustYMin, dustYMax));
