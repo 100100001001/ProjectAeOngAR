@@ -6,21 +6,6 @@ using UnityEngine.UI;
 // 시간의 흐름에 따라 상태를 변화하기 위한 스크립트
 public class TimeFlowTest : MonoBehaviour
 {
-    // 먼지 생성
-    public GameObject[] dust;        // 먼지 오브젝트들을 담을 변수
-
-    private float dustXMin = -230f;  // 먼지 오브젝트가 랜덤 위치, 랜덤한 크기로 뜰 수 있도록 범위값 지정
-    private float dustXMax = 230f;
-
-    private float dustYMin = -400f;
-    private float dustYMax = 280f;
-
-    private float dustScaleMin = 5;
-    private float dustScaleMax = 10;
-
-    public int timeCnt = 0;          // 시간의 흐름에 따라 먼지를 하나씩 증가시키기 위해 시간 흐름을 카운트 하는 변수
-    
-    
     public float time;               // 시간의 흐름을 체크하는 변수
 
 
@@ -51,19 +36,4 @@ public class TimeFlowTest : MonoBehaviour
 
     }
 
-    //// 먼지 생성하는 메소드
-    //void InstantiateDust(int step)
-    //{
-    //    for (int i = 0; i < step; i++)
-    //    {
-    //        float dustScale = Random.Range(dustScaleMin, dustScaleMax); // 랜덤한 스케일 값을 얻기 위한 변수
-
-    //        dust[i].GetComponent<RectTransform>().localScale = new Vector2(dustScale, dustScale);
-    //        dust[i].GetComponent<RectTransform>().anchoredPosition = new Vector2(Random.Range(dustXMin, dustXMax), Random.Range(dustYMin, dustYMax));
-
-    //        dust[i].SetActive(true);
-
-    //        StatusBar.instance.CleanValue(false, 10);
-    //    }
-    //}
 }

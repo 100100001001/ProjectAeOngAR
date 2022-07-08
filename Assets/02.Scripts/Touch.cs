@@ -37,18 +37,20 @@ public class Touch : MonoBehaviour
     public GameObject youth;
 
 
+    // 조이스틱
     public float sensitivity = 1f; // 조작 민감도
     private Vector2 touchPosition; // 조이스틱의 방향정보를 외부 클래스에서 사용할 수 있도록 전역 변수 설정
-
 
     public float horizontal { get { return touchPosition.x * sensitivity; } }
     public float vertical { get { return touchPosition.y * sensitivity; } }
 
 
 
-    public int touchCnt;  // 터치 카운트
+    public int limitTouchCnt;        // 임시 터치 카운트 (시간이 지남에 따라 초기화 될 수 있는 단발성 터치 카운트)
 
     public TextMeshProUGUI testTest;
+
+    float time;
 
 
 
@@ -67,6 +69,8 @@ public class Touch : MonoBehaviour
 
     void Update()
     {
+        time += Time.deltaTime;
+
 
         if (Input.touchCount > 0)
         {
@@ -77,25 +81,29 @@ public class Touch : MonoBehaviour
             RaycastHit hit;
 
             // 터치했을 때 나타나는 효과
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) || hit.transform.tag == "Player")
             {
+                if (Input.touchCount > 1)
+                {
+                    StartCoroutine(ThinkingBubble("many_touches"));
+                    StatusBar.instance.HappyValue(false, 5);
+                }
+
+
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    if (hit.transform.tag == "Player")
+
+                    Status.instance.cntTouch1++;
+
+                    limitTouchCnt++;
+                    TouchResponse();
+
+
+                    if (time > 600) // 10분이 지나면 touchCnt 초기화
                     {
-                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
-                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
-                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
-                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
-
-                        Status.instance.cntTouch1++;
-
-                        touchCnt++;
-                        TouchResponse();
-
-                        // 시간 지나면 touchCnt 초기화 -------------------
+                        limitTouchCnt = 0;
+                        time = 0;
                     }
-
                 }
 
                 else if (Input.GetTouch(0).phase == TouchPhase.Moved)
@@ -105,10 +113,6 @@ public class Touch : MonoBehaviour
                     animator[0].SetBool("isRoll", true);
 
 
-
-
-
-                            
                     // 조이스틱
                     //touchPosition = new Vector2(touchPosition.x * 2 - 1, touchPosition.y * 2 - 1);
 
@@ -120,10 +124,7 @@ public class Touch : MonoBehaviour
                     //    egg.transform.position += new Vector3(x, 0, y) * 10f * Time.deltaTime;
                     //}
 
-
                 }
-
-
 
                 else if (Input.GetTouch(0).phase == TouchPhase.Ended)
                 {
@@ -134,8 +135,13 @@ public class Touch : MonoBehaviour
 
 
 
-
             }
+
+            
+
+
+
+
 
 
 
@@ -167,201 +173,219 @@ public class Touch : MonoBehaviour
 
 
 
+
         }
+
+        // 원본 업데이트 (터치 실험 중)
+        //void Update()
+        //{
+        //    //if (Input.GetKeyDown(KeyCode.Space)) StatusBar.instance.HappyValue(true);
+
+        //    if (Input.touchCount > 0)
+        //    {
+        //        //StartCoroutine(TouchTest());
+
+        //        //var touch = Input.GetTouch(0);
+
+        //        //switch (touch.phase)
+        //        //{
+        //        //    case TouchPhase.Began:
+        //        //        touchText.GetComponent<Text>().text = "Began";
+        //        //        break;
+        //        //    case TouchPhase.Moved:
+        //        //        touchText.GetComponent<Text>().text = "Moved";
+        //        //        break;
+        //        //    case TouchPhase.Ended:
+        //        //        touchText.GetComponent<Text>().text = "Ended";
+        //        //        break;
+        //        //}
+
+        //        for (int i = 0; i < Input.touchCount; ++i)
+        //        {
+
+        //            if (Input.GetTouch(i).phase == TouchPhase.Began)
+        //            {
+        //                // 현재 터치 좌표에서 광선 생성
+        //                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+        //                RaycastHit hit;
+
+        //                // 터치했을 때 나타나는 효과
+        //                if (Physics.Raycast(ray, out hit))
+        //                {
+        //                    if (hit.transform.tag == "Player")
+        //                    {
+        //                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
+        //                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
+        //                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
+        //                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
+
+        //                        Status.instance.cntTouch1++;
+
+        //                        touchCnt++;
+        //                        TouchResponse();
+
+        //                        // 시간 지나면 touchCnt 초기화 -------------------
+        //                    }
+
+        //                }
+        //            }
+
+
+
+        //            //if (Input.GetTouch(i).phase == TouchPhase.Moved)
+        //            //{
+        //            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
+        //            //    {
+        //            //        animator[0].SetBool("isRoll", true);
+
+
+        //            //        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+        //            //        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+        //            //        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+        //            //        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+        //            //    }
+
+
+
+        //            //}
+
+        //            //else if (Input.GetTouch(i).phase == TouchPhase.Ended)
+        //            //{
+        //            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
+        //            //    {
+        //            //        animator[0].SetBool("isRoll", false);
+        //            //    }
+
+        //            //}
+
+        //        }
+
+        //    }
+        //}
+
+
+        void ChangeColor()
+        {
+            transform.GetChild(2).GetComponent<MeshRenderer>().materials.GetValue(1);
+        }
+
+        void TouchResponse()
+        {
+
+            if (limitTouchCnt < 30)
+            {
+                StatusBar.instance.HappyValue(true, 2);
+                StartCoroutine(RecBubble("happy"));
+                PlayTouchParticle();
+
+            }
+
+            else if (limitTouchCnt < 40)
+            {
+                StartCoroutine(ThinkingBubble("stop"));
+
+            }
+            else if (limitTouchCnt >= 40)
+            {
+                StartCoroutine(ThinkingBubble("angry"));
+                StatusBar.instance.HappyValue(false, 2);
+            }
+        }
+
+        void PlayTouchParticle()
+        {
+            if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
+            else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
+            else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
+            else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
+        }
+
+        /// <summary>
+        /// 반려동물(캐릭터)가 생각하는 말풍선
+        /// </summary>
+        /// <param name="st">상태에 따라 달라지는 말풍선 텍스트를 구분하기 위한 매개변수</param>
+        /// <returns></returns>
+        IEnumerator ThinkingBubble(string st)
+        {
+            if (st == "angry")
+            { 
+                string[] thinkingText = new string[3];
+                thinkingText[0] = "그만 하라고 했는데?";
+                thinkingText[1] = "왜 괴롭히지?";
+                thinkingText[2] = "뭐야 그만하지;";
+
+                bubbleText = thinkingText[Random.Range(0, 3)];
+            
+            }
+
+            else if (st == "many_touches")
+            {
+                string[] thinkingText = new string[3];
+                thinkingText[0] = "날 소중히\n대해라";
+                thinkingText[1] = "많이 터치하면\n아픈디..";
+                thinkingText[2] = "한손으로만\n터치해줘..";
+                thinkingText[3] = "한손으로만...\n톡...\n만져주지...";
+                thinkingText[4] = "악!! 막\n만지면 아파";
+
+                bubbleText = thinkingText[Random.Range(0, 5)];
+            }
+
+
+            bubble.SetActive(true);
+
+            bubbleImg.sprite = bubbleSprites[0];
+            bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
+
+            bubbleTMPro.text = bubbleText;
+
+            yield return new WaitForSeconds(3f);
+            bubble.SetActive(false);
+        }
+
+        /// <summary>
+        /// 반려동물(캐릭터)의 말풍선
+        /// </summary>
+        /// <param name="st">상태에 따라 달라지는 말풍선 텍스트를 구분하기 위한 매개변수</param>
+        /// <returns></returns>
+        IEnumerator RecBubble(string st)
+        {
+            if (st == "stop")
+            {
+
+                string[] thinkingText = new string[3];
+                thinkingText[0] = "이제 괜찮아";
+                thinkingText[1] = "...";
+                thinkingText[2] = "그만~";
+
+                bubbleText = thinkingText[Random.Range(0, 3)];
+            }
+
+            else if (st == "happy")
+            {
+
+                string[] thinkingText = new string[4];
+                thinkingText[0] = "히히\n좋아";
+                thinkingText[1] = "기분\n좋아!!!";
+                thinkingText[2] = "더 쓰다듬어줘!";
+                thinkingText[3] = "찰떡같이\n쓰다듬네";
+
+                bubbleText = thinkingText[Random.Range(0, 4)];
+
+            }
+
+
+            bubble.SetActive(true);
+
+            bubbleImg.sprite = bubbleSprites[1];
+            bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
+
+            bubbleTMPro.text = bubbleText;
+
+            yield return new WaitForSeconds(3f);
+            bubble.SetActive(false);
+        }
+
     }
-
-    // 원본 업데이트 (터치 실험 중)
-    //void Update()
-    //{
-    //    //if (Input.GetKeyDown(KeyCode.Space)) StatusBar.instance.HappyValue(true);
-
-    //    if (Input.touchCount > 0)
-    //    {
-    //        //StartCoroutine(TouchTest());
-
-    //        //var touch = Input.GetTouch(0);
-
-    //        //switch (touch.phase)
-    //        //{
-    //        //    case TouchPhase.Began:
-    //        //        touchText.GetComponent<Text>().text = "Began";
-    //        //        break;
-    //        //    case TouchPhase.Moved:
-    //        //        touchText.GetComponent<Text>().text = "Moved";
-    //        //        break;
-    //        //    case TouchPhase.Ended:
-    //        //        touchText.GetComponent<Text>().text = "Ended";
-    //        //        break;
-    //        //}
-
-    //        for (int i = 0; i < Input.touchCount; ++i)
-    //        {
-
-    //            if (Input.GetTouch(i).phase == TouchPhase.Began)
-    //            {
-    //                // 현재 터치 좌표에서 광선 생성
-    //                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-    //                RaycastHit hit;
-
-    //                // 터치했을 때 나타나는 효과
-    //                if (Physics.Raycast(ray, out hit))
-    //                {
-    //                    if (hit.transform.tag == "Player")
-    //                    {
-    //                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
-    //                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
-    //                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
-    //                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
-
-    //                        Status.instance.cntTouch1++;
-
-    //                        touchCnt++;
-    //                        TouchResponse();
-
-    //                        // 시간 지나면 touchCnt 초기화 -------------------
-    //                    }
-
-    //                }
-    //            }
-
-
-
-    //            //if (Input.GetTouch(i).phase == TouchPhase.Moved)
-    //            //{
-    //            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
-    //            //    {
-    //            //        animator[0].SetBool("isRoll", true);
-
-
-    //            //        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-    //            //        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-    //            //        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-    //            //        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-    //            //    }
-
-
-
-    //            //}
-
-    //            //else if (Input.GetTouch(i).phase == TouchPhase.Ended)
-    //            //{
-    //            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
-    //            //    {
-    //            //        animator[0].SetBool("isRoll", false);
-    //            //    }
-
-    //            //}
-
-    //        }
-
-    //    }
-    //}
-
-
-    void ChangeColor()
-    {
-        transform.GetChild(2).GetComponent<MeshRenderer>().materials.GetValue(1);
-    }
-
-    void TouchResponse()
-    {
-
-        if (touchCnt < 20)
-        {
-            StatusBar.instance.HappyValue(true, 2);
-            StartCoroutine(RecBubble("happy"));
-        }
-        else if (touchCnt < 30)
-        {
-            StartCoroutine(RecBubble("stop"));
-
-        }
-        else if (touchCnt < 40)
-        {
-            StartCoroutine(ThinkingBubble());
-            StatusBar.instance.HappyValue(false, 2);
-
-        }
-        else if (touchCnt >= 40)
-        {
-            StartCoroutine(ThinkingBubble());
-            StatusBar.instance.HappyValue(false, 2);
-        }
-    }
-
-
-    /// <summary>
-    /// 반려동물(캐릭터)가 생각하는 말풍선
-    /// </summary>
-    /// <param name="st">상태에 따라 달라지는 말풍선 텍스트를 구분하기 위한 매개변수</param>
-    /// <returns></returns>
-    IEnumerator ThinkingBubble()
-    {
-
-        string[] thinkingText = new string[3];
-        thinkingText[0] = "그만 하라고 했는데?";
-        thinkingText[1] = "왜 괴롭히지?";
-        thinkingText[2] = "뭐야 그만하지;";
-
-        bubbleText = thinkingText[Random.Range(0, 3)];
-
-
-        bubble.SetActive(true);
-
-        bubbleImg.sprite = bubbleSprites[0];
-        bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
-
-        bubbleTMPro.text = bubbleText;
-
-        yield return new WaitForSeconds(3f);
-        bubble.SetActive(false);
-    }
-
-    /// <summary>
-    /// 반려동물(캐릭터)의 말풍선
-    /// </summary>
-    /// <param name="st">상태에 따라 달라지는 말풍선 텍스트를 구분하기 위한 매개변수</param>
-    /// <returns></returns>
-    IEnumerator RecBubble(string st)
-    {
-        if (st == "stop")
-        {
-
-            string[] thinkingText = new string[3];
-            thinkingText[0] = "이제 괜찮아";
-            thinkingText[1] = "...";
-            thinkingText[2] = "그만~";
-
-            bubbleText = thinkingText[Random.Range(0, 3)];
-        }
-
-        if (st == "happy")
-        {
-
-            string[] thinkingText = new string[4];
-            thinkingText[0] = "히히\n좋아";
-            thinkingText[1] = "기분\n좋아!!!";
-            thinkingText[2] = "더 쓰다듬어줘!";
-            thinkingText[3] = "찰떡같이\n쓰다듬네";
-
-            bubbleText = thinkingText[Random.Range(0, 4)];
-
-        }
-
-
-
-
-        bubble.SetActive(true);
-
-        bubbleImg.sprite = bubbleSprites[1];
-        bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
-
-        bubbleTMPro.text = bubbleText;
-
-        yield return new WaitForSeconds(3f);
-        bubble.SetActive(false);
-    }
-
-
-
 }
+
+

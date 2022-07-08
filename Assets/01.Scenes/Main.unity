@@ -19265,17 +19265,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ffe809982b8b4647b48c76eee1febf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dust:
-  - {fileID: 697793873}
-  - {fileID: 1665323515}
-  - {fileID: 2093651639}
-  - {fileID: 1821592067}
-  - {fileID: 226840344}
-  - {fileID: 1102889507}
-  - {fileID: 1242454270}
-  - {fileID: 1626783961}
-  - {fileID: 1928366125}
-  timeCnt: 0
   time: 0
 --- !u!4 &1577749885
 Transform:
@@ -20063,7 +20052,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1665323515}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -26574,7 +26563,8 @@ MonoBehaviour:
   baby: {fileID: 6173172085771427898}
   child: {fileID: 7099655025826174673}
   youth: {fileID: 6891580170759476695}
-  touchCnt: 0
+  sensitivity: 1
+  limitTouchCnt: 0
   testTest: {fileID: 627200801}
 --- !u!1 &2079148597
 GameObject:

@@ -51,16 +51,15 @@ public class OnClickButtons : MonoBehaviour
     /// </summary>
     public void TakeShower()
     {
-        if (StatusBar.instance.curClean >= 100)      // Clean이 가득 찬 상태인데 샤워 버튼을 눌렀을 때
+        if (StatusBar.instance.curClean >= 100)       // Clean이 가득 찬 상태인데 샤워 버튼을 눌렀을 때
         {
-            Status.instance.dustCnt = 0;
+            //Status.instance.dustCnt = 0;
             StartCoroutine(ThinkingBubble("Clean"));
             StatusBar.instance.HappyValue(false, 10); // 기분이 안 좋아짐
             return;
         }
 
-        for (int i = 0; i < 9; i++) dusts.transform.GetChild(i).gameObject.SetActive(false);
-        timeFlowTest.GetComponent<TimeFlowTest>().timeCnt = 0;
+        for (int i = 0; i < 9; i++) dusts.transform.GetChild(i).gameObject.SetActive(false); // 먼지 비활성화
 
 
         StartCoroutine(RecBubble("Clean"));
@@ -72,7 +71,8 @@ public class OnClickButtons : MonoBehaviour
 
         Status.instance.cntClean1++;
 
-        Status.instance.dustCnt /= 2;
+        Status.instance.dustCnt = 0;
+        //Status.instance.dustCnt /= 2;
 
 
 
