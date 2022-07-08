@@ -42,11 +42,9 @@ public class Status : MonoBehaviour
     public int cntTouch1;   // 터치 횟수
 
 
-    public enum Evolution1 { EGG, BABY, CHILD, YOUTH } // 캐릭터 진화
-    public Evolution1 evo1;                             // 캐릭터 상태를 담을 변수
+    public enum Evolution1 { EGG, BABY, CHILD, YOUTH, BREAKEGG } // 캐릭터 성장
+    public Evolution1 evo1;                                      // 캐릭터 상태를 담을 변수
 
-
-    public GameObject breakEgg;
 
 
     // 성별
@@ -57,7 +55,6 @@ public class Status : MonoBehaviour
     // evo 테스트!!!!!!!!!
     public TextMeshProUGUI evoTestText;
 
-    float time;
 
     public int dustCnt = 0;
 
@@ -99,18 +96,25 @@ public class Status : MonoBehaviour
                 if (cntTouch1 >= 5)
                     if (cntSmart1 >= 2 || cntClean1 >= 2)
                     {
-                        StartCoroutine(BreakEgg());
-                        evo1 = Evolution1.BABY;
+                        evo1 = Evolution1.BREAKEGG;
+
+                        InitCnt();
+
                     }
 
                     else if (cntTouch1 >= 20)
                     {
-                        StartCoroutine(BreakEgg());
-                        evo1 = Evolution1.BABY;
+                        evo1 = Evolution1.BREAKEGG;
+
+                        InitCnt();
+
                     }
 
                 break;
 
+            case Evolution1.BREAKEGG:
+                StartCoroutine(BreakEgg());
+                return;
 
             case Evolution1.BABY:
                 if (cntTouch1 >= 10)
@@ -142,11 +146,21 @@ public class Status : MonoBehaviour
 
     IEnumerator BreakEgg()
     {
-        ARManager.instance.indicatorTest[0].SetActive(false);
-        breakEgg.SetActive(true);
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(5f);
+        evo1 = Evolution1.BABY;
     }
 
+
+    void InitCnt()
+    {
+        cntClean1 = 0;
+        cntSmart1 = 0;
+        cntActive1 = 0;
+        cntSleep1 = 0;
+        cntEatItem1 = 0;
+        cntHappy1 = 0;
+        cntTouch1 = 0;
+    }
     
 
 

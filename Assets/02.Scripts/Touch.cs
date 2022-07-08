@@ -37,9 +37,22 @@ public class Touch : MonoBehaviour
     public GameObject youth;
 
 
+    public float sensitivity = 1f; // 조작 민감도
+    private Vector2 touchPosition; // 조이스틱의 방향정보를 외부 클래스에서 사용할 수 있도록 전역 변수 설정
+
+
+    public float horizontal { get { return touchPosition.x * sensitivity; } }
+    public float vertical { get { return touchPosition.y * sensitivity; } }
+
 
 
     public int touchCnt;  // 터치 카운트
+
+    public TextMeshProUGUI testTest;
+
+
+
+    Vector3 tra;
 
 
     void Start()
@@ -54,87 +67,195 @@ public class Touch : MonoBehaviour
 
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Space)) StatusBar.instance.HappyValue(true);
 
         if (Input.touchCount > 0)
         {
-            //StartCoroutine(TouchTest());
+            testTest.text = "" + Input.GetTouch(0).phase;
 
-            //var touch = Input.GetTouch(0);
+            // 현재 터치 좌표에서 광선 생성
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
 
-            //switch (touch.phase)
-            //{
-            //    case TouchPhase.Began:
-            //        touchText.GetComponent<Text>().text = "Began";
-            //        break;
-            //    case TouchPhase.Moved:
-            //        touchText.GetComponent<Text>().text = "Moved";
-            //        break;
-            //    case TouchPhase.Ended:
-            //        touchText.GetComponent<Text>().text = "Ended";
-            //        break;
-            //}
-
-            for (int i = 0; i < Input.touchCount; ++i)
+            // 터치했을 때 나타나는 효과
+            if (Physics.Raycast(ray, out hit))
             {
-
-                if (Input.GetTouch(i).phase == TouchPhase.Began)
+                if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-                    // 현재 터치 좌표에서 광선 생성
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
-                    RaycastHit hit;
-
-                    // 터치했을 때 나타나는 효과
-                    if (Physics.Raycast(ray, out hit))
+                    if (hit.transform.tag == "Player")
                     {
-                        if (hit.transform.tag == "Player")
-                        {
-                            if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
-                            else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
-                            else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
-                            else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
+                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
+                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
+                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
+                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
 
-                            Status.instance.cntTouch1++;
+                        Status.instance.cntTouch1++;
 
-                            touchCnt++;
-                            TouchResponse();
+                        touchCnt++;
+                        TouchResponse();
 
-                            // 시간 지나면 touchCnt 초기화 -------------------
-                        }
-
-                    }
-                }
-
-                else if (Input.GetTouch(i).phase == TouchPhase.Moved)
-                {
-                    if (Status.instance.evo1 == Status.Evolution1.EGG)
-                    {
-                        animator[0].SetBool("isRoll", true);
-
-
-                        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-                        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-                        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-                        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-                    }
-
-                        
-
-                }
-
-                else if (Input.GetTouch(i).phase == TouchPhase.Ended)
-                {
-                    if (Status.instance.evo1 == Status.Evolution1.EGG)
-                    {
-                        animator[0].SetBool("isRoll", false);
+                        // 시간 지나면 touchCnt 초기화 -------------------
                     }
 
                 }
+
+                else if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                {
+                    //tra = egg.transform.position;
+                    //egg.transform.Translate(Input.GetTouch(0).deltaPosition);
+                    animator[0].SetBool("isRoll", true);
+
+
+
+
+
+                            
+                    // 조이스틱
+                    //touchPosition = new Vector2(touchPosition.x * 2 - 1, touchPosition.y * 2 - 1);
+
+                    //float x = horizontal; // Left & Right
+                    //float y = vertical; // Up & Down
+
+                    //if (x != 0 || y != 0)
+                    //{
+                    //    egg.transform.position += new Vector3(x, 0, y) * 10f * Time.deltaTime;
+                    //}
+
+
+                }
+
+
+
+                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
+                {
+                    animator[0].SetBool("isRoll", false);
+                    //egg.transform.Translate(tra);
+
+                }
+
+
+
 
             }
 
+
+
+            //if (Input.GetTouch(i).phase == TouchPhase.Moved)
+            //{
+            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
+            //    {
+            //        animator[0].SetBool("isRoll", true);
+
+
+            //        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+            //        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+            //        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+            //        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+            //    }
+
+
+
+            //}
+
+            //else if (Input.GetTouch(i).phase == TouchPhase.Ended)
+            //{
+            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
+            //    {
+            //        animator[0].SetBool("isRoll", false);
+            //    }
+
+            //}
+
+
+
         }
     }
+
+    // 원본 업데이트 (터치 실험 중)
+    //void Update()
+    //{
+    //    //if (Input.GetKeyDown(KeyCode.Space)) StatusBar.instance.HappyValue(true);
+
+    //    if (Input.touchCount > 0)
+    //    {
+    //        //StartCoroutine(TouchTest());
+
+    //        //var touch = Input.GetTouch(0);
+
+    //        //switch (touch.phase)
+    //        //{
+    //        //    case TouchPhase.Began:
+    //        //        touchText.GetComponent<Text>().text = "Began";
+    //        //        break;
+    //        //    case TouchPhase.Moved:
+    //        //        touchText.GetComponent<Text>().text = "Moved";
+    //        //        break;
+    //        //    case TouchPhase.Ended:
+    //        //        touchText.GetComponent<Text>().text = "Ended";
+    //        //        break;
+    //        //}
+
+    //        for (int i = 0; i < Input.touchCount; ++i)
+    //        {
+
+    //            if (Input.GetTouch(i).phase == TouchPhase.Began)
+    //            {
+    //                // 현재 터치 좌표에서 광선 생성
+    //                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(i).position);
+    //                RaycastHit hit;
+
+    //                // 터치했을 때 나타나는 효과
+    //                if (Physics.Raycast(ray, out hit))
+    //                {
+    //                    if (hit.transform.tag == "Player")
+    //                    {
+    //                        if (Status.instance.evo1 == Status.Evolution1.EGG) eggParticle.Play();
+    //                        else if (Status.instance.evo1 == Status.Evolution1.BABY) babyParticle.Play();
+    //                        else if (Status.instance.evo1 == Status.Evolution1.CHILD) childParticle.Play();
+    //                        else if (Status.instance.evo1 == Status.Evolution1.YOUTH) youthParticle.Play();
+
+    //                        Status.instance.cntTouch1++;
+
+    //                        touchCnt++;
+    //                        TouchResponse();
+
+    //                        // 시간 지나면 touchCnt 초기화 -------------------
+    //                    }
+
+    //                }
+    //            }
+
+
+
+    //            //if (Input.GetTouch(i).phase == TouchPhase.Moved)
+    //            //{
+    //            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
+    //            //    {
+    //            //        animator[0].SetBool("isRoll", true);
+
+
+    //            //        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+    //            //        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+    //            //        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+    //            //        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
+    //            //    }
+
+
+
+    //            //}
+
+    //            //else if (Input.GetTouch(i).phase == TouchPhase.Ended)
+    //            //{
+    //            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
+    //            //    {
+    //            //        animator[0].SetBool("isRoll", false);
+    //            //    }
+
+    //            //}
+
+    //        }
+
+    //    }
+    //}
 
 
     void ChangeColor()
@@ -240,6 +361,7 @@ public class Touch : MonoBehaviour
         yield return new WaitForSeconds(3f);
         bubble.SetActive(false);
     }
+
 
 
 }

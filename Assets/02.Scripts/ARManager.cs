@@ -56,6 +56,8 @@ public class ARManager : MonoBehaviour
 
 
 
+    public GameObject eggBreakParticleObject;
+
 
     void Start()
     {
@@ -71,12 +73,13 @@ public class ARManager : MonoBehaviour
         eggbreakUpMR = indicatorTest[5].GetComponent<MeshRenderer>();
         eggbreakBotMR = indicatorTest[6].GetComponent<MeshRenderer>();
 
+        indicatorTest[0].SetActive(true);
 
 
         indicatorTest[1].SetActive(false);
         indicatorTest[2].SetActive(false);
         indicatorTest[3].SetActive(false);
-
+        indicatorTest[7].SetActive(false);
 
 
         ChangeColor();
@@ -104,13 +107,20 @@ public class ARManager : MonoBehaviour
         switch (Status.instance.evo1)
         {
             case Status.Evolution1.EGG:
+
                 indicatorTest[0].SetActive(true);
                 return;
             case Status.Evolution1.BABY:
-                indicatorTest[0].SetActive(false);
+
+
+                indicatorTest[7].SetActive(false);
+
                 indicatorTest[1].SetActive(true);
+
                 return;
             case Status.Evolution1.CHILD:
+
+
                 indicatorTest[1].SetActive(false);
                 indicatorTest[2].SetActive(true);
                 return;
@@ -118,6 +128,12 @@ public class ARManager : MonoBehaviour
                 indicatorTest[2].SetActive(false);
                 indicatorTest[3].SetActive(true);
                 return;
+
+            case Status.Evolution1.BREAKEGG:
+                indicatorTest[0].SetActive(false);
+                indicatorTest[7].SetActive(true);
+                return;
+
             default:
                 return;
         }
@@ -182,6 +198,17 @@ public class ARManager : MonoBehaviour
         eggbreakUpMR.material.SetColor("_Color", color);
         eggbreakBotMR.material.SetColor("_Color", color);
     }
+
+
+    IEnumerator EggBreakParticlePlay()
+    {
+        eggBreakParticleObject.SetActive(true);
+
+        yield return new WaitForSeconds(5f);
+
+
+    }
+
 }
 
 //public void PlaceIndicatorPrefab()
