@@ -37,15 +37,6 @@ public class Touch : MonoBehaviour
     public GameObject youth;
 
 
-    // 조이스틱
-    public float sensitivity = 1f; // 조작 민감도
-    private Vector2 touchPosition; // 조이스틱의 방향정보를 외부 클래스에서 사용할 수 있도록 전역 변수 설정
-
-    public float horizontal { get { return touchPosition.x * sensitivity; } }
-    public float vertical { get { return touchPosition.y * sensitivity; } }
-
-
-
     public int limitTouchCnt;        // 임시 터치 카운트 (시간이 지남에 따라 초기화 될 수 있는 단발성 터치 카운트)
 
     public TextMeshProUGUI testTest;
@@ -53,8 +44,6 @@ public class Touch : MonoBehaviour
     float time;
 
 
-
-    Vector3 tra;
 
 
     void Start()
