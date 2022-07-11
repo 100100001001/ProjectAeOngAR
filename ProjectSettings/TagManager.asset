@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Jelly
   - Fall
+  - TimerSlider
+  - SliderFill
+  - TimerText
+  - ScoreCanvas
+  - ScoreOnBanner
   layers:
   - Default
   - TransparentFX

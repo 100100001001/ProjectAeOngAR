@@ -18,12 +18,8 @@ public class AddScore : MonoBehaviour
 
     void Update()
     {
-        if (explode.addScore)
-        {
-            playerScore += 10;
-            scoreText.text = "" + playerScore;
+        playerScore += 10;
+        scoreText.text = "" + playerScore;
 
-            explode.addScore = false;
-        }
     }
 }
