@@ -6,22 +6,34 @@ using UnityEngine;
 public class Shoot : MonoBehaviour
 {
 
-    public Transform arCamera;
-    public GameObject projectile;
+    public Transform arCamera;     // AR Camera
+    public GameObject bulletOb;
 
     public float shootForce = 700f;
 
+    
+    // 총알의 랜덤 색상을 위한 변수
+    private Renderer bulletColor;
+    Color color;
 
+
+
+    void Start()
+    {
+        bulletColor = bulletOb.GetComponent<Renderer>();
+    }
 
 
     void Update()
     {
         if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            GameObject bullet = Instantiate(projectile, arCamera.position, arCamera.rotation) as GameObject;
+            color = new Color(Random.value, Random.value, Random.value, 1f);
+            bulletColor.material.SetColor("_Color", color);
+
+            GameObject bullet = Instantiate(bulletOb, arCamera.position, arCamera.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(arCamera.forward * shootForce);
+
         }
     }
 }
-
-

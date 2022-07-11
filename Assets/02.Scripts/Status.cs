@@ -37,7 +37,7 @@ public class Status : MonoBehaviour
     public int cntSmart1;   // 공부 한 횟수
     public int cntActive1;  // 활동 한 횟수
     public int cntSleep1;   // 잠 잔 횟수
-    public int cntEatItem1; // 아이템을 먹은 횟수
+    public int cntEat1;     // 아이템을 먹은 횟수
     public int cntHappy1;   // 행복한 횟수
     public int cntTouch1;   // 터치 횟수
 
@@ -93,11 +93,10 @@ public class Status : MonoBehaviour
         {
             case Evolution1.EGG:
 
-                if (cntTouch1 >= 5)
-                    if (cntSmart1 >= 2 || cntClean1 >= 2)
+                if (cntTouch1 >= 2)
+                    if (cntSmart1 >= 1 || cntClean1 >= 1)
                     {
                         evo1 = Evolution1.BREAKEGG;
-
                         InitCnt();
 
                     }
@@ -117,23 +116,37 @@ public class Status : MonoBehaviour
                 return;
 
             case Evolution1.BABY:
-                if (cntTouch1 >= 10)
-                    if (cntSmart1 >= 4 || cntClean1 >= 4)
+                if (cntTouch1 >= 2)
+                    if (cntSmart1 >= 1 || cntClean1 >= 1)
+                    {
                         evo1 = Evolution1.CHILD;
+                        InitCnt();
+                    }
+
 
                     else if (cntTouch1 >= 50)
+                    {
                         evo1 = Evolution1.CHILD;
+                        InitCnt();
+                    }
 
                 break;
 
 
             case Evolution1.CHILD:
-                if (cntTouch1 >= 15)
-                    if (cntSmart1 >= 6 || cntClean1 >= 6)
+                if (cntTouch1 >= 2)
+                    if (cntSmart1 >= 1 || cntClean1 >= 1)
+                    {
                         evo1 = Evolution1.YOUTH;
+                        InitCnt();
+                    }
 
                     else if (cntTouch1 >= 100)
+                    {
                         evo1 = Evolution1.YOUTH;
+                        InitCnt();
+
+                    }
 
                 break;
 
@@ -157,7 +170,7 @@ public class Status : MonoBehaviour
         cntSmart1 = 0;
         cntActive1 = 0;
         cntSleep1 = 0;
-        cntEatItem1 = 0;
+        cntEat1 = 0;
         cntHappy1 = 0;
         cntTouch1 = 0;
     }

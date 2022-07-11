@@ -70,7 +70,7 @@ public class Touch : MonoBehaviour
             RaycastHit hit;
 
             // 터치했을 때 나타나는 효과
-            if (Physics.Raycast(ray, out hit) || hit.transform.tag == "Player")
+            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Player")
             {
                 if (Input.touchCount > 1)
                 {
@@ -81,8 +81,6 @@ public class Touch : MonoBehaviour
 
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-
-                    Status.instance.cntTouch1++;
 
                     limitTouchCnt++;
                     TouchResponse();

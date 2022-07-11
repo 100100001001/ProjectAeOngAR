@@ -9,7 +9,7 @@ using System.IO;
 public class ARPlacement : MonoBehaviour
 {
 
-    public GameObject arObjectToSpawn;
+    public GameObject arObjectToSpawn;      // 몬스터 생성
     public GameObject placementIndicator; 
     public GameObject shoot;
     private GameObject spawnedObject;
@@ -19,9 +19,9 @@ public class ARPlacement : MonoBehaviour
 
 
 
-    public string m_Path = @"C:\Users\user\Desktop";
-    public string m_FilePrefix = "screenshot";
-    private string m_FilePath;
+    //public string m_Path = @"C:\Users\user\Desktop";
+    //public string m_FilePrefix = "screenshot";
+    //private string m_FilePath;
 
 
 
@@ -34,14 +34,13 @@ public class ARPlacement : MonoBehaviour
     // need to update placement indicator, placement pose and spawn 
     void Update()
     {
-        if(spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (spawnedObject == null && placementPoseIsValid && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            
-
             ARPlaceObject();
             shoot.SetActive(true);
-
         }
+
+        //if (spawnedObject != null) spawnedObject.transform.position += new Vector3(0, 0, -0.001f);
 
 
         UpdatePlacementPose();
@@ -82,11 +81,11 @@ public class ARPlacement : MonoBehaviour
 
 
 
-    public void Save()
-    {
-        ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop),
-        "Screenshot" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".png"));
-    }
+    //public void Save()
+    //{
+    //    ScreenCapture.CaptureScreenshot(System.IO.Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Desktop),
+    //    "Screenshot" + DateTime.Now.ToString("yyyyMMddhhmmss") + ".png"));
+    //}
 
 }
 

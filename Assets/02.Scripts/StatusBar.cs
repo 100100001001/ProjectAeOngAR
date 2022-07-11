@@ -126,7 +126,11 @@ public class StatusBar : MonoBehaviour
 
     public void HungerValue(bool val, int n)
     {
-        if (val) curHunger += n;
+        if (val)
+        {
+            Status.instance.cntEat1++;
+            curHunger += n;
+        }
         else curHunger -= n;
 
         if (curHunger >= 100) curHunger = 100;
@@ -134,7 +138,11 @@ public class StatusBar : MonoBehaviour
     }
     public void CleanValue(bool val, int n)
     {
-        if (val) curClean += n;
+        if (val)
+        {
+            Status.instance.cntClean1++;
+            curClean += n;
+        }
         else curClean -= n;
 
         if (curClean >= 100) curClean = 100;
@@ -142,15 +150,23 @@ public class StatusBar : MonoBehaviour
     }
     public void SmartValue(bool val, int n)
     {
-        if (val) curSmart += n;
+        if (val)
+        {
+            Status.instance.cntSmart1++;
+            curSmart += n;
+        }
         else curSmart -= n;
 
         if (curSmart >= 100) curSmart = 100;
         if (curSmart <= 0) curSmart = 0;
     }
-    public void ActiveValue(bool val, int n)
+    public void ActiveValue(bool val, float n)
     {
-        if (val) curActive += n;
+        if (val)
+        {
+            Status.instance.cntActive1++;
+            curActive += n;
+        }
         else curActive -= n;
 
         if (curActive >= 100) curActive = 100;
@@ -158,7 +174,11 @@ public class StatusBar : MonoBehaviour
     }
     public void EnergyValue(bool val, int n)
     {
-        if (val) curEnergy += n;
+        if (val)
+        {
+            Status.instance.cntSleep1++;
+            curEnergy += n;
+        }
         else curEnergy -= n;
 
         if (curEnergy >= 100) curEnergy = 100;
@@ -166,7 +186,11 @@ public class StatusBar : MonoBehaviour
     }
     public void HappyValue(bool val, int n)
     {
-        if (val) curHappy += n;
+        if (val)
+        {
+            Status.instance.cntHappy1++;
+            curHappy += n;
+        }
         else curHappy -= n;
 
         if (curHappy >= 100) curHappy = 100;
