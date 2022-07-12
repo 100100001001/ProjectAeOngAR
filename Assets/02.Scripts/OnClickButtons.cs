@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 
@@ -154,6 +155,15 @@ public class OnClickButtons : MonoBehaviour
         Status.instance.cntSleep1++;
 
     }
+
+
+    public void PlayGame()
+    {
+        SceneManager.LoadScene("MainCopy_Game_Bomb");
+    }
+
+
+
 
     /// <summary>
     /// 책 읽는 이미지 오브젝트를 활성화

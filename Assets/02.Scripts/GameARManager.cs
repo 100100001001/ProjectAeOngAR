@@ -21,10 +21,6 @@ public class GameARManager : MonoBehaviour
     List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>();
 
 
-
-
-
-
     public TextMeshProUGUI t;
 
 
@@ -58,28 +54,6 @@ public class GameARManager : MonoBehaviour
 
     void Update()
     {
-
-        // Testing!!!!!!
-
-        indicatorTest[0].SetActive(false);
-
-        shoot.SetActive(true);
-
-
-        foreach (MeshRenderer mr in jellyMeshRenderers)
-        {
-            jellyMtNumber = Random.Range(0, 2);
-            mr.material = jellyMaterials[jellyMtNumber];
-        }
-
-        indicatorTest[1].SetActive(true);
-
-        indicator = indicatorTest[1].transform;
-        PlaceIndicator();
-
-        // ----------------------
-
-
         if (Input.touchCount > 1)
         {
             indicatorTest[0].SetActive(false);
@@ -88,7 +62,7 @@ public class GameARManager : MonoBehaviour
 
             foreach (MeshRenderer mr in jellyMeshRenderers)
             {
-                jellyMtNumber = Random.Range(0, 2);
+                jellyMtNumber = Random.Range(0, 3);
                 mr.material = jellyMaterials[jellyMtNumber];
             }
 
@@ -104,6 +78,18 @@ public class GameARManager : MonoBehaviour
 
     void PlaceIndicator()
     {
+        //var screenCenter = Camera.current.ViewportToScreenPoint(new Vector3(0.5f, 0.5f));
+        //List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>();
+
+        //arRaycater.Raycast(screenCenter, indicatorHits, TrackableType.Planes);
+
+        //if (indicatorHits.Count > 0)
+        //{
+        //    indicator.position = hits[0].pose.position;
+        //    indicator.rotation = hits[0].pose.rotation;
+        //}
+
+
         arRaycater.Raycast(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f), indicatorHits, TrackableType.Planes);
 
         if (indicatorHits.Count > 0)

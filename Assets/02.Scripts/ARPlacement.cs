@@ -10,7 +10,7 @@ public class ARPlacement : MonoBehaviour
 {
 
     public GameObject arObjectToSpawn;      // 몬스터 생성
-    public GameObject placementIndicator; 
+    public GameObject placementIndicator;   // 바닥 표시기
     public GameObject shoot;
     private GameObject spawnedObject;
     private Pose PlacementPose;

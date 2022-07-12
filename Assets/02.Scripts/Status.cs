@@ -104,9 +104,7 @@ public class Status : MonoBehaviour
                     else if (cntTouch1 >= 20)
                     {
                         evo1 = Evolution1.BREAKEGG;
-
                         InitCnt();
-
                     }
 
                 break;

@@ -7,16 +7,18 @@ using TMPro;
 public class TimerSlider : MonoBehaviour
 {
     [SerializeField]
-    Slider timerSlider;
+    Slider timerSlider; // 남은 시간을 시각화하기 위해 받은 슬라이더
 
     [SerializeField]
-    TextMeshProUGUI timerText;
+    TextMeshProUGUI timerText; // 남은 시간
 
+    // 슬라이더 색을 변경하기 위해 이미지와 색상을 받아줌
     [SerializeField]
     Image fillImage;
+
     public Color32 normalFillColor;
     public Color32 warningFillColor;
-    public float warningLimit;  // as a percentage
+    public float warningLimit;  // 시간이 얼마 안남은 걸 알려주기 위해 받는 변수
 
     public bool stopTimer;
 
@@ -26,8 +28,11 @@ public class TimerSlider : MonoBehaviour
 
     string textTime;
 
-    float curTime = 2f;
-    float maxTime = 2f;
+    float curTime = 20f;
+    float maxTime = 20f;
+
+
+    public GameObject Buttons;
 
 
     void Start()
@@ -45,6 +50,8 @@ public class TimerSlider : MonoBehaviour
 
         timerSlider.value = (float)curTime / (float)maxTime;
         fillImage.color = normalFillColor;
+
+        Buttons.SetActive(false);
 
 
     }
@@ -73,6 +80,9 @@ public class TimerSlider : MonoBehaviour
             gameOverText.gameObject.SetActive(true);
             gameObject.GetComponent<Shoot>().enabled = false;
             //Destroy(timerSlider.gameObject);
+
+            Buttons.SetActive(true);
+
 
 
             //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Jelly");

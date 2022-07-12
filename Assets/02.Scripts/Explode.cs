@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Explode : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Explode : MonoBehaviour
     public GameObject enemyToSpawn;
     Vector3 killPos;
     Quaternion killRot;
-    public float waitTime = 3.0f;
+    float waitTime = 3.0f;
     bool bulletCollission = false; // to avoid hittimg multiple dpiders with same bullet
     int jellyScoreNum = 1;
 
@@ -17,6 +18,7 @@ public class Explode : MonoBehaviour
 
 
     public Material[] jellyMaterials;
+    public TextMeshProUGUI t;
 
 
     private void OnCollisionEnter(Collision collision)
@@ -25,10 +27,19 @@ public class Explode : MonoBehaviour
         {
             //Destroy(collision.transform.gameObject); // destroy spider
 
-            if (collision.gameObject.GetComponent<MeshRenderer>().material.name == "GreenJelly") jellyScoreNum = 1;
-            else if (collision.gameObject.GetComponent<MeshRenderer>().material.name == "OrangeJelly") jellyScoreNum = 2;
+            //if (collision.gameObject.GetComponent<MeshRenderer>().material.name == "GreenJelly") jellyScoreNum = 1;
+            //else if (collision.gameObject.GetComponent<MeshRenderer>().material.name == "OrangeJelly") jellyScoreNum = 2; 
+            //else if (collision.gameObject.GetComponent<MeshRenderer>().material.name == "PurpleJelly") jellyScoreNum = 3; 
 
-            Scoring.score += 5 * jellyScoreNum;
+
+            if (collision.transform.GetComponent<MeshRenderer>().material.name == "GreenJelly") Scoring.score += 5;
+            else if (collision.transform.GetComponent<MeshRenderer>().material.name == "OrangeJelly") Scoring.score += 10; 
+            else if (collision.transform.GetComponent<MeshRenderer>().material.name == "PurpleJelly") Scoring.score += 15;
+            else Scoring.score += 2;
+
+            t.text = ""+collision.transform.GetComponent<MeshRenderer>().material.name;
+
+            //Scoring.score += (5 * jellyScoreNum);
 
             bulletCollission = true;
 
