@@ -100,8 +100,6 @@ public class ARManager : MonoBehaviour
             PlaceIndicator();
 
 
-
-
         }
 
         switch (Status.instance.evo1)

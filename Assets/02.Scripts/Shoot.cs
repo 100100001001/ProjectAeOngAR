@@ -26,7 +26,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
-        if(Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
             color = new Color(Random.value, Random.value, Random.value, 1f);
             bulletColor.material.SetColor("_Color", color);

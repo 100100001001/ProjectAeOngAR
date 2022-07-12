@@ -132,3 +132,6 @@ MonoBehaviour:
   enemyToSpawn: {fileID: 2604250563037443363, guid: ef436588b8d38e94dbc81c731ed85143,
     type: 3}
   waitTime: 3
+  jellyMaterials:
+  - {fileID: 2100000, guid: 018cf0b712668504b84ae87e179cd5c0, type: 2}
+  - {fileID: 2100000, guid: 3c840d16fdfb2ce48b5b96c659e09749, type: 2}

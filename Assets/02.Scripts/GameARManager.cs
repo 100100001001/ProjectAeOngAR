@@ -8,7 +8,7 @@ using TMPro;
 
 public class GameARManager : MonoBehaviour
 {
-    public static GameARManager instance; // 인스턴스화
+    //public static GameARManager instance; // 인스턴스화
 
 
     public ARRaycastManager arRaycater;
@@ -22,42 +22,82 @@ public class GameARManager : MonoBehaviour
 
 
 
-    public GameObject ttest;
-    private TextMeshProUGUI t;
+
+
+
+    public TextMeshProUGUI t;
 
 
     float time;
 
+
+    public GameObject shoot;
+
+    MeshRenderer[] jellyMeshRenderers;
+    public Material[] jellyMaterials;
+
+    int jellyMtNumber;
+
+
+
     void Start()
     {
-        // indicatorTest[0].SetActive(true);
+        shoot.SetActive(false);
+
+
+        indicatorTest[0].SetActive(true);
+        indicatorTest[1].SetActive(false);
+
         indicator = indicatorTest[0].transform;
         PlaceIndicator();
 
-        t = ttest.GetComponent<TextMeshProUGUI>();
+
+        jellyMeshRenderers = indicatorTest[1].transform.GetComponentsInChildren<MeshRenderer>();
 
     }
 
     void Update()
     {
-        time += Time.deltaTime;
 
-        if (time > 5)
+        // Testing!!!!!!
+
+        indicatorTest[0].SetActive(false);
+
+        shoot.SetActive(true);
+
+
+        foreach (MeshRenderer mr in jellyMeshRenderers)
         {
-            int a = Random.Range(0, 3);
-
-
-            if (a == 0) indicator = indicatorTest[0].transform;
-            else if (a == 1) indicator = indicatorTest[1].transform;
-            else if (a == 2) indicator = indicatorTest[2].transform;
-
-            time = 0;
-
-
+            jellyMtNumber = Random.Range(0, 2);
+            mr.material = jellyMaterials[jellyMtNumber];
         }
 
+        indicatorTest[1].SetActive(true);
+
+        indicator = indicatorTest[1].transform;
         PlaceIndicator();
-        t.text = indicator.name;
+
+        // ----------------------
+
+
+        if (Input.touchCount > 1)
+        {
+            indicatorTest[0].SetActive(false);
+            shoot.SetActive(true);
+
+
+            foreach (MeshRenderer mr in jellyMeshRenderers)
+            {
+                jellyMtNumber = Random.Range(0, 2);
+                mr.material = jellyMaterials[jellyMtNumber];
+            }
+
+            indicatorTest[1].SetActive(true);
+
+            indicator = indicatorTest[1].transform;
+            PlaceIndicator();
+
+        }
 
     }
 
@@ -73,4 +113,5 @@ public class GameARManager : MonoBehaviour
         }
 
     }
+
 }
