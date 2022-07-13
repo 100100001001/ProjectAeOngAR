@@ -128,6 +128,7 @@ public class StatusBar : MonoBehaviour
     {
         if (val)
         {
+            Status.instance.cntHappy1++;
             Status.instance.cntEat1++;
             curHunger += n;
         }
@@ -140,6 +141,7 @@ public class StatusBar : MonoBehaviour
     {
         if (val)
         {
+            Status.instance.cntHappy1++;
             Status.instance.cntClean1++;
             curClean += n;
         }
@@ -152,6 +154,7 @@ public class StatusBar : MonoBehaviour
     {
         if (val)
         {
+            Status.instance.cntHappy1++;
             Status.instance.cntSmart1++;
             curSmart += n;
         }
@@ -164,6 +167,7 @@ public class StatusBar : MonoBehaviour
     {
         if (val)
         {
+            Status.instance.cntHappy1++;
             Status.instance.cntActive1++;
             curActive += n;
         }
@@ -176,6 +180,7 @@ public class StatusBar : MonoBehaviour
     {
         if (val)
         {
+            Status.instance.cntHappy1++;
             Status.instance.cntSleep1++;
             curEnergy += n;
         }
@@ -189,6 +194,7 @@ public class StatusBar : MonoBehaviour
         if (val)
         {
             Status.instance.cntHappy1++;
+            Status.instance.cntTouch1++;
             curHappy += n;
         }
         else curHappy -= n;

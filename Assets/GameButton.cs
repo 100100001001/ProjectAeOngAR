@@ -5,11 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameButton : MonoBehaviour
 {
-    void Replay()
-    {
-        SceneManager.LoadScene("MainCopy_Game_Bomb");
 
-    }
 
     public void GoToTheMain()
     {

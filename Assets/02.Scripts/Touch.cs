@@ -100,16 +100,6 @@ public class Touch : MonoBehaviour
                     animator[0].SetBool("isRoll", true);
 
 
-                    // 조이스틱
-                    //touchPosition = new Vector2(touchPosition.x * 2 - 1, touchPosition.y * 2 - 1);
-
-                    //float x = horizontal; // Left & Right
-                    //float y = vertical; // Up & Down
-
-                    //if (x != 0 || y != 0)
-                    //{
-                    //    egg.transform.position += new Vector3(x, 0, y) * 10f * Time.deltaTime;
-                    //}
 
                 }
 

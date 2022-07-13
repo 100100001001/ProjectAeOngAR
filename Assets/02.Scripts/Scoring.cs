@@ -7,6 +7,7 @@ public class Scoring : MonoBehaviour
 {
 
     public TextMeshProUGUI scoreText;
+    //public TextMeshProUGUI bestScoreText;
 
     //public GameObject scoreBoardUI;
     public static int score;
@@ -20,8 +21,7 @@ public class Scoring : MonoBehaviour
 
     private void Update()
     {
-        scoreText.text = "Á¡¼ö´Â " + score.ToString();
-
+        scoreText.text = "" + score.ToString();
     }
 
 

@@ -12,16 +12,15 @@ public class GameARManager : MonoBehaviour
 
 
     public ARRaycastManager arRaycater;
-    List<ARRaycastHit> hits = new List<ARRaycastHit>();
 
 
     // 바닥에 표시
-    public GameObject[] indicatorTest;
-    private Transform indicator;
+    public GameObject[] indicator;
+    private Transform indicatorTr;
     List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>();
 
 
-    public TextMeshProUGUI t;
+    public GameObject subText;
 
 
     float time;
@@ -35,20 +34,20 @@ public class GameARManager : MonoBehaviour
     int jellyMtNumber;
 
 
-
     void Start()
     {
         shoot.SetActive(false);
+        subText.SetActive(true);
 
 
-        indicatorTest[0].SetActive(true);
-        indicatorTest[1].SetActive(false);
+        indicator[0].SetActive(true);
+        indicator[1].SetActive(false);
 
-        indicator = indicatorTest[0].transform;
+        indicatorTr = indicator[0].transform;
         PlaceIndicator();
 
 
-        jellyMeshRenderers = indicatorTest[1].transform.GetComponentsInChildren<MeshRenderer>();
+        jellyMeshRenderers = indicator[1].transform.GetComponentsInChildren<MeshRenderer>();
 
     }
 
@@ -56,7 +55,8 @@ public class GameARManager : MonoBehaviour
     {
         if (Input.touchCount > 1)
         {
-            indicatorTest[0].SetActive(false);
+            subText.SetActive(false);
+            indicator[0].SetActive(false);
             shoot.SetActive(true);
 
 
@@ -66,9 +66,9 @@ public class GameARManager : MonoBehaviour
                 mr.material = jellyMaterials[jellyMtNumber];
             }
 
-            indicatorTest[1].SetActive(true);
+            indicator[1].SetActive(true);
 
-            indicator = indicatorTest[1].transform;
+            indicatorTr = indicator[1].transform;
             PlaceIndicator();
 
         }
@@ -94,8 +94,8 @@ public class GameARManager : MonoBehaviour
 
         if (indicatorHits.Count > 0)
         {
-            indicator.position = indicatorHits[0].pose.position;
-            indicator.rotation = indicatorHits[0].pose.rotation;
+            indicatorTr.position = indicatorHits[0].pose.position;
+            indicatorTr.rotation = indicatorHits[0].pose.rotation;
         }
 
     }
