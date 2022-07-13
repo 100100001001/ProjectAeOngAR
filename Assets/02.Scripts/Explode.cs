@@ -27,7 +27,6 @@ public class Explode : MonoBehaviour
 
 
     public Material[] jellyMaterials;
-    public TextMeshProUGUI t;
 
 
     private void OnCollisionEnter(Collision collision)
@@ -53,8 +52,6 @@ public class Explode : MonoBehaviour
 
             }
 
-            //t.text = ""+ collision.gameObject.tag + "/" + collision.gameObject.GetComponent<MeshRenderer>().material.name + "/" + collision.gameObject.activeSelf;
-            //t.text = "" + collision.gameObject.GetComponent<MeshRenderer>().material.name;
 
             Scoring.score += jellyScoreNum;
 

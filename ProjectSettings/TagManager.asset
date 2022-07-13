@@ -12,6 +12,7 @@ TagManager:
   - ScoreCanvas
   - ScoreOnBanner
   - GameOverText
+  - Treasure
   layers:
   - Default
   - TransparentFX
