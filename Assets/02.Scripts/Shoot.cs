@@ -9,6 +9,8 @@ public class Shoot : MonoBehaviour
     public Transform arCamera;     // AR Camera
     public GameObject bulletOb;
 
+    GameObject bullet;
+
     public float shootForce = 700f;
 
     
@@ -16,7 +18,7 @@ public class Shoot : MonoBehaviour
     private Renderer bulletColor;
     Color color;
 
-
+    float time;
 
     void Start()
     {
@@ -26,6 +28,7 @@ public class Shoot : MonoBehaviour
 
     void Update()
     {
+        time += Time.deltaTime;
 
         if(Input.touchCount == 1 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
@@ -33,9 +36,15 @@ public class Shoot : MonoBehaviour
             color = new Color(Random.value, Random.value, Random.value, 1f);
             bulletColor.material.SetColor("_Color", color);
 
-            GameObject bullet = Instantiate(bulletOb, arCamera.position, arCamera.rotation);
+            bullet = Instantiate(bulletOb, arCamera.position, arCamera.rotation);
             bullet.GetComponent<Rigidbody>().AddForce(arCamera.forward * shootForce);
 
+        }
+
+        if (time > 5)
+        {
+            time = 0;
+            Destroy(bullet);
         }
     }
 }

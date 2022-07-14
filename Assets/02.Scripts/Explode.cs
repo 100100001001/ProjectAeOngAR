@@ -3,18 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+// 총알이 몬스터에 맞았을 때 실행하는 스크립트
 public class Explode : MonoBehaviour
 {
     public GameObject explosion;
     public GameObject scoreToSpawn;
-    public GameObject enemyToSpawn;
+    //public GameObject enemyToSpawn;
 
 
-    Vector3 killPos;
-    Quaternion killRot;
+    //Vector3 killPos;
+    //Quaternion killRot;
 
 
-    bool bulletCollission = false; // to avoid hittimg multiple dpiders with same bullet
+    bool bulletCollission = false; // 한 총알로 여러 몬스터를 죽이는 것을 막기 위한 변수
     int jellyScoreNum = 1;
 
 
@@ -79,16 +80,15 @@ public class Explode : MonoBehaviour
     {
         enemy.SetActive(false);
 
-        enemy.GetComponent<MeshRenderer>().material = jellyMaterials[Random.Range(0, 3)];
+        enemy.GetComponent<MeshRenderer>().material = jellyMaterials[Random.Range(0, 3)]; // 랜덤으로 몬스터 색상 지정
 
         yield return new WaitForSeconds(Random.Range(0, 3));
-
 
         enemy.SetActive(true);
 
         //Instantiate(enemyToSpawn, killPos, killRot);
         bulletCollission = false;
-        Destroy(gameObject); // destroy bullet
+        //Destroy(gameObject); // destroy bullet
 
     }
 
@@ -101,6 +101,9 @@ public class Explode : MonoBehaviour
 
         yield return new WaitForSeconds(2f);
         scoreToSpawn.SetActive(false);
+
+        yield return new WaitForSeconds(3f);
+
     }
 }
 
