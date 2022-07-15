@@ -17,6 +17,12 @@ public class Inventory : MonoBehaviour
     public OnSlotCountChange onSlotCountChange;
 
 
+    // 아이템 추가시 슬롯UI에도 알려줄 델리게이트(대리자) 정의
+    public delegate void OnChangeItem();
+    // 아이템 추가시 슬롯UI에도 알려줄 델리게이트(대리자) 인스턴스화
+    public OnChangeItem onChangeItem;
+
+
     // Slot의 개수를 지정할 변수
     private int slotCount;
 
@@ -39,6 +45,11 @@ public class Inventory : MonoBehaviour
 
     }
 
+
+    // 획득한 아이템을 보관할(담을) List
+    public List<Item> items = new List<Item>();
+
+
     private void Awake()
     {
         // 만약에 instance가 비어있지 않다면,
@@ -56,12 +67,26 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
-        // slotCount를 4로 초기화
-        SlotCount = 4;
+        // SlotCount를 4로 초기화
+        SlotCount = 0;
     }
 
-    void Update()
+
+    // items 리스트에 아이템을 추가할 수 있는 메서드
+    public bool AddItem(Item item)
     {
+        // 만약에 items(리스트)의 개수가 실제 사용가능한 slotCount(현재 활성된 슬롯)보다 작다면
+        if (items.Count < SlotCount)
+        {
+            // items 리스트에 아이템 추가
+            items.Add(item);
+            // 만약에 onChangeItem이 비어있지 않다면,
+            if (onChangeItem != null) onChangeItem.Invoke();
 
+            return true; // 아이템 추가 성공 반환
+        }
+
+        return false;
     }
+
 }

@@ -13,7 +13,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody rigid;
 
 
-    private Animator[] animators;
+    public Animator[] animators;
 
     bool isRollAni = false;
 
@@ -24,7 +24,6 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rigid = GetComponent<Rigidbody>();
-        animators = GetComponentsInChildren<Animator>();
 
         testPos = transform.position;
 
@@ -64,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
         if (rigid.velocity != Vector3.zero)
         {
             isRollAni = true;
-            StatusBar.instance.ActiveValue(true, 0.05f);
+            StatusBar.instance.ActiveValue(true, 0.1f);
             Debug.Log(StatusBar.instance.curActive);
         }
 

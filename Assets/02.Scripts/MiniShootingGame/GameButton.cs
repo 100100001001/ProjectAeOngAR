@@ -11,11 +11,13 @@ public class GameButton : MonoBehaviour
     {
         shootScript.GetComponent<TimerSlider>().enabled = false;
         shootScript.GetComponent<TimerSlider>().enabled = true;
+
+        Time.timeScale = 1f;
     }
 
     public void GoToTheMain()
     {
-        StatusBar.instance.ActiveValue(true, 20);
         SceneManager.LoadScene("Main");
+        Time.timeScale = 1f;
     }
 }

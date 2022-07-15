@@ -85,6 +85,10 @@ public class TimerSlider : MonoBehaviour
 
         foreach (GameObject jelly in jellies) jelly.SetActive(true);
 
+
+
+        StartCoroutine(GameStartMessage());
+
     }
 
 
@@ -94,7 +98,6 @@ public class TimerSlider : MonoBehaviour
         curTime = 20f;   // 슬라이더의 Value값을 조정해주기 위한 시간 변수
 
 
-        stopTimer = false; // 타이머 작동 상태. false면 타이머 실행
         gameObject.GetComponent<Shoot>().enabled = true; // Shoot 스크립트 실행
 
         timerSlider.value = (float)curTime / (float)maxTime; // timerSlider의 값을 0~1 사이의 값으로 맞춰주기 위함
@@ -132,11 +135,13 @@ public class TimerSlider : MonoBehaviour
     {
         //t.text = "Update : " + curTime;
 
-        curTime -= Time.deltaTime; // 시간을 잰다
         textTime = "" + curTime.ToString("f0") + "초 남았어요";
 
         if (stopTimer == false) // 타이머 작동 상태일 때
         {
+            curTime -= Time.deltaTime; // 시간을 잰다
+
+
             timerText.text = textTime;
             timerSlider.value = (float)curTime / (float)maxTime; // 슬라이더의 Value를 계산
         }
@@ -215,7 +220,8 @@ public class TimerSlider : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         ani.SetTrigger("treasure");
-        treasureBox.transform.GetChild(3).gameObject.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        treasureBox.transform.GetChild(4).gameObject.SetActive(true);
 
         yield return new WaitForSeconds(1.5f);
         items.SetActive(true);
@@ -225,12 +231,16 @@ public class TimerSlider : MonoBehaviour
 
         treasureMessage.text = "와~ 아이템을 얻었어요!";
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
+        treasureBox.transform.GetChild(4).gameObject.SetActive(false);
+
+
+        yield return new WaitForSeconds(2f);
         treasureMessage.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         buttons.SetActive(true);
-        treasureBox.transform.GetChild(3).gameObject.SetActive(false);
 
+        StatusBar.instance.ActiveValue(true, 20f);
     }
 
 
@@ -247,6 +257,9 @@ public class TimerSlider : MonoBehaviour
         gameStartText.text = "1";
         yield return new WaitForSeconds(1f);
         gameStartText.gameObject.SetActive(false);
+
+        stopTimer = false; // 타이머 작동 상태. false면 타이머 실행
+
     }
 }
 

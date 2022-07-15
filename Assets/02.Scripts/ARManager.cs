@@ -12,14 +12,11 @@ public class ARManager : MonoBehaviour
 {
     public static ARManager instance; // 인스턴스화
 
-
     public ARRaycastManager arRaycater;
-    List<ARRaycastHit> hits = new List<ARRaycastHit>();
-
 
     // 바닥에 표시
-    public GameObject[] indicatorTest;
-    private Transform indicator;
+    public GameObject[] indicator;
+    private Transform indicatorTr;
     List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>();
 
 
@@ -44,42 +41,44 @@ public class ARManager : MonoBehaviour
     public TextMeshProUGUI t;
 
 
-
+    // 랜덤 색상을 적용하기 위해 캐릭터 각각의 MeshRenderer, Renderer 변수 만듦
     private MeshRenderer eggMR;
     private Renderer babyMR;
     private Renderer childMR;
     private Renderer youthMR;
     private MeshRenderer eggbreakUpMR;
     private MeshRenderer eggbreakBotMR;
-
     Color color;
 
 
-
-    public GameObject eggBreakParticleObject;
-
+    public TextMeshProUGUI descriptiveText; // 게임 시작할 때 나올 설명 텍스트
+    bool textActive = true; // 텍스트 활성화여부;
 
     void Start()
     {
-        indicatorTest[4].SetActive(true);
-        indicator = indicatorTest[4].transform;
+        indicator[4].SetActive(true);
+        indicatorTr = indicator[4].transform;
         PlaceIndicator();
 
 
-        eggMR = indicatorTest[0].GetComponent<MeshRenderer>();
-        babyMR = indicatorTest[1].transform.GetChild(1).GetComponent<Renderer>();
-        childMR = indicatorTest[2].transform.GetChild(1).GetComponent<Renderer>();
-        youthMR = indicatorTest[3].transform.GetChild(1).GetComponent<Renderer>();
-        eggbreakUpMR = indicatorTest[5].GetComponent<MeshRenderer>();
-        eggbreakBotMR = indicatorTest[6].GetComponent<MeshRenderer>();
+        eggMR = indicator[0].GetComponent<MeshRenderer>();
+        babyMR = indicator[1].transform.GetChild(1).GetComponent<Renderer>();
+        childMR = indicator[2].transform.GetChild(1).GetComponent<Renderer>();
+        youthMR = indicator[3].transform.GetChild(1).GetComponent<Renderer>();
+        eggbreakUpMR = indicator[5].GetComponent<MeshRenderer>();
+        eggbreakBotMR = indicator[6].GetComponent<MeshRenderer>();
 
-        indicatorTest[0].SetActive(true);
+        indicator[0].SetActive(true);
 
 
-        indicatorTest[1].SetActive(false);
-        indicatorTest[2].SetActive(false);
-        indicatorTest[3].SetActive(false);
-        indicatorTest[7].SetActive(false);
+        indicator[1].SetActive(false);
+        indicator[2].SetActive(false);
+        indicator[3].SetActive(false);
+        indicator[7].SetActive(false);
+
+
+        descriptiveText.text = "두 손을 터치해서 또바기를 불러오세요!";
+        descriptiveText.gameObject.SetActive(true);
 
 
         ChangeColor();
@@ -95,10 +94,11 @@ public class ARManager : MonoBehaviour
     {
         if (Input.touchCount > 1)// && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            indicatorTest[4].SetActive(true);
-            indicator = indicatorTest[4].transform;
+            indicator[4].SetActive(true);
+            indicatorTr = indicator[4].transform;
             PlaceIndicator();
 
+            if (textActive) StartCoroutine(TextActive());
 
         }
 
@@ -106,30 +106,30 @@ public class ARManager : MonoBehaviour
         {
             case Status.Evolution1.EGG:
 
-                indicatorTest[0].SetActive(true);
+                indicator[0].SetActive(true);
                 return;
             case Status.Evolution1.BABY:
 
 
-                indicatorTest[7].SetActive(false);
+                indicator[7].SetActive(false);
 
-                indicatorTest[1].SetActive(true);
+                indicator[1].SetActive(true);
 
                 return;
             case Status.Evolution1.CHILD:
 
 
-                indicatorTest[1].SetActive(false);
-                indicatorTest[2].SetActive(true);
+                indicator[1].SetActive(false);
+                indicator[2].SetActive(true);
                 return;
             case Status.Evolution1.YOUTH:
-                indicatorTest[2].SetActive(false);
-                indicatorTest[3].SetActive(true);
+                indicator[2].SetActive(false);
+                indicator[3].SetActive(true);
                 return;
 
             case Status.Evolution1.BREAKEGG:
-                indicatorTest[0].SetActive(false);
-                indicatorTest[7].SetActive(true);
+                indicator[0].SetActive(false);
+                indicator[7].SetActive(true);
                 return;
 
             default:
@@ -145,8 +145,8 @@ public class ARManager : MonoBehaviour
 
         if (indicatorHits.Count > 0)
         {
-            indicator.position = indicatorHits[0].pose.position;
-            indicator.rotation = indicatorHits[0].pose.rotation;
+            indicatorTr.position = indicatorHits[0].pose.position;
+            indicatorTr.rotation = indicatorHits[0].pose.rotation;
 
 
             //dustTransform.position = indicatorHits[0].pose.position;
@@ -198,14 +198,21 @@ public class ARManager : MonoBehaviour
     }
 
 
-    IEnumerator EggBreakParticlePlay()
+    IEnumerator TextActive()
     {
-        eggBreakParticleObject.SetActive(true);
+        descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~!";
 
         yield return new WaitForSeconds(5f);
 
+        descriptiveText.text = "또바기와 함께 즐거운 시간 보내세요 >.<";
 
+        yield return new WaitForSeconds(5f);
+
+        textActive = false;
+
+        descriptiveText.gameObject.SetActive(false);
     }
+
 
 }
 

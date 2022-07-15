@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,19 +20,19 @@ public class ItemDatabase : MonoBehaviour
         instance = this;
     }
 
-    // FieldItem ÇÁ¸®ÆÕÀ» ´ãÀ» º¯¼ö
+    // FieldItem í”„ë¦¬íŒ¹ì„ ë‹´ì„ ë³€ìˆ˜
     //public GameObject fieldItemPrefab;
-    // »ı¼ºÇÒ À§Ä¡¸¦ ´ãÀ» ¹è¿­
+    // ìƒì„±í•  ìœ„ì¹˜ë¥¼ ë‹´ì„ ë°°ì—´
     public Vector3[] pos;
 
     void Start()
     {
         for (int i = 0; i < 5; i++)
         {
-            // fieldItem ÇÁ¸®ÆÕÀ» ÀÌ¿ëÇÏ¿© º¹Á¦º» »ı¼º. Item ¿ÀºêÁ§Æ® ÃÊ±âÈ­
+            // fieldItem í”„ë¦¬íŒ¹ì„ ì´ìš©í•˜ì—¬ ë³µì œë³¸ ìƒì„±. Item ì˜¤ë¸Œì íŠ¸ ì´ˆê¸°í™”
             //GameObject item = Instantiate(fieldItemPrefab, pos[i], Quaternion.identity);
 
-            // º¹Á¦µÈ item¿¡¼­ SetItem¸Ş¼­µå¸¦ ½ÇÇàÇØ¼­, itemDBÀÇ °ª Áß ÇÏ³ª·Î ·£´ıÇÏ°Ô ¾ÆÀÌÅÛ µ¥ÀÌÅÍ ¼³Á¤
+            // ë³µì œëœ itemì—ì„œ SetItemë©”ì„œë“œë¥¼ ì‹¤í–‰í•´ì„œ, itemDBì˜ ê°’ ì¤‘ í•˜ë‚˜ë¡œ ëœë¤í•˜ê²Œ ì•„ì´í…œ ë°ì´í„° ì„¤ì •
             //item.GetComponent<FieldItem>().SetItem(itemDB[Random.Range(0, 3)]);
         }
     }
