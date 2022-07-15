@@ -32,6 +32,8 @@ public class TimerSlider : MonoBehaviour
     public float curTime = 20f;   // 슬라이더의 Value값을 조정해주기 위한 시간 변수
     float maxTime = 20f;          // 슬라이더 Value의 최대값
 
+    [Header("--- 게임 시작 ---")]
+    public TextMeshProUGUI gameStartText;
 
     [Header("--- 게임 중 ---")]
     public GameObject[] jellies;
@@ -51,6 +53,10 @@ public class TimerSlider : MonoBehaviour
     private Animator ani;          // 보물 상자의 애니메이션
     int treasureTouchCnt = 0;      // 보물 상자가 터치하면 열릴 수 있도록 터치 카운트를 세어줌
     public TextMeshProUGUI treasureMessage; // 보물 상자와 관련된 알림 메시지
+
+
+    public static string itemName; // 아이템 이름 반환
+
 
     void Start()
     {
@@ -78,7 +84,6 @@ public class TimerSlider : MonoBehaviour
         //    enemy.SetActive(true);
 
         foreach (GameObject jelly in jellies) jelly.SetActive(true);
-
 
     }
 
@@ -117,6 +122,9 @@ public class TimerSlider : MonoBehaviour
         //    enemy.SetActive(true);
 
         foreach (GameObject jelly in jellies) jelly.SetActive(true);
+
+
+        StartCoroutine(GameStartMessage());
     }
 
 
@@ -138,11 +146,11 @@ public class TimerSlider : MonoBehaviour
             fillImage.color = warningFillColor;
         }
 
-        if (curTime <= 0 && stopTimer == false)  // 게임오버
+        if (curTime <= 0 && stopTimer == false)  // 게임오버 상태
         {
             stopTimer = true;
             gameOverText.gameObject.SetActive(true);
-            gameObject.GetComponent<Shoot>().enabled = false;
+            gameObject.GetComponent<Shoot>().enabled = false; // 총알이 나오지 않게 하기 위해 Shoot 스크립트 비활성화
             timerSlider.gameObject.SetActive(false);
             //Destroy(timerSlider.gameObject);
 
@@ -164,10 +172,10 @@ public class TimerSlider : MonoBehaviour
 
     void Treasure()
     {
-        treasureBox.SetActive(true);
+        treasureBox.SetActive(true); // 보물상자 활성화
 
         treasureMessage.text = "두구두구두구";
-        treasureMessage.gameObject.SetActive(true);
+        treasureMessage.gameObject.SetActive(true); // 상자 열기 전 메시지 활성화
 
         StartCoroutine(ItemsActive());
 
@@ -213,6 +221,7 @@ public class TimerSlider : MonoBehaviour
         items.SetActive(true);
         int n = Random.Range(0, milkTextures.Length);
         items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[n]);
+        itemName = milkTextures[n].name;
 
         treasureMessage.text = "와~ 아이템을 얻었어요!";
 
@@ -222,6 +231,22 @@ public class TimerSlider : MonoBehaviour
         buttons.SetActive(true);
         treasureBox.transform.GetChild(3).gameObject.SetActive(false);
 
+    }
+
+
+    IEnumerator GameStartMessage()
+    {
+        gameStartText.gameObject.SetActive(true);
+        gameStartText.text = "화면을 터치하면\n나오는 공으로\n젤리를 없애보세요!";
+
+        yield return new WaitForSeconds(3f);
+        gameStartText.text = "3";
+        yield return new WaitForSeconds(1f);
+        gameStartText.text = "2";
+        yield return new WaitForSeconds(1f);
+        gameStartText.text = "1";
+        yield return new WaitForSeconds(1f);
+        gameStartText.gameObject.SetActive(false);
     }
 }
 

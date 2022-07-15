@@ -6,11 +6,11 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/01.Scenes/MainCopy_Game_Bomb.unity
-    guid: d837688668eaa1f4f842bccdf494d443
-  - enabled: 1
     path: Assets/01.Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
+  - enabled: 1
+    path: Assets/01.Scenes/MainCopy_Game_Bomb.unity
+    guid: d837688668eaa1f4f842bccdf494d443
   - enabled: 0
     path: 
     guid: 00000000000000000000000000000000
