@@ -55,7 +55,10 @@ public class TimerSlider : MonoBehaviour
     public TextMeshProUGUI treasureMessage; // 보물 상자와 관련된 알림 메시지
 
 
-    public static string itemName; // 아이템 이름 반환
+    public static bool getMilk = false; // 아이템 획득 여부
+    public static bool getFood = false; // 아이템 획득 여부
+    public static int milkNumber;      // 아이템 이름 반환
+    public static string foodName;      // 아이템 이름 반환
 
 
     void Start()
@@ -223,17 +226,47 @@ public class TimerSlider : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         treasureBox.transform.GetChild(4).gameObject.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
-        items.SetActive(true);
-        int n = Random.Range(0, milkTextures.Length);
-        items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[n]);
-        itemName = milkTextures[n].name;
+        int n = Random.Range(0, 1);
 
-        treasureMessage.text = "와~ 아이템을 얻었어요!";
+        if (n == 0)
+        {
+            getMilk = true;
 
-        yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(1.5f);
+            items.SetActive(true);
+            milkNumber = Random.Range(0, milkTextures.Length);
+            items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[milkNumber]);
+
+            treasureMessage.text = "와~ 아이템을 얻었어요!";
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        else if (n == 1)
+        {
+            
+            getFood = true;
+
+
+            // 수정해야함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+            yield return new WaitForSeconds(1.5f);
+            items.SetActive(true);
+            int milkN = Random.Range(0, milkTextures.Length);
+            items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[milkN]);
+            foodName = milkTextures[n].name;
+
+            treasureMessage.text = "와~ 아이템을 얻었어요!";
+
+            yield return new WaitForSeconds(1f);
+        }
+
+        else
+        {
+            treasureMessage.text = "또바기가 즐거웠대요~ >.<~";
+            yield return new WaitForSeconds(1f);
+        }
+
         treasureBox.transform.GetChild(4).gameObject.SetActive(false);
-
 
         yield return new WaitForSeconds(2f);
         treasureMessage.gameObject.SetActive(false);
