@@ -202,7 +202,7 @@ public class ARManager : MonoBehaviour
     {
         descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~!";
 
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(10f);
 
         descriptiveText.text = "또바기와 함께 즐거운 시간 보내세요 >.<";
 

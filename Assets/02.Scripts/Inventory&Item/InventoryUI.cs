@@ -15,8 +15,6 @@ public class InventoryUI : MonoBehaviour
     public Transform slotHolder;
 
 
-    public TextMeshProUGUI itemNameText;
-    public TextMeshProUGUI itemDesText;
 
 
 
@@ -50,12 +48,6 @@ public class InventoryUI : MonoBehaviour
 
     void Update()
     {
-        if (inventory.SlotCount == 0)
-        {
-            itemNameText.text = "아이템이 없어요!";
-            itemDesText.text = "또바기와 미니 게임을 해보세요.\n또바기에게 선물을 줄 수 있을지도?";
-        }
-
 
     }
 }

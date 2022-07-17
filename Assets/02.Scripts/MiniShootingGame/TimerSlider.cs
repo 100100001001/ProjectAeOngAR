@@ -101,7 +101,6 @@ public class TimerSlider : MonoBehaviour
         curTime = 20f;   // 슬라이더의 Value값을 조정해주기 위한 시간 변수
 
 
-        gameObject.GetComponent<Shoot>().enabled = true; // Shoot 스크립트 실행
 
         timerSlider.value = (float)curTime / (float)maxTime; // timerSlider의 값을 0~1 사이의 값으로 맞춰주기 위함
         fillImage.color = normalFillColor; // 슬라이더의 채움 색을 기본 색상으로 지정해줌
@@ -257,13 +256,13 @@ public class TimerSlider : MonoBehaviour
 
             treasureMessage.text = "와~ 아이템을 얻었어요!";
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
 
         else
         {
             treasureMessage.text = "또바기가 즐거웠대요~ >.<~";
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(3f);
         }
 
         treasureBox.transform.GetChild(4).gameObject.SetActive(false);
@@ -291,6 +290,8 @@ public class TimerSlider : MonoBehaviour
         yield return new WaitForSeconds(1f);
         gameStartText.gameObject.SetActive(false);
 
+
+        gameObject.GetComponent<Shoot>().enabled = true; // Shoot 스크립트 실행
         stopTimer = false; // 타이머 작동 상태. false면 타이머 실행
 
     }

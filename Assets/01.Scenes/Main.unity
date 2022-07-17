@@ -715,6 +715,7 @@ Transform:
   - {fileID: 7104504788327112696}
   - {fileID: 395187593}
   - {fileID: 1808793162}
+  - {fileID: 1286019107}
   m_Father: {fileID: 1449392484}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1935,7 +1936,7 @@ Transform:
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &129650066
 BoxCollider:
@@ -17347,7 +17348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &842612297
 BoxCollider:
@@ -18404,7 +18405,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1628705861}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangePanel, Assembly-CSharp
         m_MethodName: Right
         m_Mode: 1
@@ -18659,7 +18660,6 @@ GameObject:
   - component: {fileID: 1012271001}
   - component: {fileID: 1012271004}
   - component: {fileID: 1012271005}
-  - component: {fileID: 1012271006}
   m_Layer: 5
   m_Name: Canvas (Inventory)
   m_TagString: Untagged
@@ -18680,7 +18680,7 @@ RectTransform:
   m_Children:
   - {fileID: 1628705858}
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 16
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -18762,8 +18762,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   slots: []
   slotHolder: {fileID: 451635757}
-  itemNameText: {fileID: 1734483128}
-  itemDesText: {fileID: 545275416}
 --- !u!114 &1012271005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18777,19 +18775,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
---- !u!114 &1012271006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1012270999}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 41a901a92654aa84da4395fd201f8ffa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemNameText: {fileID: 1734483128}
 --- !u!1 &1029078582
 GameObject:
   m_ObjectHideFlags: 0
@@ -20683,7 +20668,7 @@ RectTransform:
   m_Children:
   - {fileID: 1101710558}
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -21693,15 +21678,15 @@ RectTransform:
   m_GameObject: {fileID: 1286019106}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_LocalScale: {x: 0.0014285714, y: 0.0014285714, z: 0.0014285714}
   m_Children:
   - {fileID: 1450195954}
-  m_Father: {fileID: 1449392484}
-  m_RootOrder: 9
+  m_Father: {fileID: 31280443}
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 74, y: 79.200005}
+  m_AnchoredPosition: {x: 0.52856445, y: 0.56570435}
   m_SizeDelta: {x: 10, y: 10}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1286019108
@@ -22995,7 +22980,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 15
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!65 &1429516540
 BoxCollider:
@@ -24596,7 +24581,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1534989203
 BoxCollider:
@@ -26530,8 +26515,8 @@ GameObject:
   - component: {fileID: 1628705858}
   - component: {fileID: 1628705860}
   - component: {fileID: 1628705859}
-  - component: {fileID: 1628705861}
   - component: {fileID: 1628705862}
+  - component: {fileID: 1628705861}
   m_Layer: 5
   m_Name: Inventory UI
   m_TagString: Untagged
@@ -26611,14 +26596,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628705857}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b782f9c15a5c8b42b277d8ed1581a61, type: 3}
+  m_Script: {fileID: 11500000, guid: b574faff00c45e341b4112eeeb882ba0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Arrows:
   - {fileID: 1869290658}
   - {fileID: 981677386}
-  playerPanels:
-  - {fileID: 0}
+  itemParents: {fileID: 2043356266}
+  itemNameText: {fileID: 1734483128}
+  itemDesText: {fileID: 545275416}
 --- !u!114 &1628705862
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27306,7 +27292,7 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 987b52cab3610444ea1288dc7186c0ea,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 987b52cab3610444ea1288dc7186c0ea,
         type: 3}
@@ -28651,7 +28637,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1449392484}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &1772134251
 BoxCollider:
@@ -30280,7 +30266,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1628705861}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ChangePanel, Assembly-CSharp
         m_MethodName: Left
         m_Mode: 1
@@ -35374,6 +35360,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5445652339204409067, guid: 69fa37d5aba436746b155f8c50321e76,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445652339204409067, guid: 69fa37d5aba436746b155f8c50321e76,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445652339204409067, guid: 69fa37d5aba436746b155f8c50321e76,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5445652339204409067, guid: 69fa37d5aba436746b155f8c50321e76,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.49200004
       objectReference: {fileID: 0}
@@ -36283,6 +36284,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223147523695435956, guid: f7165d795323156429d22cd2e90e95b4,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223147523695435956, guid: f7165d795323156429d22cd2e90e95b4,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 2223147523695435956, guid: f7165d795323156429d22cd2e90e95b4,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.09
       objectReference: {fileID: 0}
     - target: {fileID: 2223147523695435956, guid: f7165d795323156429d22cd2e90e95b4,
         type: 3}
