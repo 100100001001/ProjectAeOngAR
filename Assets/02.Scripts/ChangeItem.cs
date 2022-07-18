@@ -12,6 +12,7 @@ public class ChangeItem : MonoBehaviour
 
     List<GameObject> itemlst = new List<GameObject>();
 
+    int itemlstCnt = 0;
 
 
 
@@ -21,7 +22,6 @@ public class ChangeItem : MonoBehaviour
 
     private void Update()
     {
-        //itemlst.Add(itemParents.transform.///gameObject);
 
 
         if (itemlst.Count == 0)

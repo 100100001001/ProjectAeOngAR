@@ -68,7 +68,7 @@ public class Inventory : MonoBehaviour
     void Start()
     {
         // SlotCount를 0으로 초기화
-        SlotCount = 0;
+        SlotCount = 4;
     }
 
 
