@@ -20,16 +20,18 @@ public class UseItem : MonoBehaviour
         {
             curTime -= Time.deltaTime;
             slider.value = (float)curTime / (float)maxTime; // 슬라이더의 Value를 계산
+            gameObject.GetComponent<Button>().interactable = false;
         }
 
         if (curTime <= 0 && stopTimer == false)  
         {
             stopTimer = true;
             curTime = 10f;
+            gameObject.GetComponent<Button>().interactable = true;
         }
     }
 
-    void Use()
+    public void Use()
     {
         StatusBar.instance.HappyValue(true, 20);
         StatusBar.instance.HungerValue(true, 20);
