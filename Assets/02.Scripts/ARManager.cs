@@ -77,7 +77,7 @@ public class ARManager : MonoBehaviour
         indicator[7].SetActive(false);
 
 
-        descriptiveText.text = "두 손을 터치해서 또바기를 불러오세요!";
+        descriptiveText.text = "두 손가락으로 동시에 터치해서 또바기를 불러오세요!";
         descriptiveText.gameObject.SetActive(true);
 
 
@@ -99,7 +99,7 @@ public class ARManager : MonoBehaviour
             PlaceIndicator();
 
             if (textActive) StartCoroutine(TextActive());
-
+            textActive = false;
         }
 
         switch (Status.instance.evo1)

@@ -90,12 +90,18 @@ public class StatusBar : MonoBehaviour
 
     void Start()
     {
+        SaveValue();
+        GetValue();
+
         HandleStatusBar(); // 초기화
         //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
     }
 
     void Update()
     {
+        SaveValue();
+        GetValue();
+
         HandleStatusBar();
 
         // Debug.Log("hungerBar "+hungerBar.value);
@@ -117,7 +123,6 @@ public class StatusBar : MonoBehaviour
         activeBar.value = (float)curActive / (float)maxActive;
         energyBar.value = (float)curEnergy / (float)maxEnergy;
         happyBar.value = (float)curHappy / (float)maxHappy;
-        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
     }
 
 
@@ -136,6 +141,7 @@ public class StatusBar : MonoBehaviour
 
         if (curHunger >= 100) curHunger = 100;
         if (curHunger <= 0) curHunger = 0;
+
     }
     public void CleanValue(bool val, int n)
     {
@@ -206,6 +212,25 @@ public class StatusBar : MonoBehaviour
     #endregion
 
 
+    void SaveValue()
+    {
+        PlayerPrefs.SetFloat("curHunger", curHunger);
+        PlayerPrefs.SetFloat("curClean", curClean);
+        PlayerPrefs.SetFloat("curSmart", curSmart);
+        PlayerPrefs.SetFloat("curActive", curActive);
+        PlayerPrefs.SetFloat("curEnergy", curEnergy);
+        PlayerPrefs.SetFloat("curHappy", curHappy);
+    }
+
+    void GetValue()
+    {
+        curHunger = PlayerPrefs.GetFloat("curHunger");
+        curClean = PlayerPrefs.GetFloat("curClean");
+        curSmart = PlayerPrefs.GetFloat("curSmart");
+        curActive = PlayerPrefs.GetFloat("curActive");
+        curEnergy = PlayerPrefs.GetFloat("curEnergy");
+        curHappy = PlayerPrefs.GetFloat("curHappy");
+    }
 
 
 }

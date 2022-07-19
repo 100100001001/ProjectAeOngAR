@@ -13,14 +13,14 @@ public class InstantiateItems : MonoBehaviour
 
     void Update()
     {
-        if (TimerSlider.getMilk)
-        {
-            milk.GetComponent<Renderer>().material.SetTexture("_MainTex", milkTextures[TimerSlider.milkNumber]);
+        //if (TimerSlider.getMilk)
+        //{
+        //    milk.GetComponent<Renderer>().material.SetTexture("_MainTex", milkTextures[TimerSlider.milkNumber]);
 
-            TimerSlider.getMilk = false;
+        //    TimerSlider.getMilk = false;
 
-            Instantiate(milk, Vector3.zero, Quaternion.identity).transform.parent = items.transform;
+        //    Instantiate(milk, Vector3.zero, Quaternion.identity).transform.parent = items.transform;
 
-        }
+        //}
     }
 }

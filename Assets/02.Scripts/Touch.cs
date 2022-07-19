@@ -95,32 +95,11 @@ public class Touch : MonoBehaviour
 
                 else if (Input.GetTouch(0).phase == TouchPhase.Moved)
                 {
-                    //tra = egg.transform.position;
-                    //egg.transform.Translate(Input.GetTouch(0).deltaPosition);
-                    animator[0].SetBool("isRoll", true);
-
-
-
+                    StartCoroutine(ThinkingBubble("many_touches"));
+                    StatusBar.instance.HappyValue(false, 5);
                 }
-
-                else if (Input.GetTouch(0).phase == TouchPhase.Ended)
-                {
-                    animator[0].SetBool("isRoll", false);
-                    //egg.transform.Translate(tra);
-
-                }
-
-
 
             }
-
-            
-
-
-
-
-
-
 
             //if (Input.GetTouch(i).phase == TouchPhase.Moved)
             //{
@@ -248,6 +227,8 @@ public class Touch : MonoBehaviour
 
         void TouchResponse()
         {
+            if (Status.instance.evo1 == Status.Evolution1.EGG) StartCoroutine(RecBubble("eggHappy"));
+
 
             if (limitTouchCnt < 30)
             {
@@ -349,6 +330,16 @@ public class Touch : MonoBehaviour
                 bubbleText = thinkingText[Random.Range(0, 4)];
 
             }
+
+            else if (st == "eggHappy")
+            {
+
+                string[] thinkingText = new string[2];
+                thinkingText[0] = "♡";
+                thinkingText[0] = "♥";
+
+            }
+
 
 
             bubble.SetActive(true);

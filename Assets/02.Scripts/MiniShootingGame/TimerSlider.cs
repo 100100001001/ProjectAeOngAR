@@ -51,14 +51,16 @@ public class TimerSlider : MonoBehaviour
     public Texture[] milkTextures; // 우유 아이템의 색상을 지정해주기 위해 텍스처들을 받아줌
 
     private Animator ani;          // 보물 상자의 애니메이션
-    int treasureTouchCnt = 0;      // 보물 상자가 터치하면 열릴 수 있도록 터치 카운트를 세어줌
+    //int treasureTouchCnt = 0;      // 보물 상자가 터치하면 열릴 수 있도록 터치 카운트를 세어줌
     public TextMeshProUGUI treasureMessage; // 보물 상자와 관련된 알림 메시지
 
 
-    public static bool getMilk = false; // 아이템 획득 여부
-    public static bool getFood = false; // 아이템 획득 여부
-    public static int milkNumber;      // 아이템 이름 반환
-    public static string foodName;      // 아이템 이름 반환
+    //public static bool getMilk = false; // 아이템 획득 여부
+    //public static bool getFood = false; // 아이템 획득 여부
+    //public static int milkNumber;      // 아이템 이름 반환
+    //public static string foodName;      // 아이템 이름 반환
+
+    public Sprite[] itemSprites; // 보상 아이템
 
 
     void Start()
@@ -223,47 +225,65 @@ public class TimerSlider : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ani.SetTrigger("treasure");
         yield return new WaitForSeconds(0.5f);
-        treasureBox.transform.GetChild(4).gameObject.SetActive(true);
+        treasureBox.transform.GetChild(4).gameObject.SetActive(true); // 파티클 오브젝트 활성화
 
+        // 랜덤 아이템 획득
         int n = Random.Range(0, 1);
 
         if (n == 0)
         {
-            getMilk = true;
+            int itemNum = Random.Range(0, itemSprites.Length);
+            items.GetComponent<SpriteRenderer>().sprite = itemSprites[itemNum];
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.5f);
             items.SetActive(true);
-            milkNumber = Random.Range(0, milkTextures.Length);
-            items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[milkNumber]);
 
-            treasureMessage.text = "와~ 아이템을 얻었어요!";
 
-            yield return new WaitForSeconds(1f);
+            switch (itemNum)
+            {
+                case 0:
+                    StatusBar.instance.HappyValue(true, 10);
+                    break;
+                case 1:
+                    StatusBar.instance.CleanValue(true, 10);
+                    break;
+                case 2:
+                    StatusBar.instance.SmartValue(true, 10);
+                    break;
+                case 3:
+                    StatusBar.instance.EnergyValue(true, 10);
+                    break;
+                case 4:
+                    StatusBar.instance.HungerValue(true, 10);
+                    break;
+                default:
+                    break;
+            }
         }
 
-        else if (n == 1)
-        {
-            
-            getFood = true;
 
+        //if (n == 0)
+        //{
+        //    getMilk = true;
 
-            // 수정해야함~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-            yield return new WaitForSeconds(1.5f);
-            items.SetActive(true);
-            int milkN = Random.Range(0, milkTextures.Length);
-            items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[milkN]);
-            foodName = milkTextures[n].name;
+        //    yield return new WaitForSeconds(1.5f);
+        //    items.SetActive(true);
+        //    milkNumber = Random.Range(0, milkTextures.Length);
+        //    items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[milkNumber]);
 
-            treasureMessage.text = "와~ 아이템을 얻었어요!";
+        //    treasureMessage.text = "와~ 아이템을 얻었어요!";
 
-            yield return new WaitForSeconds(3f);
-        }
+        //    yield return new WaitForSeconds(1f);
+        //}
 
         else
         {
             treasureMessage.text = "또바기가 즐거웠대요~ >.<~";
             yield return new WaitForSeconds(3f);
         }
+
+
+
 
         treasureBox.transform.GetChild(4).gameObject.SetActive(false);
 
