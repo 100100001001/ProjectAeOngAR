@@ -86,7 +86,7 @@ public class Touch : MonoBehaviour
                     TouchResponse();
 
 
-                    if (time > 600) // 10분이 지나면 touchCnt 초기화
+                    if (time > 300) // 5분이 지나면 touchCnt 초기화
                     {
                         limitTouchCnt = 0;
                         time = 0;
@@ -100,35 +100,6 @@ public class Touch : MonoBehaviour
                 }
 
             }
-
-            //if (Input.GetTouch(i).phase == TouchPhase.Moved)
-            //{
-            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
-            //    {
-            //        animator[0].SetBool("isRoll", true);
-
-
-            //        egg.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-            //        baby.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-            //        child.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-            //        youth.transform.Translate(Input.GetTouch(i).deltaPosition * Time.deltaTime * 2f);
-            //    }
-
-
-
-            //}
-
-            //else if (Input.GetTouch(i).phase == TouchPhase.Ended)
-            //{
-            //    if (Status.instance.evo1 == Status.Evolution1.EGG)
-            //    {
-            //        animator[0].SetBool("isRoll", false);
-            //    }
-
-            //}
-
-
-
 
         }
 
@@ -220,22 +191,15 @@ public class Touch : MonoBehaviour
         //}
 
 
-        void ChangeColor()
-        {
-            transform.GetChild(2).GetComponent<MeshRenderer>().materials.GetValue(1);
-        }
-
         void TouchResponse()
         {
             if (Status.instance.evo1 == Status.Evolution1.EGG) StartCoroutine(RecBubble("eggHappy"));
 
-
             if (limitTouchCnt < 30)
             {
-                StatusBar.instance.HappyValue(true, 2);
+                StatusBar.instance.HappyValue(true, 5);
                 StartCoroutine(RecBubble("happy"));
                 PlayTouchParticle();
-
             }
 
             else if (limitTouchCnt < 40)
@@ -246,7 +210,7 @@ public class Touch : MonoBehaviour
             else if (limitTouchCnt >= 40)
             {
                 StartCoroutine(ThinkingBubble("angry"));
-                StatusBar.instance.HappyValue(false, 2);
+                StatusBar.instance.HappyValue(false, 5);
             }
         }
 
@@ -267,12 +231,14 @@ public class Touch : MonoBehaviour
         {
             if (st == "angry")
             { 
-                string[] thinkingText = new string[3];
+                string[] thinkingText = new string[5];
                 thinkingText[0] = "그만 하라고 했는데?";
                 thinkingText[1] = "왜 괴롭히지?";
                 thinkingText[2] = "뭐야 그만하지;";
+                thinkingText[3] = "그만해라";
+                thinkingText[4] = "그만하라고";
 
-                bubbleText = thinkingText[Random.Range(0, 3)];
+                bubbleText = thinkingText[Random.Range(0, 5)];
             
             }
 
@@ -310,24 +276,28 @@ public class Touch : MonoBehaviour
             if (st == "stop")
             {
 
-                string[] thinkingText = new string[3];
+                string[] thinkingText = new string[5];
                 thinkingText[0] = "이제 괜찮아";
                 thinkingText[1] = "...";
                 thinkingText[2] = "그만~";
+                thinkingText[3] = "이제 그만해줘~!";
+                thinkingText[4] = "이제 하지마~";
 
-                bubbleText = thinkingText[Random.Range(0, 3)];
+                bubbleText = thinkingText[Random.Range(0, 5)];
             }
 
             else if (st == "happy")
             {
 
-                string[] thinkingText = new string[4];
+                string[] thinkingText = new string[6];
                 thinkingText[0] = "히히\n좋아";
                 thinkingText[1] = "기분\n좋아!!!";
                 thinkingText[2] = "더 쓰다듬어줘!";
                 thinkingText[3] = "찰떡같이\n쓰다듬네";
+                thinkingText[4] = "꺄악 신나!!!!";
+                thinkingText[5] = "행복해~!!";
 
-                bubbleText = thinkingText[Random.Range(0, 4)];
+                bubbleText = thinkingText[Random.Range(0, 6)];
 
             }
 

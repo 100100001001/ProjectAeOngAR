@@ -90,19 +90,27 @@ public class StatusBar : MonoBehaviour
 
     void Start()
     {
-        SaveValue();
-        GetValue();
+        if (ByeButton.bye)
+        {
+            InitValue();
+            HandleStatusBar();
+            SaveValue();
+
+            return;
+        }
+
+
+        if (PlayerPrefs.HasKey("curHunger")) GetValue();
+        else InitValue();
 
         HandleStatusBar(); // 초기화
-        //statusValue.bar.value = (float)statusValue.curValue / (float)statusValue.maxValue; // 초기화
+        SaveValue();
     }
 
     void Update()
     {
-        SaveValue();
-        GetValue();
-
         HandleStatusBar();
+        SaveValue();
 
         // Debug.Log("hungerBar "+hungerBar.value);
         // Debug.Log("cleanBar "+cleanBar.value);
@@ -232,5 +240,26 @@ public class StatusBar : MonoBehaviour
         curHappy = PlayerPrefs.GetFloat("curHappy");
     }
 
+    void InitValue()
+    {
+        maxHunger = 100;
+        curHunger = 50;
+
+        maxClean = 100;
+        curClean = 50;
+
+        maxSmart = 100;
+        curSmart = 0;
+
+        maxActive = 100;
+        curActive = 0;
+
+        maxEnergy = 100;
+        curEnergy = 50;
+
+        maxHappy = 100;
+        curHappy = 0;
+
+    }
 
 }

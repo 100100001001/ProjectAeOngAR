@@ -10,33 +10,20 @@ using TMPro;
 
 public class ARManager : MonoBehaviour
 {
-    public static ARManager instance; // 인스턴스화
+    public static ARManager instance;   // ARManager 인스턴스화
 
-    public ARRaycastManager arRaycater;
-
-    // 바닥에 표시
-    public GameObject[] indicator;
-    private Transform indicatorTr;
-    List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>();
-
-
-
-    //// 시간이 지남에 따라 생성되는 먼지
-    //public GameObject[] dust;
-    //private Transform dustTransform;
-
-    //private float dustXMin = -0.001f;
-    //private float dustXMax = 0.001f;
-
-    //private float dustYMin = -0.002f;
-    //private float dustYMax = 0.002f;
-
-    //private float dustScaleMin = 0.005f;
-    //private float dustScaleMax = 0.01f;
-
-    //private int dustLen = 2;
+    public ARRaycastManager arRaycater; // 평면을 인식하기 위한 ARRaycastManager 변수
 
     
+    public GameObject[] indicator; // 평면에 표시될 오브젝트
+    // Egg, Baby, Child, Youth, Ground(동산), EggBreak_Top, EggBreak_Bottom, EggBreak 순으로 들어가있다.
+
+    private Transform indicatorTr; // 사용자의 손 터치로 평면에 표시된 오브젝트 위치가 변경되기 때문에 transform을 변수로 받아줌
+    List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>(); // AR raycast에서 쏜 광선
+
+
+
+    // 테스트 //
     public GameObject ttest;
     public TextMeshProUGUI t;
 
@@ -52,15 +39,17 @@ public class ARManager : MonoBehaviour
 
 
     public TextMeshProUGUI descriptiveText; // 게임 시작할 때 나올 설명 텍스트
-    bool textActive = true; // 텍스트 활성화여부;
+    bool textActive = true;                 // 텍스트 활성화 여부. 게임 시작할 때만 나와야하기 때문에 true
+
 
     void Start()
     {
-        indicator[4].SetActive(true);
-        indicatorTr = indicator[4].transform;
-        PlaceIndicator();
+        //indicator[4].SetActive(true);
+        //indicatorTr = indicator[4].transform;
+        //PlaceIndicator();
 
 
+        // 캐릭터의 색상을 지정해주기 위해 각각의 MeshRenderer, Renderer컴포넌트를 가져온다
         eggMR = indicator[0].GetComponent<MeshRenderer>();
         babyMR = indicator[1].transform.GetChild(1).GetComponent<Renderer>();
         childMR = indicator[2].transform.GetChild(1).GetComponent<Renderer>();
@@ -68,9 +57,7 @@ public class ARManager : MonoBehaviour
         eggbreakUpMR = indicator[5].GetComponent<MeshRenderer>();
         eggbreakBotMR = indicator[6].GetComponent<MeshRenderer>();
 
-        indicator[0].SetActive(true);
-
-
+        indicator[0].SetActive(false);
         indicator[1].SetActive(false);
         indicator[2].SetActive(false);
         indicator[3].SetActive(false);
@@ -105,23 +92,19 @@ public class ARManager : MonoBehaviour
         switch (Status.instance.evo1)
         {
             case Status.Evolution1.EGG:
-
                 indicator[0].SetActive(true);
                 return;
+
             case Status.Evolution1.BABY:
-
-
                 indicator[7].SetActive(false);
-
                 indicator[1].SetActive(true);
-
                 return;
+
             case Status.Evolution1.CHILD:
-
-
                 indicator[1].SetActive(false);
                 indicator[2].SetActive(true);
                 return;
+
             case Status.Evolution1.YOUTH:
                 indicator[2].SetActive(false);
                 indicator[3].SetActive(true);
@@ -139,45 +122,26 @@ public class ARManager : MonoBehaviour
     }
 
 
+    // 바닥 평면을 감지하는 메서드
     void PlaceIndicator()
     {
+        // 화면 중앙에 레이를 쏴서 평면을 찾는다
+        // TrackableType.Planes : 광선이 평면 유형과 교차하는 경우 광선이 맞은 것으로 간주
         arRaycater.Raycast(new Vector2(Screen.width * 0.5f, Screen.height * 0.5f), indicatorHits, TrackableType.Planes);
 
+        // 감지가 됐다면 indicatorTr의 위치와 회전 정보를 indicatorHits의 pose로 가져온다
         if (indicatorHits.Count > 0)
         {
             indicatorTr.position = indicatorHits[0].pose.position;
             indicatorTr.rotation = indicatorHits[0].pose.rotation;
-
-
-            //dustTransform.position = indicatorHits[0].pose.position;
-            //dustTransform.rotation = indicatorHits[0].pose.rotation;
-
-
-            //for (int i = 0; i < UnityEngine.Random.Range(0, dust.Length); i++)
-            //{
-            //    dustTransform = dust[UnityEngine.Random.Range(0, dust.Length)].transform;
-
-            //    float dustXPos = UnityEngine.Random.Range(dustXMin, dustXMax);
-            //    float dustYPos = UnityEngine.Random.Range(dustYMin, dustYMax);
-            //    float dustScale = UnityEngine.Random.Range(dustScaleMin, dustScaleMax);
-
-            //    dustTransform.transform.localScale = new Vector3(dustScale, dustScale, dustScale);
-
-            //    dustTransform.position = new Vector3(indicatorHits[0].pose.position.x * dustXPos, indicatorHits[0].pose.position.y * dustYPos, indicatorHits[0].pose.position.z);
-            //    dustTransform.rotation = indicatorHits[0].pose.rotation;
-
-            //}
-
-
-            // test!!!!!!!!!!!!!
         }
-
     }
 
 
+    // 캐릭터의 색상을 임의 지정하는 메서드
     void ChangeColor()
     {
-
+        // 8가지 색상 중 임의의 색을 랜덤으로 가져오기 위해 0~8사이에서 랜덤한 숫자를 가져온다.
         int n = UnityEngine.Random.Range(0, 8);
 
         if (n == 0) color = new Color32(233, 200, 218, 255);      // 연두색 (원래 색상)
@@ -189,6 +153,8 @@ public class ARManager : MonoBehaviour
         else if (n == 6) color = new Color32(218, 221, 255, 255); // 남색
         else if (n == 7) color = new Color32(218, 251, 255, 255); // 하늘색
 
+
+        // 랜덤한 색상을 각각 적용시킨다.
         eggMR.material.SetColor("_Color", color);
         babyMR.material.SetColor("_Color", color);
         childMR.material.SetColor("_Color", color);
@@ -200,15 +166,13 @@ public class ARManager : MonoBehaviour
 
     IEnumerator TextActive()
     {
-        descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~!";
+        textActive = false;
 
-        yield return new WaitForSeconds(10f);
+        descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~!";
+        yield return new WaitForSeconds(7f);
 
         descriptiveText.text = "또바기와 함께 즐거운 시간 보내세요 >.<";
-
         yield return new WaitForSeconds(5f);
-
-        textActive = false;
 
         descriptiveText.gameObject.SetActive(false);
     }

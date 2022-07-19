@@ -64,15 +64,12 @@ public class PlayerMovement : MonoBehaviour
         {
             isRollAni = true;
             StatusBar.instance.ActiveValue(true, 0.1f);
-            Debug.Log(StatusBar.instance.curActive);
         }
-
 
         foreach (Animator a in animators)
         {
             a.SetBool("isRoll", isRollAni);
         }
-        Debug.Log(rigid.velocity);
 
 
     }

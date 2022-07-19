@@ -19,6 +19,30 @@ public class InputName : MonoBehaviour
 
     void Start()
     {
+        if (ByeButton.bye)
+        {
+            RandomName();
+            return;
+        }
+
+
+        if (PlayerPrefs.HasKey("Name"))
+        {
+            playerName = PlayerPrefs.GetString("Name");
+
+            tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
+            tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
+        }
+        else
+        {
+            RandomName();
+        }
+
+
+    }
+
+    public void RandomName()
+    {
         //// 기본 이름 설정
 
         // enter(\n)를 기준으로 잘라서 배열 생성 
@@ -37,7 +61,10 @@ public class InputName : MonoBehaviour
         tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
         //Debug.Log(playerName);
         //Debug.Log(names[1608]);
+
+        PlayerPrefs.SetString("Name", playerName);
     }
+
 
     // 입력 버튼을 눌렀을 때
     public void InputButtonClick()
@@ -51,6 +78,8 @@ public class InputName : MonoBehaviour
             playerName = tmpText;
             tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
             tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
+
+            PlayerPrefs.SetString("Name", playerName);
         }
 
     }

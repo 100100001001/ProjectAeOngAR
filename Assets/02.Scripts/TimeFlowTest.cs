@@ -13,7 +13,7 @@ public class TimeFlowTest : MonoBehaviour
     {
         time += Time.deltaTime;     // 마지막 프레임에서 현재 프레임까지의 초를 더하여 시간의 흐름 체크
 
-        if (time > 5)               // 상태 변화 주기
+        if (time > 10)               // 상태 변화 주기
         {
 
             StatusDecrease(5);

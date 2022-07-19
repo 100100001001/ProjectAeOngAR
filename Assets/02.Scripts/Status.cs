@@ -44,7 +44,7 @@ public class Status : MonoBehaviour
 
     public enum Evolution1 { EGG, BABY, CHILD, YOUTH, BREAKEGG } // 캐릭터 성장
     public Evolution1 evo1;                                      // 캐릭터 상태를 담을 변수
-    
+
     int saveEvo1; // 캐릭터 성장 상태를 저장하는 변수
 
 
@@ -63,15 +63,22 @@ public class Status : MonoBehaviour
 
     private void Start()
     {
+        if (ByeButton.bye)
+        {
+            evo1 = Evolution1.EGG;
+            return;
+        }
+
+
         if (PlayerPrefs.HasKey("E"))
         {
             saveEvo1 = PlayerPrefs.GetInt("E");
 
             if (saveEvo1 == (int)Evolution1.EGG) evo1 = Evolution1.EGG;
             else if (saveEvo1 == (int)Evolution1.BABY) evo1 = Evolution1.BABY;
-            else if(saveEvo1 == (int)Evolution1.CHILD) evo1 = Evolution1.CHILD;
-            else if(saveEvo1 == (int)Evolution1.YOUTH) evo1 = Evolution1.YOUTH;
-            else if(saveEvo1 == (int)Evolution1.BREAKEGG) evo1 = Evolution1.BREAKEGG;
+            else if (saveEvo1 == (int)Evolution1.CHILD) evo1 = Evolution1.CHILD;
+            else if (saveEvo1 == (int)Evolution1.YOUTH) evo1 = Evolution1.YOUTH;
+            else if (saveEvo1 == (int)Evolution1.BREAKEGG) evo1 = Evolution1.BREAKEGG;
         }
 
         // 캐릭터의 처음 상태를 EGG로 지정
@@ -89,7 +96,7 @@ public class Status : MonoBehaviour
     {
         Evo(evo1);
 
-        evoTestText.text = "" + evo1;
+        evoTestText.text = "" + evo1 + "/" + saveEvo1;
 
 
         saveEvo1 = (int)evo1;
@@ -108,9 +115,19 @@ public class Status : MonoBehaviour
         {
             case Evolution1.EGG:
 
-                if (cntTouch1 >= 5)
-                    evo1 = Evolution1.BREAKEGG;
-                    InitCnt();
+                if (cntTouch1 >= 2)
+                    if (cntSmart1 >= 1 || cntClean1 >= 1)
+                    {
+                        evo1 = Evolution1.BREAKEGG;
+                        InitCnt();
+
+                    }
+
+                    else if (cntTouch1 >= 20)
+                    {
+                        evo1 = Evolution1.BREAKEGG;
+                        InitCnt();
+                    }
 
                 break;
 

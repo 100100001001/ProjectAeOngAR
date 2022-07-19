@@ -11,9 +11,8 @@ public class UseItem : MonoBehaviour
     float curTime = 10f; // 슬라이더의 Value값을 조정해주기 위한 시간 변수
     float maxTime = 10f; // 슬라이더 Value의 최대값
 
-    bool stopTimer = false;
-   
-    
+    bool stopTimer = true;
+
     void Update()
     {
         if (stopTimer == false)
