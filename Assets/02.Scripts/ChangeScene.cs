@@ -3,10 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class IntroSceneManager : MonoBehaviour
+public class ChangeScene : MonoBehaviour
 {
     public void GoMain()
     {
         SceneManager.LoadScene("Main");
+    }
+
+    public void GoFindItem()
+    {
+        SceneManager.LoadScene("AIInference");
     }
 }
