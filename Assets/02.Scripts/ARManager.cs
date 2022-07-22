@@ -14,7 +14,7 @@ public class ARManager : MonoBehaviour
 
     public ARRaycastManager arRaycater; // 평면을 인식하기 위한 ARRaycastManager 변수
 
-    
+
     public GameObject[] indicator; // 평면에 표시될 오브젝트
     // Egg, Baby, Child, Youth, Ground(동산), EggBreak_Top, EggBreak_Bottom, EggBreak 순으로 들어가있다.
 
@@ -26,6 +26,7 @@ public class ARManager : MonoBehaviour
     // 테스트 //
     public GameObject ttest;
     public TextMeshProUGUI t;
+    public TextMeshProUGUI colorTest;
 
 
     // 랜덤 색상을 적용하기 위해 캐릭터 각각의 MeshRenderer, Renderer 변수 만듦
@@ -40,6 +41,19 @@ public class ARManager : MonoBehaviour
 
     public TextMeshProUGUI descriptiveText; // 게임 시작할 때 나올 설명 텍스트
     bool textActive = true;                 // 텍스트 활성화 여부. 게임 시작할 때만 나와야하기 때문에 true
+
+
+    string[] colorNames = new string[8] { "연두색", "노란색", "주황색", "빨간색", "분홍색", "보라색", "남색", "하늘색" };
+    Color color1 = new Color32(233, 200, 218, 255); // 연두색 (원래 색상)
+    Color color2 = new Color32(255, 255, 218, 255); // 노란색
+    Color color3 = new Color32(255, 235, 218, 255); // 주황색
+    Color color4 = new Color32(255, 218, 225, 255); // 빨간색
+    Color color5 = new Color32(255, 218, 255, 255); // 분홍색
+    Color color6 = new Color32(239, 218, 255, 255); // 보라색
+    Color color7 = new Color32(218, 221, 255, 255); // 남색
+    Color color8 = new Color32(218, 251, 255, 255); // 하늘색
+
+
 
 
     void Start()
@@ -68,7 +82,9 @@ public class ARManager : MonoBehaviour
         descriptiveText.gameObject.SetActive(true);
 
 
+
         ChangeColor();
+
 
         //dustTransform = dust[0].transform;
 
@@ -88,6 +104,12 @@ public class ARManager : MonoBehaviour
             if (textActive) StartCoroutine(TextActive());
             textActive = false;
         }
+
+        if (GetInferenceFromModel.result >= 0 && UnityEngine.Random.Range(0, 1) == 0)
+        {
+            AIColorChange();
+        }
+
 
         switch (Status.instance.evo1)
         {
@@ -134,6 +156,7 @@ public class ARManager : MonoBehaviour
         {
             indicatorTr.position = indicatorHits[0].pose.position;
             indicatorTr.rotation = indicatorHits[0].pose.rotation;
+
         }
     }
 
@@ -141,20 +164,12 @@ public class ARManager : MonoBehaviour
     // 캐릭터의 색상을 임의 지정하는 메서드
     void ChangeColor()
     {
-        // 8가지 색상 중 임의의 색을 랜덤으로 가져오기 위해 0~8사이에서 랜덤한 숫자를 가져온다.
-        int n = UnityEngine.Random.Range(0, 8);
+        // 저장된 색상이 있다면 저장된 색상을 가져옴
+        if (PlayerPrefs.HasKey("Color")) Colors(PlayerPrefs.GetString("Color"));
+        // 저장된 색상이 없다면 랜덤한 색상을 가져옴
+        else Colors(colorNames[UnityEngine.Random.Range(0, 8)]);
 
-        if (n == 0) color = new Color32(233, 200, 218, 255);      // 연두색 (원래 색상)
-        else if (n == 1) color = new Color32(255, 255, 218, 255); // 노란색
-        else if (n == 2) color = new Color32(255, 235, 218, 255); // 주황색
-        else if (n == 3) color = new Color32(255, 218, 225, 255); // 빨간색
-        else if (n == 4) color = new Color32(255, 218, 255, 255); // 분홍색
-        else if (n == 5) color = new Color32(239, 218, 255, 255); // 보라색
-        else if (n == 6) color = new Color32(218, 221, 255, 255); // 남색
-        else if (n == 7) color = new Color32(218, 251, 255, 255); // 하늘색
-
-
-        // 랜덤한 색상을 각각 적용시킨다.
+        // 색상 적용
         eggMR.material.SetColor("_Color", color);
         babyMR.material.SetColor("_Color", color);
         childMR.material.SetColor("_Color", color);
@@ -162,7 +177,6 @@ public class ARManager : MonoBehaviour
         eggbreakUpMR.material.SetColor("_Color", color);
         eggbreakBotMR.material.SetColor("_Color", color);
     }
-
 
     IEnumerator TextActive()
     {
@@ -175,6 +189,66 @@ public class ARManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         descriptiveText.gameObject.SetActive(false);
+    }
+
+    void Colors(string name)
+    {
+        // 색상 이름 저장
+        PlayerPrefs.SetString("Color", name);
+
+        switch (name)
+        {
+            case "연두색":
+                color = color1;
+                break;
+            case "노란색":
+                color = color2;
+                break;
+            case "주황색":
+                color = color3;
+                break;
+            case "빨간색":
+                color = color4;
+                break;
+            case "분홍색":
+                color = color5;
+                break;
+            case "보라색":
+                color = color6;
+                break;
+            case "남색":
+                color = color7;
+                break;
+            case "하늘색":
+                color = color8;
+                break;
+        }
+    }
+
+    void AIColorChange()
+    {
+        colorTest.text = "" + color;
+
+        if (GetInferenceFromModel.result == 0) color = new Color32(255, 218, 225, 255); // 빨간색
+        else if (GetInferenceFromModel.result == 1) color = new Color32(233, 200, 218, 255); // 연두색 (원래 색상)
+        else if (GetInferenceFromModel.result == 2) color = new Color32(218, 221, 255, 255); // 남색
+        else if (GetInferenceFromModel.result == 3 || GetInferenceFromModel.result == 4)
+        {
+            int n = UnityEngine.Random.Range(0, 4);
+            if (n == 0) color.r = UnityEngine.Random.Range(0, 256);
+            else if (n == 1) color.g = UnityEngine.Random.Range(0, 256);
+            else if (n == 2) color.b = UnityEngine.Random.Range(0, 256);
+        }
+
+        GetInferenceFromModel.result = -1;
+
+        // 색상 적용
+        eggMR.material.SetColor("_Color", color);
+        babyMR.material.SetColor("_Color", color);
+        childMR.material.SetColor("_Color", color);
+        youthMR.material.SetColor("_Color", color);
+        eggbreakUpMR.material.SetColor("_Color", color);
+        eggbreakBotMR.material.SetColor("_Color", color);
     }
 
 

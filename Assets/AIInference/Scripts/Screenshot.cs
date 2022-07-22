@@ -41,10 +41,10 @@ public class Screenshot : MonoBehaviour
     {
         yield return new WaitForEndOfFrame();
          //스크린샷할 이미지 담을 공간 생성
-        Texture2D screenShot = new Texture2D(1000, 1000, TextureFormat.RGB24, false); //카메라가 인식할 영역의 크기
+        Texture2D screenShot = new Texture2D(500, 500, TextureFormat.RGB24, false); //카메라가 인식할 영역의 크기
         
         // 현재 이미지로부터 지정 영역의 픽셀들을 텍스쳐에 저장
-        Rect area = new Rect(450, 40, 1000, 1000); // (cameraview UI Pivot 좌하단 기준) Rect(좌표 x,y 입력, 가로 길이, 세로 길이)
+        Rect area = new Rect(900, 350, 500, 500); // (cameraview UI Pivot 좌하단 기준) Rect(좌표 x,y 입력, 가로 길이, 세로 길이)
         screenShot.ReadPixels(area, 0, 0); 
         screenShot.Apply();
 

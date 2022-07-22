@@ -13,20 +13,23 @@ public class GetInferenceFromModel : MonoBehaviour
     public static GetInferenceFromModel instance;
 
     public static Texture2D texture; // 모델이 예측할 이미지 텍스처
-    
+
+
     [Header(" ---Model---")]
     public NNModel modelAsset; // 학습된 모델
     private Model _runtimeModel; // 실행할 모델
     private IWorker _engine; // 모델을 돌릴 엔진
+    public static int result = -1; // 결과 값
 
     // 예측값 구조체를 통해 필요한 기능 받아오기 
     public Prediction prediction;
 
     [Header("---Debugger---")]
-    public TextMeshProUGUI result; // 결과값을 확인할 UI Text
+    public TextMeshProUGUI resultText; // 결과값을 확인할 UI Text
     public RawImage testimage;
     public RawImage testimageafter;
 
+    public Image test;
 
     public TextMeshProUGUI testText;
 
@@ -70,16 +73,16 @@ public class GetInferenceFromModel : MonoBehaviour
         _engine = WorkerFactory.CreateWorker(_runtimeModel, WorkerFactory.Device.CPU);
         // 예측 구조체 인스턴스화.
         prediction = new Prediction();
-        result.text = "카메라가 켜졌습니다.";
+        resultText.text = "카메라가 켜졌습니다.";
     }
     
     // ModelExecute 버튼 누르면 실행될 함수
     public void PreModel()
     {
-        result.text = "PreModel";
+        resultText.text = "PreModel";
 
         testimage.texture = texture; // 이미지 잘 불러와 지는지 확인
-        texture = ScaleTexture(texture, 0.244f); // 이미지 전처리 : 리사이즈
+        texture = ScaleTexture(texture, 0.448f); // 이미지 전처리 : 리사이즈
   
         testimageafter.texture = texture; // 이미지 잘 불러와 지는지 확인
 
@@ -89,7 +92,11 @@ public class GetInferenceFromModel : MonoBehaviour
         // 실행해서(Execute) 결과값 내보내기(PeekOutput)
         Tensor outputY = _engine.Execute(inputX).PeekOutput();
         // 출력 텐서를 사용하여 예측 구조체의 값을 설정
-        prediction.SetPrediction(outputY);   
+        prediction.SetPrediction(outputY);
+
+        // 예측값 중 가장 높은 값을 result에 저장
+        result = prediction.predictedValue;
+
         // 예측값중 가장 높은 값 문자열로 변환해서 UI Text에 보여주기
         TextValue(prediction.predictedValue);
         // 입력 텐서를 수동으로 폐기(가비지 컬렉터 아님).
@@ -130,9 +137,15 @@ public class GetInferenceFromModel : MonoBehaviour
 
         // 스케일 텍스처 생성
         Texture2D result = new Texture2D(_newWidth, _newHeight, source.format, false);
+
+
+        //Sprite sprite = Sprite.Create(result, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        //test.sprite = sprite;
+
+
+
         result.SetPixels(_scaledTexPixels, 0);
         result.Apply();
-
         return result;
     }
     private void OnDestroy()
@@ -146,28 +159,28 @@ public class GetInferenceFromModel : MonoBehaviour
         switch (value)
         {
             case 0:
-                result.text = "0";
+                resultText.text = "0";
                 break;
             case 1:
-                result.text = "1";
+                resultText.text = "1";
                 break;
             case 2:
-                result.text = "2";
+                resultText.text = "2";
                 break;
             case 3:
-                result.text = "3";
+                resultText.text = "3";
                 break;
             case 4:
-                result.text = "4";
+                resultText.text = "4";
                 break;
             case 5:
-                result.text = "5";
+                resultText.text = "5";
                 break;
             case 6:
-                result.text = "6";
+                resultText.text = "6";
                 break;
             case 7:
-                result.text = "7";
+                resultText.text = "7";
                 break;
 
         }
