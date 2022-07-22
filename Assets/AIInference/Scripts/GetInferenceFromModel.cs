@@ -29,10 +29,12 @@ public class GetInferenceFromModel : MonoBehaviour
     public RawImage testimage;
     public RawImage testimageafter;
 
-    public Image test;
 
-    public TextMeshProUGUI testText;
+    public Sprite[] predictionCompleteSp;
+    public GameObject ShotButton;
 
+
+    int buttonCnt = 0;
 
     /// <summary>
     /// 인스펙터에서 쉽게 볼 수 있는 방식으로 예측 결과를 유지하는 데 사용되는 구조체.
@@ -79,6 +81,21 @@ public class GetInferenceFromModel : MonoBehaviour
     // ModelExecute 버튼 누르면 실행될 함수
     public void PreModel()
     {
+        buttonCnt++;
+
+        gameObject.GetComponent<Image>().sprite = predictionCompleteSp[0];
+
+        if (buttonCnt >= 2)
+        {
+
+            gameObject.GetComponent<Image>().sprite = predictionCompleteSp[1];
+            ShotButton.GetComponent<Button>().interactable = true;
+
+            buttonCnt = 0;
+            gameObject.GetComponent<Button>().interactable = false;
+        }
+
+
         resultText.text = "PreModel";
 
         testimage.texture = texture; // 이미지 잘 불러와 지는지 확인
@@ -184,15 +201,6 @@ public class GetInferenceFromModel : MonoBehaviour
                 break;
 
         }
-        
-        //if(prediction.predictedValue == 0)
-        //{
-        //     result.text = "셔츠 인식 성공! 선물을 보냈습니다.";
-        //}
-        //else if(prediction.predictedValue ==1 )
-        //{
-        //    result.text = "나무 인식 성공! 선물을 보냈습니다.";
-        //}
     }
 }
 

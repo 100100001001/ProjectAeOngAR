@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/01.Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
@@ -17,6 +17,9 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/AIInference/Scenes/AIInference.unity
     guid: 61ee9766c23667446b16b43833fc965f
+  - enabled: 1
+    path: Assets/01.Scenes/MainCopy_FindColor.unity
+    guid: 9a0d625922a67e34897654f07865f812
   m_configObjects:
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 744b813df90924c169af73489b8325de,
       type: 2}

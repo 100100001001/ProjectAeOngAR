@@ -12,6 +12,6 @@ public class ChangeScene : MonoBehaviour
 
     public void GoFindItem()
     {
-        SceneManager.LoadScene("AIInference");
+        SceneManager.LoadScene("MainCopy_FindColor");
     }
 }
