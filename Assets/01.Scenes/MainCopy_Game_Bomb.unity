@@ -2287,6 +2287,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 5.79
       objectReference: {fileID: 0}
+    - target: {fileID: 428139908, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 428139909, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 4.89
@@ -2500,17 +2504,17 @@ PrefabInstance:
     - target: {fileID: 98023595369760502, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 98023595369760502, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 98023595369760502, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 254007922859530374, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
@@ -2551,6 +2555,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1487853732607038786, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1893831553304837652, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
@@ -2686,6 +2695,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5092077743115872482, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
+        type: 3}
+      propertyPath: m_text
+      value: "20\uCD08 \uB0A8\uC558\uC5B4\uC694"
       objectReference: {fileID: 0}
     - target: {fileID: 5092077743115872482, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
@@ -2860,6 +2874,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: JellyParent
+      objectReference: {fileID: 0}
+    - target: {fileID: 7519694551611892616, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7867080223476899865, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}

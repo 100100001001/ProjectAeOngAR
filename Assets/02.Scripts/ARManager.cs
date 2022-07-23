@@ -55,7 +55,6 @@ public class ARManager : MonoBehaviour
 
 
 
-
     void Start()
     {
         //indicator[4].SetActive(true);
@@ -229,16 +228,28 @@ public class ARManager : MonoBehaviour
     {
         colorTest.text = "" + color;
 
-        if (GetInferenceFromModel.result == 0) color = new Color32(255, 218, 225, 255); // 빨간색
-        else if (GetInferenceFromModel.result == 1) color = new Color32(233, 200, 218, 255); // 연두색 (원래 색상)
-        else if (GetInferenceFromModel.result == 2) color = new Color32(218, 221, 255, 255); // 남색
-        else if (GetInferenceFromModel.result == 3 || GetInferenceFromModel.result == 4)
+        if (GetInferenceFromModel.result == 0) // R
         {
-            int n = UnityEngine.Random.Range(0, 4);
-            if (n == 0) color.r = UnityEngine.Random.Range(0, 256);
-            else if (n == 1) color.g = UnityEngine.Random.Range(0, 256);
-            else if (n == 2) color.b = UnityEngine.Random.Range(0, 256);
+            color = new Color32(225, 80, 0, 255);
+            color.b = UnityEngine.Random.Range(0, 256);
         }
+        else if (GetInferenceFromModel.result == 1) // G
+        {
+            color = new Color32(0, 255, 80, 255);
+            color.r = UnityEngine.Random.Range(0, 256);
+        }
+        else if (GetInferenceFromModel.result == 2) // B
+        {
+            color = new Color32(80, 0, 255, 255);
+            color.g = UnityEngine.Random.Range(0, 256);
+        }
+        //else if (GetInferenceFromModel.result == 3 || GetInferenceFromModel.result == 4)
+        //{
+        //    int n = UnityEngine.Random.Range(0, 4);
+        //    if (n == 0) color.r = UnityEngine.Random.Range(0, 256);
+        //    else if (n == 1) color.g = UnityEngine.Random.Range(0, 256);
+        //    else if (n == 2) color.b = UnityEngine.Random.Range(0, 256);
+        //}
 
         GetInferenceFromModel.result = -1;
 

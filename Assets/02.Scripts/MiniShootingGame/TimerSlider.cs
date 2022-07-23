@@ -74,22 +74,22 @@ public class TimerSlider : MonoBehaviour
 
         fillImage = GameObject.FindGameObjectWithTag("SliderFill").GetComponent<Image>(); // SliderFill 태그를 가지고 있는 게임 오브젝트에서 Image 컴포넌트를 가져 옴
 
-        ani = treasureBox.GetComponent<Animator>();
+        ani = treasureBox.GetComponent<Animator>(); // 보물 상자의 애니메이션
 
         fillImage.color = normalFillColor; // 슬라이더의 채움 색을 기본 색상으로 지정해줌
-        treasureBox.SetActive(false);
-        treasureMessage.gameObject.SetActive(false);
-        buttons.SetActive(false);
-        items.SetActive(false);
+        treasureBox.SetActive(false);      // 보물 상자 비활성화
+        treasureMessage.gameObject.SetActive(false); // 보물 상자가 나왔을 때의 메시지 비활성화
+        items.SetActive(false);   // 보물 상자가 열리고 나오는 아이템 비활성화
+        buttons.SetActive(false); // 게임이 끝났을 때 나오는 버튼 비활성화
 
-
+        stopTimer = true; // 타이머 멈춤 상태
+        gameObject.GetComponent<Shoot>().enabled = false; // 총알이 안나오게끔 Shoot 스크립트 비활성화
 
         //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Jelly");
         //foreach (GameObject enemy in enemies)
         //    enemy.SetActive(true);
 
         foreach (GameObject jelly in jellies) jelly.SetActive(true);
-
 
 
         StartCoroutine(GameStartMessage());
@@ -101,8 +101,6 @@ public class TimerSlider : MonoBehaviour
     {
 
         curTime = 20f;   // 슬라이더의 Value값을 조정해주기 위한 시간 변수
-
-
 
         timerSlider.value = (float)curTime / (float)maxTime; // timerSlider의 값을 0~1 사이의 값으로 맞춰주기 위함
         fillImage.color = normalFillColor; // 슬라이더의 채움 색을 기본 색상으로 지정해줌
@@ -121,8 +119,6 @@ public class TimerSlider : MonoBehaviour
 
         targetImage.SetActive(true);
         treasureBox.SetActive(false);
-
-
 
         //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Jelly");
         //foreach (GameObject enemy in enemies)
@@ -227,67 +223,31 @@ public class TimerSlider : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         treasureBox.transform.GetChild(4).gameObject.SetActive(true); // 파티클 오브젝트 활성화
 
-        // 랜덤 아이템 획득
-        int n = Random.Range(0, 1);
-
-        if (n == 0)
+        // 게임 후 점수가 100점 이상, 또는 랜덤으로 캐릭터의 상태값 상승을 보상으로 받음
+        if (Scoring.score >= 100 || Random.Range(0, 1) == 0)
         {
+            int ccordingToTheScore = (int)Scoring.score / 5;
             int itemNum = Random.Range(0, itemSprites.Length);
             items.GetComponent<SpriteRenderer>().sprite = itemSprites[itemNum];
 
             yield return new WaitForSeconds(0.5f);
             items.SetActive(true);
 
-
-            switch (itemNum)
-            {
-                case 0:
-                    StatusBar.instance.HappyValue(true, 10);
-                    break;
-                case 1:
-                    StatusBar.instance.CleanValue(true, 10);
-                    break;
-                case 2:
-                    StatusBar.instance.SmartValue(true, 10);
-                    break;
-                case 3:
-                    StatusBar.instance.EnergyValue(true, 10);
-                    break;
-                case 4:
-                    StatusBar.instance.HungerValue(true, 10);
-                    break;
-                default:
-                    break;
-            }
+            if (itemNum == 0) StatusBar.instance.HappyValue(true, ccordingToTheScore);
+            else if (itemNum == 1) StatusBar.instance.CleanValue(true, ccordingToTheScore);
+            else if (itemNum == 2) StatusBar.instance.SmartValue(true, ccordingToTheScore);
+            else if (itemNum == 3) StatusBar.instance.EnergyValue(true, ccordingToTheScore);
+            else if (itemNum == 4) StatusBar.instance.HungerValue(true, ccordingToTheScore);
         }
-
-
-        //if (n == 0)
-        //{
-        //    getMilk = true;
-
-        //    yield return new WaitForSeconds(1.5f);
-        //    items.SetActive(true);
-        //    milkNumber = Random.Range(0, milkTextures.Length);
-        //    items.GetComponentInChildren<Renderer>().material.SetTexture("_MainTex", milkTextures[milkNumber]);
-
-        //    treasureMessage.text = "와~ 아이템을 얻었어요!";
-
-        //    yield return new WaitForSeconds(1f);
-        //}
-
         else
         {
             treasureMessage.text = "또바기가 즐거웠대요~ >.<~";
             yield return new WaitForSeconds(3f);
         }
 
-
-
-
         treasureBox.transform.GetChild(4).gameObject.SetActive(false);
 
-        yield return new WaitForSeconds(2f);
+        //yield return new WaitForSeconds(2f);
         treasureMessage.gameObject.SetActive(false);
         yield return new WaitForSeconds(1f);
         buttons.SetActive(true);

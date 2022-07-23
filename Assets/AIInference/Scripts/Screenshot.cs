@@ -26,6 +26,9 @@ public class Screenshot : MonoBehaviour
     // 캡쳐 버튼을 누르면 호출
     public void Capture_Button()
     {
+        ShotButton.GetComponent<Button>().interactable = true;
+
+
         // 중복방지 bool, true 일 때 실행
         if (!isCoroutinePlaying)
         {

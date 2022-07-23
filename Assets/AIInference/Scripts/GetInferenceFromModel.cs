@@ -33,8 +33,12 @@ public class GetInferenceFromModel : MonoBehaviour
     public Sprite[] predictionCompleteSp;
     public GameObject ShotButton;
 
+    public GameObject completePanel;
+
 
     int buttonCnt = 0;
+
+    
 
     /// <summary>
     /// 인스펙터에서 쉽게 볼 수 있는 방식으로 예측 결과를 유지하는 데 사용되는 구조체.
@@ -76,24 +80,26 @@ public class GetInferenceFromModel : MonoBehaviour
         // 예측 구조체 인스턴스화.
         prediction = new Prediction();
         resultText.text = "카메라가 켜졌습니다.";
+
+
+
+        gameObject.GetComponent<Image>().sprite = predictionCompleteSp[1];
+
+
     }
-    
+
     // ModelExecute 버튼 누르면 실행될 함수
     public void PreModel()
     {
-        buttonCnt++;
-
         gameObject.GetComponent<Image>().sprite = predictionCompleteSp[0];
 
-        if (buttonCnt >= 2)
-        {
+        completePanel.SetActive(true);
 
-            gameObject.GetComponent<Image>().sprite = predictionCompleteSp[1];
-            ShotButton.GetComponent<Button>().interactable = true;
+        //gameObject.GetComponent<Image>().sprite = predictionCompleteSp[1];
+        ShotButton.GetComponent<Button>().interactable = true;
 
-            buttonCnt = 0;
-            gameObject.GetComponent<Button>().interactable = false;
-        }
+        buttonCnt = 0;
+        gameObject.GetComponent<Button>().interactable = false;
 
 
         resultText.text = "PreModel";
@@ -156,10 +162,6 @@ public class GetInferenceFromModel : MonoBehaviour
         Texture2D result = new Texture2D(_newWidth, _newHeight, source.format, false);
 
 
-        //Sprite sprite = Sprite.Create(result, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-        //test.sprite = sprite;
-
-
 
         result.SetPixels(_scaledTexPixels, 0);
         result.Apply();
@@ -173,34 +175,7 @@ public class GetInferenceFromModel : MonoBehaviour
 
     private void TextValue(int value)
     {
-        switch (value)
-        {
-            case 0:
-                resultText.text = "0";
-                break;
-            case 1:
-                resultText.text = "1";
-                break;
-            case 2:
-                resultText.text = "2";
-                break;
-            case 3:
-                resultText.text = "3";
-                break;
-            case 4:
-                resultText.text = "4";
-                break;
-            case 5:
-                resultText.text = "5";
-                break;
-            case 6:
-                resultText.text = "6";
-                break;
-            case 7:
-                resultText.text = "7";
-                break;
-
-        }
+        resultText.text = "" + value;
     }
 }
 
