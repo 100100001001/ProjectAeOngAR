@@ -22,11 +22,6 @@ public class TextSetActive : MonoBehaviour
 
     IEnumerator DesText()
     {
-        descriptiveText.text = "또바기의 색을 찾아주세요!";
-        descriptiveText.gameObject.SetActive(true);
-        yield return new WaitForSeconds(3f);
-
-        descriptiveText.gameObject.SetActive(false);
         colorDesText.SetActive(true);
         yield return new WaitForSeconds(10f);
 

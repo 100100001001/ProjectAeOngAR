@@ -21121,7 +21121,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &830919424
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21860,7 +21860,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &886739050
 RectTransform:
   m_ObjectHideFlags: 0
@@ -32096,7 +32096,6 @@ GameObject:
   - component: {fileID: 1628705858}
   - component: {fileID: 1628705860}
   - component: {fileID: 1628705859}
-  - component: {fileID: 1628705862}
   - component: {fileID: 1628705861}
   m_Layer: 5
   m_Name: Inventory UI
@@ -32189,22 +32188,6 @@ MonoBehaviour:
   itemParents: {fileID: 2043356266}
   itemNameText: {fileID: 1734483128}
   itemDesText: {fileID: 545275416}
---- !u!114 &1628705862
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1628705857}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03aa3e9a20a8d9d4b9c5ca7bffa71516, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  items: {fileID: 2043356266}
-  milk: {fileID: 100000, guid: e51fe706056928b4586f68a8eeaabac5, type: 3}
-  food: {fileID: 100000, guid: 5b63de927760304438a3c6ac347846d5, type: 3}
-  milkTextures: []
 --- !u!1 &1646001032
 GameObject:
   m_ObjectHideFlags: 0

@@ -38,11 +38,6 @@ public class ARManager : MonoBehaviour
     private MeshRenderer eggbreakBotMR;
     Color color;
 
-
-    public TextMeshProUGUI descriptiveText; // 게임 시작할 때 나올 설명 텍스트
-    bool textActive = true;                 // 텍스트 활성화 여부. 게임 시작할 때만 나와야하기 때문에 true
-
-
     string[] colorNames = new string[8] { "연두색", "노란색", "주황색", "빨간색", "분홍색", "보라색", "남색", "하늘색" };
     Color color1 = new Color32(233, 200, 218, 255); // 연두색 (원래 색상)
     Color color2 = new Color32(255, 255, 218, 255); // 노란색
@@ -52,6 +47,10 @@ public class ARManager : MonoBehaviour
     Color color6 = new Color32(239, 218, 255, 255); // 보라색
     Color color7 = new Color32(218, 221, 255, 255); // 남색
     Color color8 = new Color32(218, 251, 255, 255); // 하늘색
+
+
+    public TextMeshProUGUI descriptiveText; // 게임 시작할 때 나올 설명 텍스트
+    bool textActive = true;                 // 텍스트 활성화 여부. 게임 시작할 때만 나와야하기 때문에 true
 
 
 
@@ -75,21 +74,13 @@ public class ARManager : MonoBehaviour
         indicator[2].SetActive(false);
         indicator[3].SetActive(false);
         indicator[7].SetActive(false);
-
-
+        
         descriptiveText.text = "두 손가락으로 동시에 터치해서 또바기를 불러오세요!";
         descriptiveText.gameObject.SetActive(true);
 
 
-
+        // 캐릭터의 색상 변경
         ChangeColor();
-
-
-        //dustTransform = dust[0].transform;
-
-        //indicatorTest[1].SetActive(false);
-        //indicatorTest[2].SetActive(false);
-        //indicatorTest[3].SetActive(false);
     }
 
     void Update()
@@ -104,7 +95,8 @@ public class ARManager : MonoBehaviour
             textActive = false;
         }
 
-        if (GetInferenceFromModel.result >= 0 && UnityEngine.Random.Range(0, 1) == 0)
+        // AI로 분류 후 모델 값이 있을 경우
+        if (GetInferenceFromModel.result >= 0)
         {
             AIColorChange();
         }
@@ -164,7 +156,13 @@ public class ARManager : MonoBehaviour
     void ChangeColor()
     {
         // 저장된 색상이 있다면 저장된 색상을 가져옴
-        if (PlayerPrefs.HasKey("Color")) Colors(PlayerPrefs.GetString("Color"));
+        //if (PlayerPrefs.HasKey("Color")) Colors(PlayerPrefs.GetString("Color"));
+        if (PlayerPrefs.HasKey("ColorRed"))
+        {
+            color.r = PlayerPrefs.GetFloat("ColorRed");
+            color.g = PlayerPrefs.GetFloat("ColorGreen");
+            color.b = PlayerPrefs.GetFloat("ColorBlue");
+        }
         // 저장된 색상이 없다면 랜덤한 색상을 가져옴
         else Colors(colorNames[UnityEngine.Random.Range(0, 8)]);
 
@@ -175,6 +173,8 @@ public class ARManager : MonoBehaviour
         youthMR.material.SetColor("_Color", color);
         eggbreakUpMR.material.SetColor("_Color", color);
         eggbreakBotMR.material.SetColor("_Color", color);
+
+        SaveColor();
     }
 
     IEnumerator TextActive()
@@ -190,11 +190,15 @@ public class ARManager : MonoBehaviour
         descriptiveText.gameObject.SetActive(false);
     }
 
+    void SaveColor()
+    {
+        PlayerPrefs.SetFloat("ColorRed", color.r);
+        PlayerPrefs.SetFloat("ColorGreen", color.g);
+        PlayerPrefs.SetFloat("ColorBlue", color.b);
+    }
+
     void Colors(string name)
     {
-        // 색상 이름 저장
-        PlayerPrefs.SetString("Color", name);
-
         switch (name)
         {
             case "연두색":
@@ -260,6 +264,8 @@ public class ARManager : MonoBehaviour
         youthMR.material.SetColor("_Color", color);
         eggbreakUpMR.material.SetColor("_Color", color);
         eggbreakBotMR.material.SetColor("_Color", color);
+
+        SaveColor();
     }
 
 

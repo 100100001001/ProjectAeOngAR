@@ -82,6 +82,7 @@ public class GetInferenceFromModel : MonoBehaviour
         resultText.text = "카메라가 켜졌습니다.";
 
 
+        completePanel.SetActive(false);
 
         gameObject.GetComponent<Image>().sprite = predictionCompleteSp[1];
 
@@ -98,7 +99,6 @@ public class GetInferenceFromModel : MonoBehaviour
         //gameObject.GetComponent<Image>().sprite = predictionCompleteSp[1];
         ShotButton.GetComponent<Button>().interactable = true;
 
-        buttonCnt = 0;
         gameObject.GetComponent<Button>().interactable = false;
 
 

@@ -10,7 +10,7 @@ public class CompletePanel : MonoBehaviour
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
 
         
-        if (GetInferenceFromModel.result == 1 || GetInferenceFromModel.result == 2 || GetInferenceFromModel.result == 3)
+        if (GetInferenceFromModel.result == 0 || GetInferenceFromModel.result == 1 || GetInferenceFromModel.result == 2)
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
 
@@ -19,6 +19,7 @@ public class CompletePanel : MonoBehaviour
         {
             gameObject.transform.GetChild(1).gameObject.SetActive(true);
         }
+        else gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
     }
 }

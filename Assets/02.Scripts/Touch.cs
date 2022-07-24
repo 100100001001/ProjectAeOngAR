@@ -86,7 +86,7 @@ public class Touch : MonoBehaviour
                     TouchResponse();
 
 
-                    if (time > 300) // 5분이 지나면 touchCnt 초기화
+                    if (time > 60) // 1분이 지나면 touchCnt 초기화
                     {
                         limitTouchCnt = 0;
                         time = 0;
