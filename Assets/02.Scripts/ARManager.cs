@@ -22,22 +22,16 @@ public class ARManager : MonoBehaviour
     List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>(); // AR raycast에서 쏜 광선
 
 
-
-    // 테스트 //
-    public GameObject ttest;
-    public TextMeshProUGUI t;
-    public TextMeshProUGUI colorTest;
-
-
     // 랜덤 색상을 적용하기 위해 캐릭터 각각의 MeshRenderer, Renderer 변수 만듦
-    private MeshRenderer eggMR;
-    private Renderer babyMR;
-    private Renderer childMR;
-    private Renderer youthMR;
-    private MeshRenderer eggbreakUpMR;
-    private MeshRenderer eggbreakBotMR;
+    MeshRenderer eggMR;
+    Renderer babyMR;
+    Renderer childMR;
+    Renderer youthMR;
+    MeshRenderer eggbreakUpMR;
+    MeshRenderer eggbreakBotMR;
     Color color;
 
+    // 색상 배열과 각각의 색들을 지정해줌
     string[] colorNames = new string[8] { "연두색", "노란색", "주황색", "빨간색", "분홍색", "보라색", "남색", "하늘색" };
     Color color1 = new Color32(233, 200, 218, 255); // 연두색 (원래 색상)
     Color color2 = new Color32(255, 255, 218, 255); // 노란색
@@ -56,11 +50,6 @@ public class ARManager : MonoBehaviour
 
     void Start()
     {
-        //indicator[4].SetActive(true);
-        //indicatorTr = indicator[4].transform;
-        //PlaceIndicator();
-
-
         // 캐릭터의 색상을 지정해주기 위해 각각의 MeshRenderer, Renderer컴포넌트를 가져온다
         eggMR = indicator[0].GetComponent<MeshRenderer>();
         babyMR = indicator[1].transform.GetChild(1).GetComponent<Renderer>();
@@ -75,9 +64,8 @@ public class ARManager : MonoBehaviour
         indicator[3].SetActive(false);
         indicator[7].SetActive(false);
         
-        descriptiveText.text = "두 손가락으로 동시에 터치해서 또바기를 불러오세요!";
+        descriptiveText.text = "두 손가락을 동시에 터치해서 또바기를 불러오세요!";
         descriptiveText.gameObject.SetActive(true);
-
 
         // 캐릭터의 색상 변경
         ChangeColor();
@@ -87,7 +75,10 @@ public class ARManager : MonoBehaviour
     {
         if (Input.touchCount > 1)// && Input.GetTouch(0).phase == TouchPhase.Began)
         {
+            // 3D동산 오브젝트 활성화
             indicator[4].SetActive(true);
+
+            // 동산의 위치를 indicatorTr 위치에 넣어주고 위치 업데이트
             indicatorTr = indicator[4].transform;
             PlaceIndicator();
 
@@ -166,7 +157,6 @@ public class ARManager : MonoBehaviour
         }
 
         // 저장된 색상이 있다면 저장된 색상을 가져옴
-        //if (PlayerPrefs.HasKey("Color")) Colors(PlayerPrefs.GetString("Color"));
         if (PlayerPrefs.HasKey("ColorRed"))
         {
             color.r = PlayerPrefs.GetFloat("ColorRed");
@@ -180,6 +170,7 @@ public class ARManager : MonoBehaviour
         SaveColor();
     }
 
+    // 시작할 때 설명하는 텍스트 활성화
     IEnumerator TextActive()
     {
         textActive = false;
@@ -193,6 +184,7 @@ public class ARManager : MonoBehaviour
         descriptiveText.gameObject.SetActive(false);
     }
 
+    // 색상을 저장하는 메서드
     void SaveColor()
     {
         PlayerPrefs.SetFloat("ColorRed", color.r);
@@ -200,9 +192,9 @@ public class ARManager : MonoBehaviour
         PlayerPrefs.SetFloat("ColorBlue", color.b);
     }
 
+    // 색상을 적용하는 메서드
     void ApplyColor()
     {
-        // 색상 적용
         eggMR.material.SetColor("_Color", color);
         babyMR.material.SetColor("_Color", color);
         childMR.material.SetColor("_Color", color);
@@ -242,45 +234,34 @@ public class ARManager : MonoBehaviour
         }
     }
 
+    // AI 모델 분류가 성공했을 때 색상 변경하는 메서드
     void AIColorChange()
     {
-        colorTest.text = "" + color;
-
-        if (GetInferenceFromModel.result == 0) // R
+        // Red로 분류한 결과값이 가장 높은 경우이다. 빨간색 계열의 색 중 랜덤하여 color값을 지정한다.
+        if (GetInferenceFromModel.result == 0)
         {
             color = new Color32(225, 80, 0, 255);
             color.b = UnityEngine.Random.Range(0, 256);
         }
-        else if (GetInferenceFromModel.result == 1) // G
+        // Green으로 분류한 결과값이 가장 높은 경우이다. 초록색 계열의 색 중 랜덤하여 color값을 지정한다.
+        else if (GetInferenceFromModel.result == 1)
         {
             color = new Color32(0, 255, 80, 255);
             color.r = UnityEngine.Random.Range(0, 256);
         }
-        else if (GetInferenceFromModel.result == 2) // B
+        // Blue로 분류한 결과값이 가장 높은 경우이다. 파란색 계열의 색 중 랜덤하여 color값을 지정한다.
+        else if (GetInferenceFromModel.result == 2)
         {
             color = new Color32(80, 0, 255, 255);
             color.g = UnityEngine.Random.Range(0, 256);
         }
-        //else if (GetInferenceFromModel.result == 3 || GetInferenceFromModel.result == 4)
-        //{
-        //    int n = UnityEngine.Random.Range(0, 4);
-        //    if (n == 0) color.r = UnityEngine.Random.Range(0, 256);
-        //    else if (n == 1) color.g = UnityEngine.Random.Range(0, 256);
-        //    else if (n == 2) color.b = UnityEngine.Random.Range(0, 256);
-        //}
 
+        // AI 모델 결과값을 초기화
         GetInferenceFromModel.result = -1;
 
+        // 변경된 색상을 적용하고 저장한다.
         ApplyColor();
         SaveColor();
     }
-
-
 }
-
-//public void PlaceIndicatorPrefab()
-//{
-//    Pose hitPose = IndicatorHits[0].pose;
-//    Instantiate(spawnPrefab, hitPose.position, hitPose.rotation);
-//}
 

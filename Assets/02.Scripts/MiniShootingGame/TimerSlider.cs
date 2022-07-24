@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,83 +7,83 @@ using TMPro;
 
 public class TimerSlider : MonoBehaviour
 {
-    [Header("--- ½½¶óÀÌ´õ ---")]
+    [Header("--- ìŠ¬ë¼ì´ë” ---")]
 
     [SerializeField]
-    Slider timerSlider; // ³²Àº ½Ã°£À» ½Ã°¢È­ÇÏ±â À§ÇØ ¹ŞÀº ½½¶óÀÌ´õ
+    Slider timerSlider; // ë‚¨ì€ ì‹œê°„ì„ ì‹œê°í™”í•˜ê¸° ìœ„í•´ ë°›ì€ ìŠ¬ë¼ì´ë”
 
     [SerializeField]
-    TextMeshProUGUI timerText; // ³²Àº ½Ã°£
+    TextMeshProUGUI timerText; // ë‚¨ì€ ì‹œê°„
 
     [SerializeField]
-    Image fillImage; // ½½¶óÀÌ´õ »öÀ» º¯°æÇÏ±â À§ÇØ ÀÌ¹ÌÁö¿Í »ö»óÀ» ¹Ş¾ÆÁÜ
+    Image fillImage; // ìŠ¬ë¼ì´ë” ìƒ‰ì„ ë³€ê²½í•˜ê¸° ìœ„í•´ ì´ë¯¸ì§€ì™€ ìƒ‰ìƒì„ ë°›ì•„ì¤Œ
 
-    public Color32 normalFillColor;  // ½½¶óÀÌ´õÀÇ ±âº» »ö»ó
-    public Color32 warningFillColor; // ½Ã°£ÀÌ ¾ó¸¶ ¾È³²¾ÒÀ» ¶§ ³ª¿À´Â °æ°í »ö»ó
-    public float warningLimit;       // °æ°í ÇÒ ½Ã°£À» ÁöÁ¤ÇÒ º¯¼ö
+    public Color32 normalFillColor;  // ìŠ¬ë¼ì´ë”ì˜ ê¸°ë³¸ ìƒ‰ìƒ
+    public Color32 warningFillColor; // ì‹œê°„ì´ ì–¼ë§ˆ ì•ˆë‚¨ì•˜ì„ ë•Œ ë‚˜ì˜¤ëŠ” ê²½ê³  ìƒ‰ìƒ
+    public float warningLimit;       // ê²½ê³  í•  ì‹œê°„ì„ ì§€ì •í•  ë³€ìˆ˜
 
-    public bool stopTimer;           // Å¸ÀÌ¸Ó À¯¹«
+    public bool stopTimer;           // íƒ€ì´ë¨¸ ìœ ë¬´
 
     [SerializeField]
-    TextMeshProUGUI gameOverText; // °ÔÀÓ¿À¹ö½Ã ³ª¿Ã ÅØ½ºÆ®
+    TextMeshProUGUI gameOverText; // ê²Œì„ì˜¤ë²„ì‹œ ë‚˜ì˜¬ í…ìŠ¤íŠ¸
 
-    string textTime;              // ½Ã°£À» ¾Ë·ÁÁÖ±â À§ÇÑ ÅØ½ºÆ®
+    string textTime;              // ì‹œê°„ì„ ì•Œë ¤ì£¼ê¸° ìœ„í•œ í…ìŠ¤íŠ¸
 
-    public float curTime = 20f;   // ½½¶óÀÌ´õÀÇ Value°ªÀ» Á¶Á¤ÇØÁÖ±â À§ÇÑ ½Ã°£ º¯¼ö
-    float maxTime = 20f;          // ½½¶óÀÌ´õ ValueÀÇ ÃÖ´ë°ª
+    public float curTime = 20f;   // ìŠ¬ë¼ì´ë”ì˜ Valueê°’ì„ ì¡°ì •í•´ì£¼ê¸° ìœ„í•œ ì‹œê°„ ë³€ìˆ˜
+    float maxTime = 20f;          // ìŠ¬ë¼ì´ë” Valueì˜ ìµœëŒ€ê°’
 
-    [Header("--- °ÔÀÓ ½ÃÀÛ ---")]
+    [Header("--- ê²Œì„ ì‹œì‘ ---")]
     public TextMeshProUGUI gameStartText;
 
-    [Header("--- °ÔÀÓ Áß ---")]
+    [Header("--- ê²Œì„ ì¤‘ ---")]
     public GameObject[] jellies;
-    public GameObject targetImage; // °ÔÀÓÇÏ´Â Áß È­¸é Áß¾Ó¿¡ ¶ç¿öÁú Àú°İ ÀÌ¹ÌÁö
+    public GameObject targetImage; // ê²Œì„í•˜ëŠ” ì¤‘ í™”ë©´ ì¤‘ì•™ì— ë„ì›Œì§ˆ ì €ê²© ì´ë¯¸ì§€
 
-    [Header("--- °ÔÀÓ Á¾·á ÈÄ ---")]
+    [Header("--- ê²Œì„ ì¢…ë£Œ í›„ ---")]
 
-    public GameObject buttons;     // ´Ù½Ã ½ÃÀÛ°ú Á¾·áÇÏ±â ¹öÆ°ÀÌ ÀÖ´Â °ÔÀÓ ¿ÀºêÁ§Æ®
+    public GameObject buttons;     // ë‹¤ì‹œ ì‹œì‘ê³¼ ì¢…ë£Œí•˜ê¸° ë²„íŠ¼ì´ ìˆëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸
 
     public TextMeshProUGUI t;      // Testing!!!!!!!!!
 
-    public GameObject treasureBox; // °ÔÀÓÀÌ ³¡³ª¸é ³ª¿Ã º¸¹° »óÀÚ
-    public GameObject items;       // º¸¹° »óÀÚ¸¦ ¿­¸é ³ª¿À´Â ¾ÆÀÌÅÛ
+    public GameObject treasureBox; // ê²Œì„ì´ ëë‚˜ë©´ ë‚˜ì˜¬ ë³´ë¬¼ ìƒì
+    public GameObject items;       // ë³´ë¬¼ ìƒìë¥¼ ì—´ë©´ ë‚˜ì˜¤ëŠ” ì•„ì´í…œ
 
-    public Texture[] milkTextures; // ¿ìÀ¯ ¾ÆÀÌÅÛÀÇ »ö»óÀ» ÁöÁ¤ÇØÁÖ±â À§ÇØ ÅØ½ºÃ³µéÀ» ¹Ş¾ÆÁÜ
+    public Texture[] milkTextures; // ìš°ìœ  ì•„ì´í…œì˜ ìƒ‰ìƒì„ ì§€ì •í•´ì£¼ê¸° ìœ„í•´ í…ìŠ¤ì²˜ë“¤ì„ ë°›ì•„ì¤Œ
 
-    private Animator ani;          // º¸¹° »óÀÚÀÇ ¾Ö´Ï¸ŞÀÌ¼Ç
-    //int treasureTouchCnt = 0;      // º¸¹° »óÀÚ°¡ ÅÍÄ¡ÇÏ¸é ¿­¸± ¼ö ÀÖµµ·Ï ÅÍÄ¡ Ä«¿îÆ®¸¦ ¼¼¾îÁÜ
-    public TextMeshProUGUI treasureMessage; // º¸¹° »óÀÚ¿Í °ü·ÃµÈ ¾Ë¸² ¸Ş½ÃÁö
+    private Animator ani;          // ë³´ë¬¼ ìƒìì˜ ì• ë‹ˆë©”ì´ì…˜
+    //int treasureTouchCnt = 0;      // ë³´ë¬¼ ìƒìê°€ í„°ì¹˜í•˜ë©´ ì—´ë¦´ ìˆ˜ ìˆë„ë¡ í„°ì¹˜ ì¹´ìš´íŠ¸ë¥¼ ì„¸ì–´ì¤Œ
+    public TextMeshProUGUI treasureMessage; // ë³´ë¬¼ ìƒìì™€ ê´€ë ¨ëœ ì•Œë¦¼ ë©”ì‹œì§€
 
 
-    //public static bool getMilk = false; // ¾ÆÀÌÅÛ È¹µæ ¿©ºÎ
-    //public static bool getFood = false; // ¾ÆÀÌÅÛ È¹µæ ¿©ºÎ
-    //public static int milkNumber;      // ¾ÆÀÌÅÛ ÀÌ¸§ ¹İÈ¯
-    //public static string foodName;      // ¾ÆÀÌÅÛ ÀÌ¸§ ¹İÈ¯
+    //public static bool getMilk = false; // ì•„ì´í…œ íšë“ ì—¬ë¶€
+    //public static bool getFood = false; // ì•„ì´í…œ íšë“ ì—¬ë¶€
+    //public static int milkNumber;      // ì•„ì´í…œ ì´ë¦„ ë°˜í™˜
+    //public static string foodName;      // ì•„ì´í…œ ì´ë¦„ ë°˜í™˜
 
-    public Sprite[] itemSprites; // º¸»ó ¾ÆÀÌÅÛ
+    public Sprite[] itemSprites; // ë³´ìƒ ì•„ì´í…œ
 
 
     void Start()
     {
 
-        gameOverText = GameObject.FindGameObjectWithTag("GameOverText").GetComponent<TextMeshProUGUI>(); // GameOverText ÅÂ±×¸¦ °¡Áö°í ÀÖ´Â °ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ TextMeshProUGUI ÄÄÆ÷³ÍÆ®¸¦ °¡Á® ¿È
-        gameOverText.gameObject.SetActive(false); // gameOverText´Â °ÔÀÓ¿À¹ö ÈÄ È°¼ºÈ­ µÇ¾î¾ßÇÏ±â ¶§¹®¿¡ ºñÈ°¼ºÈ­
+        gameOverText = GameObject.FindGameObjectWithTag("GameOverText").GetComponent<TextMeshProUGUI>(); // GameOverText íƒœê·¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸ì—ì„œ TextMeshProUGUI ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ ì˜´
+        gameOverText.gameObject.SetActive(false); // gameOverTextëŠ” ê²Œì„ì˜¤ë²„ í›„ í™œì„±í™” ë˜ì–´ì•¼í•˜ê¸° ë•Œë¬¸ì— ë¹„í™œì„±í™”
 
-        timerSlider = GameObject.FindGameObjectWithTag("TimerSlider").GetComponent<Slider>(); // TimerSlider ÅÂ±×¸¦ °¡Áö°í ÀÖ´Â °ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ Slider ÄÄÆ÷³ÍÆ®¸¦ °¡Á® ¿È
-        timerText = GameObject.FindGameObjectWithTag("TimerText").GetComponent<TextMeshProUGUI>(); // TimerText ÅÂ±×¸¦ °¡Áö°í ÀÖ´Â °ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ TextMeshProUGUI ÄÄÆ÷³ÍÆ®¸¦ °¡Á® ¿È
+        timerSlider = GameObject.FindGameObjectWithTag("TimerSlider").GetComponent<Slider>(); // TimerSlider íƒœê·¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸ì—ì„œ Slider ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ ì˜´
+        timerText = GameObject.FindGameObjectWithTag("TimerText").GetComponent<TextMeshProUGUI>(); // TimerText íƒœê·¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸ì—ì„œ TextMeshProUGUI ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ ì˜´
 
-        fillImage = GameObject.FindGameObjectWithTag("SliderFill").GetComponent<Image>(); // SliderFill ÅÂ±×¸¦ °¡Áö°í ÀÖ´Â °ÔÀÓ ¿ÀºêÁ§Æ®¿¡¼­ Image ÄÄÆ÷³ÍÆ®¸¦ °¡Á® ¿È
+        fillImage = GameObject.FindGameObjectWithTag("SliderFill").GetComponent<Image>(); // SliderFill íƒœê·¸ë¥¼ ê°€ì§€ê³  ìˆëŠ” ê²Œì„ ì˜¤ë¸Œì íŠ¸ì—ì„œ Image ì»´í¬ë„ŒíŠ¸ë¥¼ ê°€ì ¸ ì˜´
 
-        ani = treasureBox.GetComponent<Animator>(); // º¸¹° »óÀÚÀÇ ¾Ö´Ï¸ŞÀÌ¼Ç
+        ani = treasureBox.GetComponent<Animator>(); // ë³´ë¬¼ ìƒìì˜ ì• ë‹ˆë©”ì´ì…˜
 
-        fillImage.color = normalFillColor; // ½½¶óÀÌ´õÀÇ Ã¤¿ò »öÀ» ±âº» »ö»óÀ¸·Î ÁöÁ¤ÇØÁÜ
-        treasureBox.SetActive(false);      // º¸¹° »óÀÚ ºñÈ°¼ºÈ­
-        treasureMessage.gameObject.SetActive(false); // º¸¹° »óÀÚ°¡ ³ª¿ÔÀ» ¶§ÀÇ ¸Ş½ÃÁö ºñÈ°¼ºÈ­
-        items.SetActive(false);   // º¸¹° »óÀÚ°¡ ¿­¸®°í ³ª¿À´Â ¾ÆÀÌÅÛ ºñÈ°¼ºÈ­
-        buttons.SetActive(false); // °ÔÀÓÀÌ ³¡³µÀ» ¶§ ³ª¿À´Â ¹öÆ° ºñÈ°¼ºÈ­
+        fillImage.color = normalFillColor; // ìŠ¬ë¼ì´ë”ì˜ ì±„ì›€ ìƒ‰ì„ ê¸°ë³¸ ìƒ‰ìƒìœ¼ë¡œ ì§€ì •í•´ì¤Œ
+        treasureBox.SetActive(false);      // ë³´ë¬¼ ìƒì ë¹„í™œì„±í™”
+        treasureMessage.gameObject.SetActive(false); // ë³´ë¬¼ ìƒìê°€ ë‚˜ì™”ì„ ë•Œì˜ ë©”ì‹œì§€ ë¹„í™œì„±í™”
+        items.SetActive(false);   // ë³´ë¬¼ ìƒìê°€ ì—´ë¦¬ê³  ë‚˜ì˜¤ëŠ” ì•„ì´í…œ ë¹„í™œì„±í™”
+        buttons.SetActive(false); // ê²Œì„ì´ ëë‚¬ì„ ë•Œ ë‚˜ì˜¤ëŠ” ë²„íŠ¼ ë¹„í™œì„±í™”
 
-        stopTimer = true; // Å¸ÀÌ¸Ó ¸ØÃã »óÅÂ
-        gameObject.GetComponent<Shoot>().enabled = false; // ÃÑ¾ËÀÌ ¾È³ª¿À°Ô²û Shoot ½ºÅ©¸³Æ® ºñÈ°¼ºÈ­
+        stopTimer = true; // íƒ€ì´ë¨¸ ë©ˆì¶¤ ìƒíƒœ
+        gameObject.GetComponent<Shoot>().enabled = false; // ì´ì•Œì´ ì•ˆë‚˜ì˜¤ê²Œë” Shoot ìŠ¤í¬ë¦½íŠ¸ ë¹„í™œì„±í™”
 
         //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Jelly");
         //foreach (GameObject enemy in enemies)
@@ -100,10 +100,10 @@ public class TimerSlider : MonoBehaviour
     void OnEnable()
     {
 
-        curTime = 20f;   // ½½¶óÀÌ´õÀÇ Value°ªÀ» Á¶Á¤ÇØÁÖ±â À§ÇÑ ½Ã°£ º¯¼ö
+        curTime = 20f;   // ìŠ¬ë¼ì´ë”ì˜ Valueê°’ì„ ì¡°ì •í•´ì£¼ê¸° ìœ„í•œ ì‹œê°„ ë³€ìˆ˜
 
-        timerSlider.value = (float)curTime / (float)maxTime; // timerSliderÀÇ °ªÀ» 0~1 »çÀÌÀÇ °ªÀ¸·Î ¸ÂÃçÁÖ±â À§ÇÔ
-        fillImage.color = normalFillColor; // ½½¶óÀÌ´õÀÇ Ã¤¿ò »öÀ» ±âº» »ö»óÀ¸·Î ÁöÁ¤ÇØÁÜ
+        timerSlider.value = (float)curTime / (float)maxTime; // timerSliderì˜ ê°’ì„ 0~1 ì‚¬ì´ì˜ ê°’ìœ¼ë¡œ ë§ì¶°ì£¼ê¸° ìœ„í•¨
+        fillImage.color = normalFillColor; // ìŠ¬ë¼ì´ë”ì˜ ì±„ì›€ ìƒ‰ì„ ê¸°ë³¸ ìƒ‰ìƒìœ¼ë¡œ ì§€ì •í•´ì¤Œ
 
 
         timerSlider.gameObject.SetActive(true);
@@ -135,41 +135,41 @@ public class TimerSlider : MonoBehaviour
     {
         //t.text = "Update : " + curTime;
 
-        textTime = "" + curTime.ToString("f0") + "ÃÊ ³²¾Ò¾î¿ä";
+        textTime = "" + curTime.ToString("f0") + "ì´ˆ ë‚¨ì•˜ì–´ìš”";
 
-        if (stopTimer == false) // Å¸ÀÌ¸Ó ÀÛµ¿ »óÅÂÀÏ ¶§
+        if (stopTimer == false) // íƒ€ì´ë¨¸ ì‘ë™ ìƒíƒœì¼ ë•Œ
         {
-            curTime -= Time.deltaTime; // ½Ã°£À» Àé´Ù
+            curTime -= Time.deltaTime; // ì‹œê°„ì„ ì°ë‹¤
 
 
             timerText.text = textTime;
-            timerSlider.value = (float)curTime / (float)maxTime; // ½½¶óÀÌ´õÀÇ Value¸¦ °è»ê
+            timerSlider.value = (float)curTime / (float)maxTime; // ìŠ¬ë¼ì´ë”ì˜ Valueë¥¼ ê³„ì‚°
         }
 
-        if (timerSlider.value < ((warningLimit / 100) * timerSlider.maxValue)) // °æ°í ½Ã°£ °è»ê
+        if (timerSlider.value < ((warningLimit / 100) * timerSlider.maxValue)) // ê²½ê³  ì‹œê°„ ê³„ì‚°
         {
             fillImage.color = warningFillColor;
         }
 
-        if (curTime <= 0 && stopTimer == false)  // °ÔÀÓ¿À¹ö »óÅÂ
+        if (curTime <= 0 && stopTimer == false)  // ê²Œì„ì˜¤ë²„ ìƒíƒœ
         {
             stopTimer = true;
             gameOverText.gameObject.SetActive(true);
-            gameObject.GetComponent<Shoot>().enabled = false; // ÃÑ¾ËÀÌ ³ª¿ÀÁö ¾Ê°Ô ÇÏ±â À§ÇØ Shoot ½ºÅ©¸³Æ® ºñÈ°¼ºÈ­
+            gameObject.GetComponent<Shoot>().enabled = false; // ì´ì•Œì´ ë‚˜ì˜¤ì§€ ì•Šê²Œ í•˜ê¸° ìœ„í•´ Shoot ìŠ¤í¬ë¦½íŠ¸ ë¹„í™œì„±í™”
             timerSlider.gameObject.SetActive(false);
             //Destroy(timerSlider.gameObject);
 
             targetImage.SetActive(false);
 
 
-            // "Jelly" ÅÂ±×¸¦ °¡Áø °ÔÀÓ¿ÀºêÁ§Æ®µéÀ» ºñÈ°¼ºÈ­ÇØÁÜ
+            // "Jelly" íƒœê·¸ë¥¼ ê°€ì§„ ê²Œì„ì˜¤ë¸Œì íŠ¸ë“¤ì„ ë¹„í™œì„±í™”í•´ì¤Œ
             //GameObject[] enemies = GameObject.FindGameObjectsWithTag("Jelly");
             //foreach (GameObject enemy in enemies)
             //    enemy.SetActive(false);
 
             //foreach (GameObject jelly in jellies) jelly.SetActive(false);
 
-            Treasure(); // º¸¹° »óÀÚ 
+            Treasure(); // ë³´ë¬¼ ìƒì 
 
         }
     }
@@ -177,10 +177,10 @@ public class TimerSlider : MonoBehaviour
 
     void Treasure()
     {
-        treasureBox.SetActive(true); // º¸¹°»óÀÚ È°¼ºÈ­
+        treasureBox.SetActive(true); // ë³´ë¬¼ìƒì í™œì„±í™”
 
-        treasureMessage.text = "µÎ±¸µÎ±¸µÎ±¸";
-        treasureMessage.gameObject.SetActive(true); // »óÀÚ ¿­±â Àü ¸Ş½ÃÁö È°¼ºÈ­
+        treasureMessage.text = "ë‘êµ¬ë‘êµ¬ë‘êµ¬";
+        treasureMessage.gameObject.SetActive(true); // ìƒì ì—´ê¸° ì „ ë©”ì‹œì§€ í™œì„±í™”
 
         StartCoroutine(ItemsActive());
 
@@ -188,11 +188,11 @@ public class TimerSlider : MonoBehaviour
 
         //if (Input.touchCount > 0)
         //{
-        //    // ÇöÀç ÅÍÄ¡ ÁÂÇ¥¿¡¼­ ±¤¼± »ı¼º
+        //    // í˜„ì¬ í„°ì¹˜ ì¢Œí‘œì—ì„œ ê´‘ì„  ìƒì„±
         //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
         //    RaycastHit hit;
 
-        //    // ÅÍÄ¡ÇßÀ» ¶§ ³ªÅ¸³ª´Â È¿°ú
+        //    // í„°ì¹˜í–ˆì„ ë•Œ ë‚˜íƒ€ë‚˜ëŠ” íš¨ê³¼
         //    if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Player")
         //    {
         //        if (Input.touchCount > 1)
@@ -221,9 +221,9 @@ public class TimerSlider : MonoBehaviour
         yield return new WaitForSeconds(1f);
         ani.SetTrigger("treasure");
         yield return new WaitForSeconds(0.5f);
-        treasureBox.transform.GetChild(4).gameObject.SetActive(true); // ÆÄÆ¼Å¬ ¿ÀºêÁ§Æ® È°¼ºÈ­
+        treasureBox.transform.GetChild(4).gameObject.SetActive(true); // íŒŒí‹°í´ ì˜¤ë¸Œì íŠ¸ í™œì„±í™”
 
-        // °ÔÀÓ ÈÄ Á¡¼ö°¡ 100Á¡ ÀÌ»ó, ¶Ç´Â ·£´ıÀ¸·Î Ä³¸¯ÅÍÀÇ »óÅÂ°ª »ó½ÂÀ» º¸»óÀ¸·Î ¹ŞÀ½
+        // ê²Œì„ í›„ ì ìˆ˜ê°€ 100ì  ì´ìƒ, ë˜ëŠ” ëœë¤ìœ¼ë¡œ ìºë¦­í„°ì˜ ìƒíƒœê°’ ìƒìŠ¹ì„ ë³´ìƒìœ¼ë¡œ ë°›ìŒ
         if (Scoring.score >= 100 || Random.Range(0, 1) == 0)
         {
             int ccordingToTheScore = (int)Scoring.score / 5;
@@ -241,7 +241,7 @@ public class TimerSlider : MonoBehaviour
         }
         else
         {
-            treasureMessage.text = "¶Ç¹Ù±â°¡ Áñ°Å¿ü´ë¿ä~ >.<~";
+            treasureMessage.text = "ë˜ë°”ê¸°ê°€ ì¦ê±°ì› ëŒ€ìš”~ >.<~";
             yield return new WaitForSeconds(3f);
         }
 
@@ -259,7 +259,7 @@ public class TimerSlider : MonoBehaviour
     IEnumerator GameStartMessage()
     {
         gameStartText.gameObject.SetActive(true);
-        gameStartText.text = "È­¸éÀ» ÅÍÄ¡ÇÏ¸é\n³ª¿À´Â °øÀ¸·Î\nÁ©¸®¸¦ ¾ø¾Öº¸¼¼¿ä!";
+        gameStartText.text = "í™”ë©´ì„ í„°ì¹˜í•˜ë©´\në‚˜ì˜¤ëŠ” ê³µìœ¼ë¡œ\nì ¤ë¦¬ë¥¼ ì—†ì• ë³´ì„¸ìš”!";
 
         yield return new WaitForSeconds(3f);
         gameStartText.text = "3";
@@ -271,8 +271,8 @@ public class TimerSlider : MonoBehaviour
         gameStartText.gameObject.SetActive(false);
 
 
-        gameObject.GetComponent<Shoot>().enabled = true; // Shoot ½ºÅ©¸³Æ® ½ÇÇà
-        stopTimer = false; // Å¸ÀÌ¸Ó ÀÛµ¿ »óÅÂ. false¸é Å¸ÀÌ¸Ó ½ÇÇà
+        gameObject.GetComponent<Shoot>().enabled = true; // Shoot ìŠ¤í¬ë¦½íŠ¸ ì‹¤í–‰
+        stopTimer = false; // íƒ€ì´ë¨¸ ì‘ë™ ìƒíƒœ. falseë©´ íƒ€ì´ë¨¸ ì‹¤í–‰
 
     }
 }

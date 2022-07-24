@@ -115,12 +115,11 @@ public class Status : MonoBehaviour
         {
             case Evolution1.EGG:
 
-                if (cntTouch1 >= 2)
-                    if (cntSmart1 >= 1 || cntClean1 >= 1)
+                if (cntTouch1 >= 5)
+                    if (cntSmart1 >= 1 || cntClean1 >= 1 || cntActive1 >= 5)
                     {
                         evo1 = Evolution1.BREAKEGG;
                         InitCnt();
-
                     }
 
                     else if (cntTouch1 >= 20)
@@ -136,8 +135,8 @@ public class Status : MonoBehaviour
                 return;
 
             case Evolution1.BABY:
-                if (cntTouch1 >= 2)
-                    if (cntSmart1 >= 1 || cntClean1 >= 1)
+                if (cntTouch1 >= 10)
+                    if (cntSmart1 >= 5 || cntClean1 >= 5 || cntActive1 >= 20 || cntSleep1 >= 5)
                     {
                         evo1 = Evolution1.CHILD;
                         InitCnt();
@@ -154,8 +153,8 @@ public class Status : MonoBehaviour
 
 
             case Evolution1.CHILD:
-                if (cntTouch1 >= 2)
-                    if (cntSmart1 >= 1 || cntClean1 >= 1)
+                if (cntTouch1 >= 30)
+                    if (cntSmart1 >= 10 || cntClean1 >= 10 || cntActive1 >= 50 || cntSleep1 >= 10)
                     {
                         evo1 = Evolution1.YOUTH;
                         InitCnt();
@@ -167,9 +166,7 @@ public class Status : MonoBehaviour
                         InitCnt();
 
                     }
-
                 break;
-
 
             case Evolution1.YOUTH:
                 break;

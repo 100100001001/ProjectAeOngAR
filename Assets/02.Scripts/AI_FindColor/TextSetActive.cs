@@ -29,12 +29,9 @@ public class TextSetActive : MonoBehaviour
         FindColor.SetActive(true);
     }
 
-    IEnumerator GoMain()
+    public void Skip()
     {
-        descriptiveText.text = "또바기가 가장 행복할 때에만\n또바기의 색을 찾을 수 있어요~!";
-        descriptiveText.gameObject.SetActive(true);
-        
-        yield return new WaitForSeconds(3f);
-        BackButton.SetActive(true);
+        colorDesText.SetActive(false);
+        FindColor.SetActive(true);
     }
 }

@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class ByeButton : MonoBehaviour
 {
     public static bool bye = false;
+    public GameObject endingPanel;
 
     private void Start()
     {
@@ -16,6 +17,6 @@ public class ByeButton : MonoBehaviour
     public void OnClick()
     {
         bye = true;
-        SceneManager.LoadScene("Main");
+        endingPanel.SetActive(true);
     }
 }

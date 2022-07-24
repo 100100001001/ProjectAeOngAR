@@ -16,7 +16,7 @@ public class PlayerPanelStatus : MonoBehaviour
 
     void Update()
     {
-        panelStatusTMP[0].text = "배고픔 : " + (int)StatusBar.instance.curHunger + "%";
+        panelStatusTMP[0].text = "배부름 : " + (int)StatusBar.instance.curHunger + "%";
         panelStatusTMP[1].text = "깨끗함 : " + (int)StatusBar.instance.curClean + "%";
         panelStatusTMP[2].text = "똑똑함 : " + (int)StatusBar.instance.curSmart + "%";
         panelStatusTMP[3].text = "움직임 : " + (int)StatusBar.instance.curActive + "%";

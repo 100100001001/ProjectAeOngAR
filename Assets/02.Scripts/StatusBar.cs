@@ -86,7 +86,7 @@ public class StatusBar : MonoBehaviour
 
     //public StatusValue statusValue;
 
-
+    float cntAct = 0;
 
     void Start()
     {
@@ -182,7 +182,12 @@ public class StatusBar : MonoBehaviour
         if (val)
         {
             Status.instance.cntHappy1++;
-            Status.instance.cntActive1++;
+            cntAct++;
+            if (cntAct > 50)
+            {
+                Status.instance.cntActive1++;
+                cntAct = 0;
+            }
             curActive += n;
         }
         else curActive -= n;
@@ -203,7 +208,7 @@ public class StatusBar : MonoBehaviour
         if (curEnergy >= 100) curEnergy = 100;
         if (curEnergy <= 0) curEnergy = 0;
     }
-    public void HappyValue(bool val, int n)
+    public void HappyValue(bool val, float n)
     {
         if (val)
         {

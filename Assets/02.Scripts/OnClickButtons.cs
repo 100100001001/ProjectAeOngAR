@@ -37,6 +37,10 @@ public class OnClickButtons : MonoBehaviour
     [Header("--- For the ShowerButton ---")]
     public GameObject shower;
 
+    [Header("--- For the GameButton ---")]
+    public TextMeshProUGUI playGameText;
+    public TextMeshProUGUI FindColorText;
+
 
     private void Start()
     {
@@ -44,7 +48,6 @@ public class OnClickButtons : MonoBehaviour
         bubbleImg = bubble.GetComponent<Image>();
 
         bubbleTMPro = bubble.GetComponentInChildren<TextMeshProUGUI>();
-
     }
 
     /// <summary>
@@ -156,10 +159,34 @@ public class OnClickButtons : MonoBehaviour
 
     }
 
+    public void PlayButton()
+    {
+        playGameText.text = "화면을 터치하면 총알이 나와요!\n점수에 따라 선물을 받을지도~";
+    }
 
     public void PlayGame()
     {
-        SceneManager.LoadScene("MainCopy_Game_Bomb");
+        if (StatusBar.instance.curEnergy >= 17) SceneManager.LoadScene("MainCopy_Game_Bomb");
+        else
+        {
+            playGameText.text = "또바기가 힘들어서 못 하겠대요.\n기력..71력..17..\n기력이 17 이상은 되어야 하지 않을까요?";
+        }
+
+    }
+    
+    public void FindColorButton()
+    {
+        FindColorText.text = "화면을 고정하고 찰칵!\n똑똑한 AI가 또바기의 색을 바꿔줘요";
+    }
+
+    public void PlayFindColor()
+    {
+        if (StatusBar.instance.curHappy >= 100) SceneManager.LoadScene("MainCopy_FindColor");
+        else
+        {
+            FindColorText.text = "또바기가 최고로 행복할 때만\n색을 찾을 수 있어요";
+        }
+
     }
 
 
