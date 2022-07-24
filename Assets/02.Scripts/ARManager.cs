@@ -155,6 +155,16 @@ public class ARManager : MonoBehaviour
     // 캐릭터의 색상을 임의 지정하는 메서드
     void ChangeColor()
     {
+        // 캐릭터를 보내주었을 때
+        if (ByeButton.bye)
+        {
+            Colors(colorNames[UnityEngine.Random.Range(0, 8)]);
+            ApplyColor();
+            SaveColor();
+
+            return;
+        }
+
         // 저장된 색상이 있다면 저장된 색상을 가져옴
         //if (PlayerPrefs.HasKey("Color")) Colors(PlayerPrefs.GetString("Color"));
         if (PlayerPrefs.HasKey("ColorRed"))
@@ -166,14 +176,7 @@ public class ARManager : MonoBehaviour
         // 저장된 색상이 없다면 랜덤한 색상을 가져옴
         else Colors(colorNames[UnityEngine.Random.Range(0, 8)]);
 
-        // 색상 적용
-        eggMR.material.SetColor("_Color", color);
-        babyMR.material.SetColor("_Color", color);
-        childMR.material.SetColor("_Color", color);
-        youthMR.material.SetColor("_Color", color);
-        eggbreakUpMR.material.SetColor("_Color", color);
-        eggbreakBotMR.material.SetColor("_Color", color);
-
+        ApplyColor();
         SaveColor();
     }
 
@@ -195,6 +198,17 @@ public class ARManager : MonoBehaviour
         PlayerPrefs.SetFloat("ColorRed", color.r);
         PlayerPrefs.SetFloat("ColorGreen", color.g);
         PlayerPrefs.SetFloat("ColorBlue", color.b);
+    }
+
+    void ApplyColor()
+    {
+        // 색상 적용
+        eggMR.material.SetColor("_Color", color);
+        babyMR.material.SetColor("_Color", color);
+        childMR.material.SetColor("_Color", color);
+        youthMR.material.SetColor("_Color", color);
+        eggbreakUpMR.material.SetColor("_Color", color);
+        eggbreakBotMR.material.SetColor("_Color", color);
     }
 
     void Colors(string name)
@@ -257,14 +271,7 @@ public class ARManager : MonoBehaviour
 
         GetInferenceFromModel.result = -1;
 
-        // 색상 적용
-        eggMR.material.SetColor("_Color", color);
-        babyMR.material.SetColor("_Color", color);
-        childMR.material.SetColor("_Color", color);
-        youthMR.material.SetColor("_Color", color);
-        eggbreakUpMR.material.SetColor("_Color", color);
-        eggbreakBotMR.material.SetColor("_Color", color);
-
+        ApplyColor();
         SaveColor();
     }
 

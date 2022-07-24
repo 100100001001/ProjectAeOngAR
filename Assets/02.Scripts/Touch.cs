@@ -93,11 +93,11 @@ public class Touch : MonoBehaviour
                     }
                 }
 
-                else if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                {
-                    StartCoroutine(ThinkingBubble("many_touches"));
-                    StatusBar.instance.HappyValue(false, 5);
-                }
+                //else if (Input.GetTouch(0).phase == TouchPhase.Moved)
+                //{
+                //    StartCoroutine(ThinkingBubble("many_touches"));
+                //    StatusBar.instance.HappyValue(false, 5);
+                //}
 
             }
 
