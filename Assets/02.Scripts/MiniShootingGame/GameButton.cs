@@ -9,8 +9,8 @@ public class GameButton : MonoBehaviour
 
     public void Replay()
     {
-        shootScript.GetComponent<TimerSlider>().enabled = false;
-        shootScript.GetComponent<TimerSlider>().enabled = true;
+        shootScript.GetComponent<PlayShootingGame>().enabled = false;
+        shootScript.GetComponent<PlayShootingGame>().enabled = true;
 
         Time.timeScale = 1f;
     }

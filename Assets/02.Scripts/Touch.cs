@@ -60,47 +60,40 @@ public class Touch : MonoBehaviour
     {
         time += Time.deltaTime;
 
-
+        // 화면 터치가 1회 이상일 때 실행
         if (Input.touchCount > 0)
         {
-            testTest.text = "" + Input.GetTouch(0).phase;
-
             // 현재 터치 좌표에서 광선 생성
             Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
             RaycastHit hit;
 
             // 터치했을 때 나타나는 효과
+            // 광선의 충돌체 태그가 "Player(또바기)"일 때 실행
             if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Player")
             {
+                // 또바기를 2회 이상 터치했을 때
                 if (Input.touchCount > 1)
                 {
+                    // 싫어하는 말풍선이 화면에 띄워지며 또바기의 Happy정도를 감소시킴
                     StartCoroutine(ThinkingBubble("many_touches"));
                     StatusBar.instance.HappyValue(false, 5);
                 }
 
-
+                // 터치를 시작했을 때
                 if (Input.GetTouch(0).phase == TouchPhase.Began)
                 {
-
+                    // limitTouchCnt를 올려주고 터치 후 반응 메서드 실행
                     limitTouchCnt++;
                     TouchResponse();
 
-
-                    if (time > 60) // 1분이 지나면 touchCnt 초기화
+                    // 1분이 지나면 touchCnt 초기화
+                    if (time > 60)
                     {
                         limitTouchCnt = 0;
                         time = 0;
                     }
                 }
-
-                //else if (Input.GetTouch(0).phase == TouchPhase.Moved)
-                //{
-                //    StartCoroutine(ThinkingBubble("many_touches"));
-                //    StatusBar.instance.HappyValue(false, 5);
-                //}
-
             }
-
         }
 
         // 원본 업데이트 (터치 실험 중)
@@ -191,10 +184,14 @@ public class Touch : MonoBehaviour
         //}
 
 
+        // 터치했을 때 반응하는 메서드
         void TouchResponse()
         {
+            // Egg상태일 때 나오는 말풍선
             if (Status.instance.evo1 == Status.Evolution1.EGG) StartCoroutine(RecBubble("eggHappy"));
 
+            //// limitTouchCnt에 따라 다른 반응이 나오도록 if문으로 나눠놓음
+            // 터치 했을 때 Happy값을 올리고 좋아하는 말풍선과 파티클이 나오도록 함
             if (limitTouchCnt < 30)
             {
                 StatusBar.instance.HappyValue(true, 5);
@@ -202,11 +199,13 @@ public class Touch : MonoBehaviour
                 PlayTouchParticle();
             }
 
+            // 터치를 많이 할수록 싫어하기 때문에, 그만하라는 메시지를 띄움
             else if (limitTouchCnt < 40)
             {
                 StartCoroutine(ThinkingBubble("stop"));
-
             }
+
+            // 그만하라는 메시지를 넘어갔을 때 싫어하는 말풍선을 띄우고 Happy값을 내려줌
             else if (limitTouchCnt >= 40)
             {
                 StartCoroutine(ThinkingBubble("angry"));
@@ -229,6 +228,7 @@ public class Touch : MonoBehaviour
         /// <returns></returns>
         IEnumerator ThinkingBubble(string st)
         {
+            // 화난 텍스트
             if (st == "angry")
             { 
                 string[] thinkingText = new string[5];
@@ -238,10 +238,12 @@ public class Touch : MonoBehaviour
                 thinkingText[3] = "그만해라";
                 thinkingText[4] = "그만하라고";
 
+                // 화난 텍스트 문구 중 랜덤 지정
                 bubbleText = thinkingText[Random.Range(0, 5)];
             
             }
 
+            // 많은 터치를 했을 때
             else if (st == "many_touches")
             {
                 string[] thinkingText = new string[3];
@@ -251,17 +253,19 @@ public class Touch : MonoBehaviour
                 thinkingText[3] = "한손으로만...\n톡...\n만져주지...";
                 thinkingText[4] = "악!! 막\n만지면 아파";
 
+                // 텍스트 문구 중 랜덤 지정
                 bubbleText = thinkingText[Random.Range(0, 5)];
             }
 
-
+            // 말풍선 오브젝트 활성화
             bubble.SetActive(true);
-
+            // 말풍선 이미지를 생각하는 sprite로 변경
             bubbleImg.sprite = bubbleSprites[0];
+            // 말풍선의 위치는 랜덤 지정
             bubbleRT.anchoredPosition = new Vector3(Random.Range(-310, 260), Random.Range(-170, 100), 0);
-
+            // 말풍선 텍스트 변경
             bubbleTMPro.text = bubbleText;
-
+            // 말풍선은 3초 후에 비활성화되로록 함
             yield return new WaitForSeconds(3f);
             bubble.SetActive(false);
         }
@@ -309,8 +313,6 @@ public class Touch : MonoBehaviour
                 thinkingText[0] = "♥";
 
             }
-
-
 
             bubble.SetActive(true);
 

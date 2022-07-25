@@ -8,21 +8,16 @@ public class TimeFlowTest : MonoBehaviour
 {
     public float time;               // 시간의 흐름을 체크하는 변수
 
-
     void Update()
     {
         time += Time.deltaTime;     // 마지막 프레임에서 현재 프레임까지의 초를 더하여 시간의 흐름 체크
 
         if (time > 10)               // 상태 변화 주기
         {
-
             StatusDecrease(5);
             time = 0;
-            
-
         }
     }
-
 
     // 시간의 흐름에 따른 상태 변화 (Value 감소)
     void StatusDecrease(int n)
@@ -33,7 +28,5 @@ public class TimeFlowTest : MonoBehaviour
         StatusBar.instance.ActiveValue(false, n);
         StatusBar.instance.EnergyValue(false, n);
         StatusBar.instance.HappyValue(false, n);
-
     }
-
 }

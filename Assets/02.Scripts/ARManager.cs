@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.ARFoundation;
+using UnityEngine.XR.ARFoundation; // ARFoundation을 사용하기 위해 네임스페이스 선언
 using UnityEngine.XR.ARSubsystems;
 using TMPro;
 
@@ -14,11 +14,10 @@ public class ARManager : MonoBehaviour
 
     public ARRaycastManager arRaycater; // 평면을 인식하기 위한 ARRaycastManager 변수
 
-
-    public GameObject[] indicator; // 평면에 표시될 오브젝트
+    public GameObject[] indicator;      // 평면에 표시될 오브젝트
     // Egg, Baby, Child, Youth, Ground(동산), EggBreak_Top, EggBreak_Bottom, EggBreak 순으로 들어가있다.
 
-    private Transform indicatorTr; // 사용자의 손 터치로 평면에 표시된 오브젝트 위치가 변경되기 때문에 transform을 변수로 받아줌
+    private Transform indicatorTr;      // 사용자의 손 터치로 평면에 표시된 오브젝트 위치가 변경되기 때문에 transform을 변수로 받아줌
     List<ARRaycastHit> indicatorHits = new List<ARRaycastHit>(); // AR raycast에서 쏜 광선
 
 
@@ -69,11 +68,19 @@ public class ARManager : MonoBehaviour
 
         // 캐릭터의 색상 변경
         ChangeColor();
+
+        // AI로 분류 후 모델 값이 있을 경우
+        if (GetInferenceFromModel.result >= 0)
+        {
+            AIColorChange();
+        }
+
+        descriptiveText.gameObject.GetComponent<Button>().interactable = false;
     }
 
     void Update()
     {
-        if (Input.touchCount > 1)// && Input.GetTouch(0).phase == TouchPhase.Began)
+        if (Input.touchCount > 1)
         {
             // 3D동산 오브젝트 활성화
             indicator[4].SetActive(true);
@@ -82,14 +89,9 @@ public class ARManager : MonoBehaviour
             indicatorTr = indicator[4].transform;
             PlaceIndicator();
 
+            // 설명 텍스트 활성화
             if (textActive) StartCoroutine(TextActive());
             textActive = false;
-        }
-
-        // AI로 분류 후 모델 값이 있을 경우
-        if (GetInferenceFromModel.result >= 0)
-        {
-            AIColorChange();
         }
 
 
@@ -173,6 +175,7 @@ public class ARManager : MonoBehaviour
     // 시작할 때 설명하는 텍스트 활성화
     IEnumerator TextActive()
     {
+        descriptiveText.gameObject.GetComponent<Button>().interactable = true;
         textActive = false;
 
         descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~!";

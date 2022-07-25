@@ -1,21 +1,21 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    private float xMove; // Ä³¸¯ÅÍÀÇ ¿òÁ÷ÀÓ x°ª
-    private float zMove; // Ä³¸¯ÅÍÀÇ ¿òÁ÷ÀÓ z°ª
-    private float moveSpeed = 20f; // Ä³¸¯ÅÍ ¿òÁ÷ÀÓÀÇ ½ºÇÇµå°ª
+    private float xMove; // ìºë¦­í„°ì˜ ì›€ì§ì„ xê°’
+    private float zMove; // ìºë¦­í„°ì˜ ì›€ì§ì„ zê°’
+    private float moveSpeed = 20f; // ìºë¦­í„° ì›€ì§ì„ì˜ ìŠ¤í”¼ë“œê°’
 
-    public VirtualJoystick virtualJoyStick; // Á¶ÀÌ½ºÆ½°ú ¿¬°áÇÏ±â À§ÇØ VirtualJoystickÀ» ¹Ş¾Æ¿È
+    public VirtualJoystick virtualJoyStick; // ì¡°ì´ìŠ¤í‹±ê³¼ ì—°ê²°í•˜ê¸° ìœ„í•´ VirtualJoystickì„ ë°›ì•„ì˜´
 
-    private Rigidbody rigid; // ¿òÁ÷ÀÓ °ªÀÇ º¯È­¸¦ À§ÇØ Rigidbody¹Ş¾Æ¿È
+    private Rigidbody rigid;     // ì›€ì§ì„ ê°’ì˜ ë³€í™”ë¥¼ ìœ„í•´ Rigidbodyë°›ì•„ì˜´
 
-    public Animator[] animators; // ¿òÁ÷ÀÌ´Â ¾Ö´Ï¸ŞÀÌ¼ÇÀ» ½ÇÇàÇÏ±â À§ÇØ Ä³¸¯ÅÍµéÀÇ ¾Ö´Ï¸ŞÀÌÅÍ¸¦ ¹Ş¾Æ¿Â´Ù
-    bool isRollAni = false;      // ¾Ö´Ï¸ŞÀÌÅÍÀÇ ÀüÈ¯ Á¶°ÇÀº ¸ğµÎ bool ÆÄ¶ó¹ÌÅÍ¸¦ »ç¿ëÇÏ±â ¶§¹®¿¡ º¯¼ö ¼±¾ğ
+    public Animator[] animators; // ì›€ì§ì´ëŠ” ì• ë‹ˆë©”ì´ì…˜ì„ ì‹¤í–‰í•˜ê¸° ìœ„í•´ ìºë¦­í„°ë“¤ì˜ ì• ë‹ˆë©”ì´í„°ë¥¼ ë°›ì•„ì˜¨ë‹¤
+    bool isRollAni = false;      // ì• ë‹ˆë©”ì´í„°ì˜ ì „í™˜ ì¡°ê±´ì€ ëª¨ë‘ bool íŒŒë¼ë¯¸í„°ë¥¼ ì‚¬ìš©í•˜ê¸° ë•Œë¬¸ì— ë³€ìˆ˜ ì„ ì–¸
 
-    Vector3 savePos; // Ä³¸¯ÅÍ°¡ ¶³¾îÁú °ÍÀ» ´ëºñÇÏ¿© º»·¡ÀÇ À§Ä¡¸¦ ÀúÀåÇÒ º¯¼ö
+    Vector3 savePos;             // ìºë¦­í„°ê°€ ë–¨ì–´ì§ˆ ê²ƒì„ ëŒ€ë¹„í•˜ì—¬ ë³¸ë˜ì˜ ìœ„ì¹˜ë¥¼ ì €ì¥í•  ë³€ìˆ˜
 
     float time;
 

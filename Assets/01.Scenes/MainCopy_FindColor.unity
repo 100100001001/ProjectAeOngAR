@@ -1486,7 +1486,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124.1, y: -37.899998}
+  m_AnchoredPosition: {x: -124.1, y: -16.7}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &221261999
@@ -1892,7 +1892,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &378982859
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2158,7 +2158,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 378982859}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -2396,7 +2396,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB610\uBC14\uAE30\uC758 \uC0C9\uC744 \uCC3E\uC544\uC8FC\uC138\uC694"
+  m_text: "\uB610\uBC14\uAE30\uC758 \uC0C9\uC744 \uCC3E\uC544\uC8FC\uC138\uC694\ndlglglgl"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a0a08d7bcb05d048baa592d47811fab, type: 2}
   m_sharedMaterial: {fileID: -2940621681208594115, guid: 5a0a08d7bcb05d048baa592d47811fab,
@@ -3355,7 +3355,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 61.6, y: -37.899998}
+  m_AnchoredPosition: {x: 61.6, y: -16.700018}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &764594614
@@ -4457,7 +4457,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -126.9, y: -7.0999985}
+  m_AnchoredPosition: {x: -126.9, y: 14.099981}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1110240525
@@ -4799,7 +4799,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 378982859}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -5015,7 +5015,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 42, y: -7.0999985}
+  m_AnchoredPosition: {x: 42, y: 14.099981}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1486626530
@@ -5164,7 +5164,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 180.1, y: -37.6}
+  m_AnchoredPosition: {x: 180.1, y: -16.400019}
   m_SizeDelta: {x: 500, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1561399848
@@ -6960,6 +6960,11 @@ PrefabInstance:
       objectReference: {fileID: 2130570388}
     - target: {fileID: 7289973074877745163, guid: e18a5b29c91acf74b80ef50c8b393a18,
         type: 3}
+      propertyPath: shotButton
+      value: 
+      objectReference: {fileID: 285935125}
+    - target: {fileID: 7289973074877745163, guid: e18a5b29c91acf74b80ef50c8b393a18,
+        type: 3}
       propertyPath: completePanel
       value: 
       objectReference: {fileID: 1221242138}
@@ -7220,6 +7225,11 @@ PrefabInstance:
       objectReference: {fileID: 285935125}
     - target: {fileID: 7924528624257674111, guid: e18a5b29c91acf74b80ef50c8b393a18,
         type: 3}
+      propertyPath: shotButton
+      value: 
+      objectReference: {fileID: 285935125}
+    - target: {fileID: 7924528624257674111, guid: e18a5b29c91acf74b80ef50c8b393a18,
+        type: 3}
       propertyPath: learningButton
       value: 
       objectReference: {fileID: 849462855}
@@ -7264,7 +7274,7 @@ PrefabInstance:
     - target: {fileID: 8395147463988515233, guid: e18a5b29c91acf74b80ef50c8b393a18,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8784634272381668326, guid: e18a5b29c91acf74b80ef50c8b393a18,
         type: 3}

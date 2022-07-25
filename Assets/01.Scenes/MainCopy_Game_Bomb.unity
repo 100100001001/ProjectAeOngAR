@@ -1476,7 +1476,7 @@ MonoBehaviour:
     \uC5C6\uC560\uBCF4\uC138\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a0a08d7bcb05d048baa592d47811fab, type: 2}
-  m_sharedMaterial: {fileID: 5615223612196875860, guid: bd8a125525f256a4e9f70cccd62dea8f,
+  m_sharedMaterial: {fileID: -2940621681208594115, guid: 5a0a08d7bcb05d048baa592d47811fab,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -1634,7 +1634,7 @@ MonoBehaviour:
     rgba: 4285025535
   warningLimit: 10
   stopTimer: 0
-  gameOverText: {fileID: 456780677}
+  gameOverText: {fileID: 2035125134}
   curTime: 20
   gameStartText: {fileID: 456780677}
   jellies:
@@ -1649,18 +1649,8 @@ MonoBehaviour:
   - {fileID: 1759727962}
   targetImage: {fileID: 1415370847}
   buttons: {fileID: 811244911}
-  t: {fileID: 999774728}
   treasureBox: {fileID: 559596637}
   items: {fileID: 450073312}
-  milkTextures:
-  - {fileID: 2800000, guid: bef8e48c161741d4e9dd8dc66eea3d43, type: 3}
-  - {fileID: 2800000, guid: 9cbb1ae3233337143b56b128c635f393, type: 3}
-  - {fileID: 2800000, guid: d4ed0dd86c4f2a245a0a71b629950d21, type: 3}
-  - {fileID: 2800000, guid: 8d57918538a77dc448786585ec09c046, type: 3}
-  - {fileID: 2800000, guid: 7b3dad4f4585ed04aa49d132e3fd7630, type: 3}
-  - {fileID: 2800000, guid: 59da97a3ffddc0b4d9ef2292383c98c8, type: 3}
-  - {fileID: 2800000, guid: f3fc16215ca68f24cbe05540db7946a7, type: 3}
-  - {fileID: 2800000, guid: 0a48ffa0e84d07f40a5a6e20e00472e5, type: 3}
   treasureMessage: {fileID: 428139910}
   itemSprites:
   - {fileID: 1808735844054267416, guid: 2c4ed2e220adde4439904af41e4121ea, type: 3}
@@ -2339,7 +2329,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 748429789, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_fontSize
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 748429789, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_fontAsset
@@ -2348,7 +2338,7 @@ PrefabInstance:
         type: 2}
     - target: {fileID: 748429789, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_fontSizeBase
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 748429789, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_sharedMaterial
@@ -2416,6 +2406,10 @@ PrefabInstance:
     - target: {fileID: 1839085400, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1965211452, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
+      propertyPath: m_Name
+      value: Treasure Box
       objectReference: {fileID: 0}
     - target: {fileID: 1965211452, guid: 77af9c5b0ef26c84fb40da1a1454eb14, type: 3}
       propertyPath: m_IsActive
@@ -2604,6 +2598,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0.4
       objectReference: {fileID: 0}
+    - target: {fileID: 3141753436973117938, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3531099676846469198, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2637,7 +2636,7 @@ PrefabInstance:
     - target: {fileID: 3889497712261893458, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_fontSize
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3889497712261893458, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
@@ -2648,12 +2647,12 @@ PrefabInstance:
     - target: {fileID: 3889497712261893458, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_lineSpacing
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3889497712261893458, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
       propertyPath: m_fontSizeBase
-      value: 12
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3889497712261893458, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
         type: 3}
@@ -8478,7 +8477,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB450 \uC190\uC73C\uB85C \uD654\uBA74\uC744 \uD130\uCE58\uD574\uC11C
+  m_text: "\uB450 \uC190\uAC00\uB77D\uC744 \uB3D9\uC2DC\uC5D0 \uD130\uCE58\uD574\uC11C
     \uC824\uB9AC\uB97C \uCC3E\uC544\uBCF4\uC138\uC694!"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5a0a08d7bcb05d048baa592d47811fab, type: 2}
@@ -9417,7 +9416,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2015039775
 Transform:
   m_ObjectHideFlags: 0
@@ -14075,6 +14074,18 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!114 &2035125134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2294941493506212085, guid: 77af9c5b0ef26c84fb40da1a1454eb14,
+    type: 3}
+  m_PrefabInstance: {fileID: 946006477}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2064444299
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class InstantiateDusts : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            if (time > 10)
+            if (time > 60)
             {
                 time = 0; // time 초기화
                 Status.instance.dustCnt++;

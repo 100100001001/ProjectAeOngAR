@@ -59,8 +59,6 @@ public class InputName : MonoBehaviour
         playerName = names[Random.Range(0, names.Count)];
         tmpName.GetComponent<TextMeshProUGUI>().text = playerName;
         tmpNameCharWin.GetComponent<TextMeshProUGUI>().text = playerName;
-        //Debug.Log(playerName);
-        //Debug.Log(names[1608]);
 
         PlayerPrefs.SetString("Name", playerName);
     }
