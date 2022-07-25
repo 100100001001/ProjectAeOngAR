@@ -182,12 +182,12 @@ public class StatusBar : MonoBehaviour
         if (val)
         {
             Status.instance.cntHappy1++;
-            cntAct++;
-            if (cntAct > 50)
-            {
-                Status.instance.cntActive1++;
-                cntAct = 0;
-            }
+            //cntAct++;
+            //if (cntAct > 50)
+            //{
+            //    Status.instance.cntActive1++;
+            //    cntAct = 0;
+            //}
             curActive += n;
         }
         else curActive -= n;

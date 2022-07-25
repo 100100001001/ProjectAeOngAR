@@ -8,16 +8,11 @@ public class CompletePanel : MonoBehaviour
     {
         gameObject.transform.GetChild(0).gameObject.SetActive(false);
         gameObject.transform.GetChild(1).gameObject.SetActive(false);
-
         
-        if (GetInferenceFromModel.result == 0 || GetInferenceFromModel.result == 1 || GetInferenceFromModel.result == 2)
+        if (GetInferenceFromModel.instance.prediction.predictedValue == 0 || GetInferenceFromModel.instance.prediction.predictedValue == 1 || GetInferenceFromModel.instance.prediction.predictedValue == 2)
+        //if (GetInferenceFromModel.resultValue == 0 || GetInferenceFromModel.resultValue == 1 || GetInferenceFromModel.resultValue == 2)
         {
             gameObject.transform.GetChild(0).gameObject.SetActive(true);
-
-        }
-        else if (GetInferenceFromModel.result == 3 || GetInferenceFromModel.result == 4)
-        {
-            gameObject.transform.GetChild(1).gameObject.SetActive(true);
         }
         else gameObject.transform.GetChild(1).gameObject.SetActive(true);
 

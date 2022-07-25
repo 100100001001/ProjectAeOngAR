@@ -63,14 +63,14 @@ public class ARManager : MonoBehaviour
         indicator[3].SetActive(false);
         indicator[7].SetActive(false);
         
-        descriptiveText.text = "두 손가락을 동시에 터치해서 또바기를 불러오세요!";
+        descriptiveText.text = "두 손가락을 동시에 터치해서 또바기를 불러오세요";
         descriptiveText.gameObject.SetActive(true);
 
         // 캐릭터의 색상 변경
         ChangeColor();
 
         // AI로 분류 후 모델 값이 있을 경우
-        if (GetInferenceFromModel.result >= 0)
+        if (GetInferenceFromModel.resultValue >= 0)
         {
             AIColorChange();
         }
@@ -94,6 +94,11 @@ public class ARManager : MonoBehaviour
             textActive = false;
         }
 
+        // AI로 분류 후 모델 값이 있을 경우
+        if (GetInferenceFromModel.resultValue >= 0)
+        {
+            AIColorChange();
+        }
 
         switch (Status.instance.evo1)
         {
@@ -178,7 +183,7 @@ public class ARManager : MonoBehaviour
         descriptiveText.gameObject.GetComponent<Button>().interactable = true;
         textActive = false;
 
-        descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~!";
+        descriptiveText.text = "두 손을 꾹 누른 채 움직여 보세요\n또바기의 동산이 따라와요~";
         yield return new WaitForSeconds(7f);
 
         descriptiveText.text = "또바기와 함께 즐거운 시간 보내세요 >.<";
@@ -241,26 +246,26 @@ public class ARManager : MonoBehaviour
     void AIColorChange()
     {
         // Red로 분류한 결과값이 가장 높은 경우이다. 빨간색 계열의 색 중 랜덤하여 color값을 지정한다.
-        if (GetInferenceFromModel.result == 0)
+        //if (GetInferenceFromModel.instance.prediction.predictedValue == 0)
+        if (GetInferenceFromModel.resultValue == 0)
         {
             color = new Color32(225, 80, 0, 255);
             color.b = UnityEngine.Random.Range(0, 256);
         }
         // Green으로 분류한 결과값이 가장 높은 경우이다. 초록색 계열의 색 중 랜덤하여 color값을 지정한다.
-        else if (GetInferenceFromModel.result == 1)
+        //else if (GetInferenceFromModel.instance.prediction.predictedValue == 1)
+        else if (GetInferenceFromModel.resultValue == 1)
         {
             color = new Color32(0, 255, 80, 255);
             color.r = UnityEngine.Random.Range(0, 256);
         }
         // Blue로 분류한 결과값이 가장 높은 경우이다. 파란색 계열의 색 중 랜덤하여 color값을 지정한다.
-        else if (GetInferenceFromModel.result == 2)
+        //else if (GetInferenceFromModel.instance.prediction.predictedValue == 2)
+        else if (GetInferenceFromModel.resultValue == 2)
         {
             color = new Color32(80, 0, 255, 255);
             color.g = UnityEngine.Random.Range(0, 256);
         }
-
-        // AI 모델 결과값을 초기화
-        GetInferenceFromModel.result = -1;
 
         // 변경된 색상을 적용하고 저장한다.
         ApplyColor();

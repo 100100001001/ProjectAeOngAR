@@ -56,8 +56,6 @@ public class PlayerMovement : MonoBehaviour
         {
             isRollAni = true;
             StatusBar.instance.ActiveValue(true, 0.1f);
-            StatusBar.instance.HappyValue(true, 0.1f);
-
         }
 
         foreach (Animator a in animators)

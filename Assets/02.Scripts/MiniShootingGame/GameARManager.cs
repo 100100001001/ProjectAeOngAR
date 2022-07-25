@@ -40,10 +40,10 @@ public class GameARManager : MonoBehaviour
         subText.SetActive(true);
 
 
-        indicator[0].SetActive(true);
+        //indicator[0].SetActive(true);
         indicator[1].SetActive(false);
 
-        indicatorTr = indicator[0].transform;
+        //indicatorTr = indicator[0].transform;
         PlaceIndicator();
 
 
@@ -56,7 +56,7 @@ public class GameARManager : MonoBehaviour
         if (Input.touchCount > 1)
         {
             subText.SetActive(false);
-            indicator[0].SetActive(false);
+            //indicator[0].SetActive(false);
             shoot.SetActive(true);
 
 

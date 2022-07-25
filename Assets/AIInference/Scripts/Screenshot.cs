@@ -23,7 +23,7 @@ public class Screenshot : MonoBehaviour
         // 중복 방지, true일 때 실행
         if (!isCoroutinePlaying)
         {
-            captureScreenshot();
+            StartCoroutine("captureScreenshot");
 
             // 모델 예측 버튼을 누르기 전까진 캡처가 한번만 되기 위해 shotButton의 interactable를 비활성화해줌
             shotButton.GetComponent<Button>().interactable = false;
@@ -34,12 +34,15 @@ public class Screenshot : MonoBehaviour
         }
     }
 
-    void captureScreenshot()
+    IEnumerator captureScreenshot()
     {
         isCoroutinePlaying = true;
-
-        // 스크린샷
+        // 스크린샷 
         StartCoroutine(ScreenshotAndGallery());
+
+        // 셔터
+        yield return new WaitForSeconds(1f);
+
         isCoroutinePlaying = false;
 
         debugnum++;

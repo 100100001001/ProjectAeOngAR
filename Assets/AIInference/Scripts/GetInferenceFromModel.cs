@@ -17,7 +17,7 @@ public class GetInferenceFromModel : MonoBehaviour
     public NNModel modelAsset;     // 학습된 모델
     private Model _runtimeModel;   // 실행할 모델
     private IWorker _engine;       // 모델을 돌릴 엔진
-    public static int result = -1; // 결과 값
+    public static int resultValue = -1; // 결과 값
     public Prediction prediction;  // 예측값 구조체를 통해 필요한 기능 받아오기 
 
     [Header("---Debugger---")]
@@ -108,8 +108,7 @@ public class GetInferenceFromModel : MonoBehaviour
         // 출력 텐서를 사용하여 예측 구조체의 값을 설정
         prediction.SetPrediction(outputY);
 
-        // 예측값 중 가장 높은 값을 result에 저장
-        result = prediction.predictedValue;
+        resultValue = prediction.predictedValue;
 
         // 예측값중 가장 높은 값 문자열로 변환해서 UI Text에 보여주기
         TextValue(prediction.predictedValue);
