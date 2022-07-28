@@ -46,6 +46,8 @@ public class ARManager : MonoBehaviour
     bool textActive = true;                 // 텍스트 활성화 여부. 게임 시작할 때만 나와야하기 때문에 true
 
 
+    public TextMeshProUGUI colorTest;
+
 
     void Start()
     {
@@ -249,23 +251,24 @@ public class ARManager : MonoBehaviour
         //if (GetInferenceFromModel.instance.prediction.predictedValue == 0)
         if (GetInferenceFromModel.resultValue == 0)
         {
-            color = new Color32(225, 80, 0, 255);
-            color.b = UnityEngine.Random.Range(0, 256);
+            color = new Color32(225, (byte)UnityEngine.Random.Range(0, 101), (byte)UnityEngine.Random.Range(0, 256), 255);
         }
         // Green으로 분류한 결과값이 가장 높은 경우이다. 초록색 계열의 색 중 랜덤하여 color값을 지정한다.
         //else if (GetInferenceFromModel.instance.prediction.predictedValue == 1)
         else if (GetInferenceFromModel.resultValue == 1)
         {
-            color = new Color32(0, 255, 80, 255);
-            color.r = UnityEngine.Random.Range(0, 256);
+            color = new Color32((byte)UnityEngine.Random.Range(0, 256), 255, (byte)UnityEngine.Random.Range(0, 101), 255);
         }
         // Blue로 분류한 결과값이 가장 높은 경우이다. 파란색 계열의 색 중 랜덤하여 color값을 지정한다.
-        //else if (GetInferenceFromModel.instance.prediction.predictedValue == 2)
+        //else if (GetInferenceFromModel.instance.prediction.predictedValue == 2)s
         else if (GetInferenceFromModel.resultValue == 2)
         {
-            color = new Color32(80, 0, 255, 255);
-            color.g = UnityEngine.Random.Range(0, 256);
+            color = new Color32((byte)UnityEngine.Random.Range(0, 101), (byte)UnityEngine.Random.Range(0, 256), 255, 255);
         }
+
+        colorTest.text = GetInferenceFromModel.resultValue + "/" + color;
+
+        GetInferenceFromModel.resultValue = -1; // 결과값 초기화
 
         // 변경된 색상을 적용하고 저장한다.
         ApplyColor();

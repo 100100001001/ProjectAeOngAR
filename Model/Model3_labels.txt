@@ -1,9 +1,0 @@
-0 Green
-1 Indigo
-2 Orange
-3 Pink
-4 Purple
-5 Red
-6 Skyblue
-7 white
-8 Yellow

@@ -1145,6 +1145,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   descriptiveText: {fileID: 0}
+  colorTest: {fileID: 0}
 --- !u!4 &223974228
 Transform:
   m_ObjectHideFlags: 0
@@ -4649,7 +4650,7 @@ PrefabInstance:
         type: 3}
       propertyPath: modelAsset
       value: 
-      objectReference: {fileID: 5022602860645237092, guid: e4addbc349a4e864fb672de1b9599893,
+      objectReference: {fileID: 5022602860645237092, guid: 5f28d7aef0c99094d90a9acd60b062ee,
         type: 3}
     - target: {fileID: 7289973074877745163, guid: e18a5b29c91acf74b80ef50c8b393a18,
         type: 3}
